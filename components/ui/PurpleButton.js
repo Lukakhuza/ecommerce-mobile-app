@@ -3,7 +3,10 @@ import { Colors } from "../../constants/colors";
 
 function PurpleButton({ children, onPress, style }) {
   return (
-    <Pressable style={[style, styles.button]} onPress={onPress}>
+    <Pressable
+      style={({ pressed }) => [style, styles.button, pressed && styles.pressed]}
+      onPress={onPress}
+    >
       <Text style={styles.text}>{children}</Text>
     </Pressable>
   );
@@ -32,5 +35,8 @@ const styles = StyleSheet.create({
     color: Colors.white100,
     textAlign: "center",
     justifyContent: "center",
+  },
+  pressed: {
+    opacity: 0.5,
   },
 });

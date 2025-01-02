@@ -1,11 +1,56 @@
-import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+  Input,
+} from "react-native";
+import { useState, useContext } from "react";
 import PurpleButton from "../../components/ui/PurpleButton";
 import Button2 from "../../components/ui/Button2";
 import { Colors } from "../../constants/colors";
 import { useNavigation } from "@react-navigation/native";
+import { UserInputContext } from "../../store/context/userInputContext";
 
-function EnterEmail() {
+function EnterEmail({ route }) {
+  const userInputCtx = useContext(UserInputContext);
+
+  const [userInput, setUserInput] = useState({
+    email: "",
+    passwordPlaceholder: "",
+    firstName: "",
+    lastName: "",
+  });
   const navigation = useNavigation();
+  console.log(userInputCtx.input.email);
+  const email = userInputCtx.email;
+  // console.log(email);
+  // function handleInputUpdate(enteredText) {
+  //   userInputCtx.updateInputs((enteredText) => {
+  //     console.log(enteredText);
+  //   });
+
+  function handleInputUpdate(enteredText) {
+    console.log(enteredText);
+    setUserInput((currInputValues) => {
+      return {
+        ...currInputValues,
+        email: enteredText,
+      };
+    });
+  }
+
+  // userInputCtx.setUserInput(())
+  // setUserInput((currInputValues) => {
+  //   return {
+  //     ...currInputValues,
+  //     email: enteredText.email,
+  //   };
+  // });
+  // console.log(enteredText);
+  // }
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.titleContainer}>
@@ -16,8 +61,12 @@ function EnterEmail() {
           <View>
             <View>
               <TextInput
-                placeholder="Email Address"
+                autoCorrect={false}
+                placeholder="Enter Email"
                 style={styles.textInput}
+                // value={userInputCtx.email}
+                onChangeText={handleInputUpdate}
+                // {...textInputConfig}
               ></TextInput>
             </View>
             <PurpleButton
@@ -34,9 +83,31 @@ function EnterEmail() {
           </View>
         </View>
         <View style={styles.buttons2}>
-          <Button2>Continue with Apple</Button2>
-          <Button2>Continue with Google</Button2>
-          <Button2>Continue with Facebook</Button2>
+          <Button2
+            style={styles.button1}
+            onPress={() => {
+              console.log("Log in with your Apple account.");
+            }}
+            imageSource={require("../../assets/apple-logo1.png")}
+          >
+            Continue with Apple
+          </Button2>
+          <Button2
+            onPress={() => {
+              console.log("Log in with your Google account.");
+            }}
+            imageSource={require("../../assets/google-logo.png")}
+          >
+            Continue with Google{" "}
+          </Button2>
+          <Button2
+            onPress={() => {
+              console.log("Log in with your Facebook account.");
+            }}
+            imageSource={require("../../assets/facebook-logo.png")}
+          >
+            Continue with Facebook
+          </Button2>
         </View>
       </View>
     </ScrollView>
@@ -66,12 +137,11 @@ const styles = StyleSheet.create({
     left: 35,
   },
   signInInputContainer: {
-    margin: 6,
-    // width: 410,
+    marginTop: 6,
+    marginHorizontal: 6,
+    marginBottom: 250,
     height: 152,
     top: 190,
-    // left: 23,
-    // right: 23,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -86,11 +156,11 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   buttons2: {
-    top: 250,
     flex: 1,
     flexDirection: "column",
-    borderColor: "black",
-    borderWidth: 2,
     width: "80%",
+  },
+  button1: {
+    // backgroundColor: "blue",
   },
 });

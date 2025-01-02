@@ -2,18 +2,19 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../constants/colors";
 import { Image } from "react-native";
 
-function Button2({ children, onPress, style }) {
+function Button2({ children, onPress, style, imageSource }) {
   return (
-    <Pressable style={[style, styles.button]} onPress={onPress}>
+    <Pressable
+      style={({ pressed }) => [style, styles.button, pressed && styles.pressed]}
+      onPress={onPress}
+    >
       <View style={styles.imageContainer}>
-        <Image
-          style={styles.image}
-          source={require("../../assets/google-logo.png")}
-        />
+        <Image style={styles.image} source={imageSource} />
       </View>
       <View>
         <Text style={styles.text}>{children}</Text>
       </View>
+      <View></View>
     </Pressable>
   );
 }
@@ -27,12 +28,14 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     marginTop: 12.15,
     marginBottom: 12.15,
-    paddingVertical: 11,
-    paddingHorizontal: 48.6,
+    // paddingVertical: 11,
+    paddingRight: 48.6,
+    paddingLeft: 15,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
     // alignContent: "flex-end",
+    justifyContent: "space-between",
   },
   text: {
     fontSize: 16,
@@ -46,9 +49,14 @@ const styles = StyleSheet.create({
   image: {
     height: 20,
     width: 20,
+    margin: 0,
   },
   imageContainer: {
     flexDirection: "row",
-    alignSelf: "flex-start",
+  },
+  pressed: {
+    // opacity: 0.5,
+    backgroundColor: Colors.primary100,
+    color: "white",
   },
 });
