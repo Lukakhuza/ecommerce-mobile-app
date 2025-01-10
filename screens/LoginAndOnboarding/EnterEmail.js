@@ -14,43 +14,13 @@ import { Colors } from "../../constants/colors";
 import { useNavigation } from "@react-navigation/native";
 import { UserInputContext } from "../../store/context/userInputContext";
 
-function EnterEmail({ route }) {
+function EnterEmail({ navigation }) {
   const userInputCtx = useContext(UserInputContext);
 
-  const [userInput, setUserInput] = useState({
-    email: "",
-    passwordPlaceholder: "",
-    firstName: "",
-    lastName: "",
-  });
-  const navigation = useNavigation();
-  console.log(userInputCtx.input.email);
-  const email = userInputCtx.email;
-  // console.log(email);
-  // function handleInputUpdate(enteredText) {
-  //   userInputCtx.updateInputs((enteredText) => {
-  //     console.log(enteredText);
-  //   });
-
-  function handleInputUpdate(enteredText) {
-    console.log(enteredText);
-    setUserInput((currInputValues) => {
-      return {
-        ...currInputValues,
-        email: enteredText,
-      };
-    });
+  function handleInputUpdate(inputIdentifier, enteredText) {
+    console.log(userInputCtx);
+    userInputCtx.updateInputs(inputIdentifier, enteredText);
   }
-
-  // userInputCtx.setUserInput(())
-  // setUserInput((currInputValues) => {
-  //   return {
-  //     ...currInputValues,
-  //     email: enteredText.email,
-  //   };
-  // });
-  // console.log(enteredText);
-  // }
 
   return (
     <ScrollView style={styles.container}>
@@ -65,9 +35,8 @@ function EnterEmail({ route }) {
                 autoCorrect={false}
                 placeholder="Enter Email"
                 style={styles.textInput}
-                // value={userInputCtx.email}
-                onChangeText={handleInputUpdate}
-                // {...textInputConfig}
+                onChangeText={handleInputUpdate.bind(this, "email")}
+                value={userInputCtx.input.email}
               ></TextInput>
             </View>
             <PurpleButton

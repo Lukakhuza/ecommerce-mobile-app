@@ -1,11 +1,27 @@
 import { View, Text, StyleSheet, TextInput } from "react-native";
+import { useContext } from "react";
+import { UserInputContext } from "../../store/context/userInputContext";
 import PurpleButton from "../../components/ui/PurpleButton";
 import { Colors } from "../../constants/colors";
 import IconButton from "../../components/ui/IconButton";
 import LoginInput from "./LoginInput";
 import Button3 from "../../components/ui/Button3";
+import { createUser } from "../../util/auth";
 
 function CreateAccount({ navigation }) {
+  const userInputCtx = useContext(UserInputContext);
+  function handleInputUpdate(inputIdentifier, enteredText) {
+    console.log(userInputCtx);
+    userInputCtx.updateInputs(inputIdentifier, enteredText);
+  }
+
+  async function createAccountHandler() {
+    const email = userInputCtx.input.email;
+    const passwordPlaceholder = userInputCtx.input.passwordPlaceholder;
+    const response = await createUser(email, passwordPlaceholder);
+    console.log(response);
+  }
+
   return (
     <View style={styles.container}>
       <View></View>
@@ -16,29 +32,34 @@ function CreateAccount({ navigation }) {
         <View>
           <View>
             <TextInput
+              autoCorrect={false}
               placeholder="First Name"
               style={styles.textInput}
+              onChangeText={handleInputUpdate.bind(this, "firstName")}
+              value={userInputCtx.input.firstName}
             ></TextInput>
             <TextInput
               placeholder="Last Name"
               style={styles.textInput}
+              onChangeText={handleInputUpdate.bind(this, "lastName")}
+              value={userInputCtx.input.lastName}
             ></TextInput>
             <TextInput
-              placeholder="Email Address"
+              autoCorrect={false}
+              placeholder="Enter Email"
               style={styles.textInput}
+              onChangeText={handleInputUpdate.bind(this, "email")}
+              value={userInputCtx.input.email}
             ></TextInput>
             <TextInput
               placeholder="Password"
               style={styles.textInput}
+              autoCorrect={false}
+              onChangeText={handleInputUpdate.bind(this, "passwordPlaceholder")}
+              value={userInputCtx.input.passwordPlaceholder}
             ></TextInput>
           </View>
-          <PurpleButton
-            onPress={() => {
-              navigation.navigate("ForgotPassword");
-            }}
-          >
-            Continue
-          </PurpleButton>
+          <PurpleButton onPress={createAccountHandler}>Continue</PurpleButton>
           <View style={styles.redirectText}>
             <Text>Forgot Password?</Text>
             <Text> </Text>

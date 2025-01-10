@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 export const UserInputContext = createContext({
   email: "",
   passwordPlaceHolder: "",
-  updateInputs: () => {},
+  updateInputs: (inputIdentifier, enteredText) => {},
   resetInputs: () => {},
 });
 
@@ -15,11 +15,11 @@ function UserInputContextProvider({ children }) {
     lastName: "",
   });
 
-  function updateInputs(property, enteredText) {
+  function updateInputs(inputIdentifier, enteredText) {
     setUserInput((currInputValues) => {
       return {
         ...currInputValues,
-        email: enteredText.email,
+        [inputIdentifier]: enteredText,
       };
     });
   }
@@ -35,7 +35,7 @@ function UserInputContextProvider({ children }) {
 
   const value = {
     input: userInput,
-    updateInput: updateInputs,
+    updateInputs: updateInputs,
     resetInput: resetInputs,
   };
 
