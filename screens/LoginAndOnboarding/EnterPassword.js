@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TextInput } from "react-native";
 import PurpleButton from "../../components/ui/PurpleButton";
 import { Colors } from "../../constants/colors";
+import Button3 from "../../components/ui/Button3";
 
 function EnterPassword({ navigation }) {
   return (
@@ -23,10 +24,16 @@ function EnterPassword({ navigation }) {
           >
             Continue
           </PurpleButton>
-          <View>
-            <Text>
-              Forgot Password? <Text style={styles.boldedText}>Reset</Text>
-            </Text>
+          <View style={styles.redirectText}>
+            <Text>Forgot Password?</Text>
+            <Text> </Text>
+            <Button3
+              onPress={() => {
+                navigation.navigate("ForgotPassword");
+              }}
+            >
+              Reset
+            </Button3>
           </View>
         </View>
       </View>
@@ -67,7 +74,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#F4F4F4",
     paddingLeft: 10,
   },
-  boldedText: {
-    fontWeight: "600",
+  redirectText: {
+    flexDirection: "row",
+    marginLeft: 5,
   },
 });

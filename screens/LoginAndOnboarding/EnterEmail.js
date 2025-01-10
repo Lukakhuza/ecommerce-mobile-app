@@ -9,6 +9,7 @@ import {
 import { useState, useContext } from "react";
 import PurpleButton from "../../components/ui/PurpleButton";
 import Button2 from "../../components/ui/Button2";
+import Button3 from "../../components/ui/Button3";
 import { Colors } from "../../constants/colors";
 import { useNavigation } from "@react-navigation/native";
 import { UserInputContext } from "../../store/context/userInputContext";
@@ -76,10 +77,17 @@ function EnterEmail({ route }) {
             >
               Continue
             </PurpleButton>
-            <Text>
-              Don't have an account?{" "}
-              <Text style={styles.boldedText}>Create One</Text>
-            </Text>
+            <View style={styles.redirectText}>
+              <Text>Don't have an account?</Text>
+              <Text> </Text>
+              <Button3
+                onPress={() => {
+                  navigation.navigate("CreateAccount");
+                }}
+              >
+                Create One
+              </Button3>
+            </View>
           </View>
         </View>
         <View style={styles.buttons2}>
@@ -152,8 +160,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#F4F4F4",
     paddingLeft: 10,
   },
-  boldedText: {
-    fontWeight: "600",
+  redirectText: {
+    flexDirection: "row",
+    marginLeft: 5,
   },
   buttons2: {
     flex: 1,

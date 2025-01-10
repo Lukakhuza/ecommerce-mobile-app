@@ -3,6 +3,7 @@ import PurpleButton from "../../components/ui/PurpleButton";
 import { Colors } from "../../constants/colors";
 import IconButton from "../../components/ui/IconButton";
 import LoginInput from "./LoginInput";
+import Button3 from "../../components/ui/Button3";
 
 function CreateAccount({ navigation }) {
   return (
@@ -38,10 +39,16 @@ function CreateAccount({ navigation }) {
           >
             Continue
           </PurpleButton>
-          <View>
-            <Text>
-              Forgot Password? <Text style={styles.boldedText}>Reset</Text>
-            </Text>
+          <View style={styles.redirectText}>
+            <Text>Forgot Password?</Text>
+            <Text> </Text>
+            <Button3
+              onPress={() => {
+                navigation.navigate("ForgotPassword");
+              }}
+            >
+              Reset
+            </Button3>
           </View>
         </View>
       </View>
@@ -83,8 +90,9 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     marginVertical: 10,
   },
-  boldedText: {
-    fontWeight: "600",
+  redirectText: {
+    flexDirection: "row",
+    marginLeft: 5,
   },
   icon: {
     top: 20,

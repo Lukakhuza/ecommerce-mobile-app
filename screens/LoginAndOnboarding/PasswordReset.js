@@ -18,14 +18,14 @@ function PasswordReset({ navigation }) {
       <View>
         <PurpleButton
           onPress={() => {
-            navigation.navigate("EnterEmail");
+            navigation.replace("EnterEmail");
           }}
         >
           Return to Login
         </PurpleButton>
         <PurpleButton
           onPress={() => {
-            navigation.navigate("TellUsAboutYourself");
+            navigation.replace("TellUsAboutYourself");
           }}
         >
           Tell us

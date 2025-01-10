@@ -20,7 +20,7 @@ function ForgotPassword({ navigation }) {
           </View>
           <PurpleButton
             onPress={() => {
-              navigation.navigate("PasswordReset");
+              navigation.replace("PasswordReset");
             }}
           >
             Continue
