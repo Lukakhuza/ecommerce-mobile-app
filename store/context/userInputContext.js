@@ -13,7 +13,13 @@ function UserInputContextProvider({ children }) {
     passwordPlaceholder: "",
     firstName: "",
     lastName: "",
+    shopFor: "",
+    ageRange: "",
   });
+
+  // function updateCurrentUser(uid) {
+  //   setCurrentUser(uid);
+  // }
 
   function updateInputs(inputIdentifier, enteredText) {
     setUserInput((currInputValues) => {
@@ -37,6 +43,7 @@ function UserInputContextProvider({ children }) {
     input: userInput,
     updateInputs: updateInputs,
     resetInput: resetInputs,
+    // updateCurrentUser: updateCurrentUser,
   };
 
   return (

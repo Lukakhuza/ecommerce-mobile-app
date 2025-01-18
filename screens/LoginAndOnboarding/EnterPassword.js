@@ -1,13 +1,17 @@
 import { View, Text, StyleSheet, TextInput } from "react-native";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import PurpleButton from "../../components/ui/PurpleButton";
 import { UserInputContext } from "../../store/context/userInputContext";
 import { Colors } from "../../constants/colors";
 import Button3 from "../../components/ui/Button3";
 import { loginUser } from "../../util/auth";
+import { AuthContext } from "../../store/context/auth-context";
+import LoadingOverlay from "../../components/ui/LoadingOverlay";
 
 function EnterPassword({ navigation }) {
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
   const userInputCtx = useContext(UserInputContext);
+  const authCtx = useContext(AuthContext);
 
   function handleInputUpdate(inputIdentifier, enteredText) {
     console.log(userInputCtx);
@@ -15,10 +19,21 @@ function EnterPassword({ navigation }) {
   }
 
   async function loginHandler() {
+    setIsAuthenticating(true);
     const email = userInputCtx.input.email;
     const password = userInputCtx.input.passwordPlaceholder;
-    const response = await loginUser(email, password);
+    const token = await loginUser(email, password);
+    // console.log("Test 908");
+    // console.log(token);
+    authCtx.authenticate(token);
+    setIsAuthenticating(false);
+    // console.log("Token is: ", authCtx);
+    // userInputCtx.
     // console.log(response);
+  }
+
+  if (isAuthenticating) {
+    return <LoadingOverlay message="Logging In..." />;
   }
 
   return (

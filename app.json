@@ -13,8 +13,10 @@
       "backgroundColor": "#8E6CEF"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.lukakhuza.ecommerce"
     },
+    "scheme": "e-commerce",
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/splash-icon.png",
