@@ -11,7 +11,6 @@ function AuthContextProvider({ children }) {
   const [authToken, setAuthToken] = useState(null);
 
   function authenticate(token) {
-    console.log("Token here is ", token);
     setAuthToken(token);
     // console.log(authToken);
     // console.log(authenticationToken);

@@ -17,10 +17,6 @@ function UserInputContextProvider({ children }) {
     ageRange: "",
   });
 
-  // function updateCurrentUser(uid) {
-  //   setCurrentUser(uid);
-  // }
-
   function updateInputs(inputIdentifier, enteredText) {
     setUserInput((currInputValues) => {
       return {
@@ -30,12 +26,15 @@ function UserInputContextProvider({ children }) {
     });
   }
 
+  console.log(userInput);
   function resetInputs() {
     setUserInput({
       email: "",
       passwordPlaceholder: "",
       firstName: "",
       lastName: "",
+      shopFor: "",
+      ageRange: "",
     });
   }
 
@@ -43,7 +42,6 @@ function UserInputContextProvider({ children }) {
     input: userInput,
     updateInputs: updateInputs,
     resetInput: resetInputs,
-    // updateCurrentUser: updateCurrentUser,
   };
 
   return (

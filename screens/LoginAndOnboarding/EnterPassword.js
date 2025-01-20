@@ -14,7 +14,7 @@ function EnterPassword({ navigation }) {
   const authCtx = useContext(AuthContext);
 
   function handleInputUpdate(inputIdentifier, enteredText) {
-    console.log(userInputCtx);
+    // console.log(userInputCtx);
     userInputCtx.updateInputs(inputIdentifier, enteredText);
   }
 
@@ -48,6 +48,7 @@ function EnterPassword({ navigation }) {
               autoCorrect={false}
               placeholder="Password Placeholder"
               style={styles.textInput}
+              secureTextEntry={true}
               onChangeText={handleInputUpdate.bind(this, "passwordPlaceholder")}
               value={userInputCtx.input.passwordPlaceholder}
             ></TextInput>

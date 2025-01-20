@@ -17,7 +17,7 @@ function Welcome() {
     getUserData();
   }, []);
 
-  console.log(fetchedUserData);
+  // console.log(fetchedUserData);
   return (
     <View style={styles.container}>
       <Text>Welcome</Text>

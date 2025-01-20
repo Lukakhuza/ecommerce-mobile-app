@@ -1,13 +1,20 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import { Colors } from "../../constants/colors";
 
-function PurpleButton({ children, onPress, style }) {
+function PurpleButton({ children, onPress, style, mode }) {
   return (
     <Pressable
-      style={({ pressed }) => [style, styles.button, pressed && styles.pressed]}
+      style={({ pressed }) => [
+        style,
+        styles.button,
+        pressed && styles.pressed,
+        mode === "selected" && styles.white,
+      ]}
       onPress={onPress}
     >
-      <Text style={styles.text}>{children}</Text>
+      <Text style={[styles.text, mode === "selected" && styles.selected]}>
+        {children}
+      </Text>
     </Pressable>
   );
 }
@@ -38,5 +45,11 @@ const styles = StyleSheet.create({
   },
   pressed: {
     opacity: 0.5,
+  },
+  white: {
+    backgroundColor: Colors.bgLight2,
+  },
+  selected: {
+    color: "black",
   },
 });

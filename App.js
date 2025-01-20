@@ -115,7 +115,7 @@ function AuthenticatedStack() {
 function Navigation() {
   const authCtx = useContext(AuthContext);
   // console.log(authCtx.isAuthenticated);
-  console.log(authCtx.token);
+  // console.log(authCtx.token);
   // console.log(authCtx);
   return (
     <NavigationContainer style={styles.container}>

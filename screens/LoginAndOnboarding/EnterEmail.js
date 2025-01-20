@@ -16,68 +16,11 @@ import { useNavigation } from "@react-navigation/native";
 import { addData } from "../../util/auth";
 import { UserInputContext } from "../../store/context/userInputContext";
 
-// import { sendEmail } from "../../util/email";
-// const fetch111 = require("node-fetch");
-
-// function getAccessToken() {
-//   return admin.credential
-//     .applicationDefault()
-//     .getAccessToken()
-//     .then((accessToken) => {
-//       return accessToken.access_token;
-//     })
-//     .catch((err) => {
-//       console.error("Unable to get access token");
-//       console.error(err);
-//     });
-// }
-
-// async function listProjects() {
-//   const accessToken = getAccessToken();
-//   console.log(accessToken);
-//   const uri = "https://firebase.googleapis.com/v1beta1/availableProjects";
-//   console.log(uri);
-//   const options = {
-//     method: "GET",
-//     headers: {
-//       Authorization: "Bearer " + accessToken,
-//     },
-//   };
-
-//   try {
-// const rawResponse = await fetch(uri, options);
-// console.log(rawResponse);
-// const resp = await rawResponse.json();
-// console.log(resp);
-// const projects = resp["projectInfo"];
-// console.log("Project total: " + projects.length);
-// console.log("");
-// for (let i in projects) {
-//   const project = projects[i];
-//   console.log("Project " + i);
-//   console.log("ID: " + project["project"]);
-//   console.log("Display Name: " + project["displayName"]);
-//   console.log("");
-//   } catch (err) {
-//     console.error(err);
-//   }
-// }
-
 function EnterEmail({ navigation }) {
   const userInputCtx = useContext(UserInputContext);
 
   function handleInputUpdate(inputIdentifier, enteredText) {
-    console.log(userInputCtx);
     userInputCtx.updateInputs(inputIdentifier, enteredText);
-  }
-
-  function handlePress() {
-    // listProjects();
-    addData();
-    // console.log(fetch111.Request);
-    // console.log("Hello");
-    // console.log("Hi");
-    // sendEmail();
   }
 
   return (
@@ -121,7 +64,7 @@ function EnterEmail({ navigation }) {
           <Button2
             style={styles.button1}
             onPress={() => {
-              console.log("Log in with your Apple account.");
+              // console.log("Log in with your Apple account.");
             }}
             imageSource={require("../../assets/apple-logo1.png")}
           >
@@ -129,7 +72,7 @@ function EnterEmail({ navigation }) {
           </Button2>
           <Button2
             onPress={() => {
-              console.log("Log in with your Google account.");
+              // console.log("Log in with your Google account.");
             }}
             imageSource={require("../../assets/google-logo.png")}
           >
@@ -137,13 +80,12 @@ function EnterEmail({ navigation }) {
           </Button2>
           <Button2
             onPress={() => {
-              console.log("Log in with your Facebook account.");
+              // console.log("Log in with your Facebook account.");
             }}
             imageSource={require("../../assets/facebook-logo.png")}
           >
             Continue with Facebook
           </Button2>
-          <Button title="Trigger Email" onPress={handlePress} />
         </View>
       </View>
     </ScrollView>

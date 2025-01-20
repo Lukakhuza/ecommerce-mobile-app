@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import PurpleButton from "../../components/ui/PurpleButton";
+import { UserInputContext } from "../../store/context/userInputContext";
 import { Colors } from "../../constants/colors";
 import { Dropdown } from "react-native-element-dropdown";
 import DropdownComponent from "../../components/ui/Dropdown";
@@ -12,7 +13,12 @@ const data = [
 ];
 
 function TellUsAboutYourself({ navigation }) {
+  const userInputCtx = useContext(UserInputContext);
+  const [selection, setSelection] = useState("");
   const [ageRange, setAgeRange] = useState("");
+  function handleInputUpdate(inputIdentifier, enteredText) {
+    userInputCtx.updateInputs(inputIdentifier, enteredText);
+  }
 
   return (
     <View style={styles.container}>
@@ -20,32 +26,49 @@ function TellUsAboutYourself({ navigation }) {
         <View>
           <Text style={styles.text1}>Tell us about yourself</Text>
         </View>
-        <View style={styles.subcontainer}>
+        <View>
           <Text style={styles.text2}>Who do you shop for?</Text>
           <View style={styles.genders}>
-            <PurpleButton style={styles.male}>Men</PurpleButton>
-            <PurpleButton style={styles.female}>Women</PurpleButton>
+            <PurpleButton
+              style={styles.male}
+              mode={selection === "men" ? "selected" : ""}
+              onPress={() => {
+                if (selection === "men") {
+                  setSelection("");
+                  userInputCtx.updateInputs("shopFor", "");
+                } else {
+                  setSelection("men");
+                  userInputCtx.updateInputs("shopFor", "men");
+                }
+              }}
+            >
+              Men
+            </PurpleButton>
+            <PurpleButton
+              style={styles.female}
+              mode={selection === "women" ? "selected" : ""}
+              onPress={() => {
+                if (selection === "women") {
+                  setSelection("");
+                  userInputCtx.updateInputs("shopFor", "");
+                } else {
+                  setSelection("women");
+                  userInputCtx.updateInputs("shopFor", "women");
+                }
+              }}
+            >
+              Women
+            </PurpleButton>
           </View>
         </View>
-        <View style={styles.subcontainer}>
+        <View>
           <Text style={styles.text2}>How old are you?</Text>
         </View>
         <View>
-          {/* <Dropdown
-            style={styles.dropdown}
-            data={data}
-            search
-            maxHeight={300}
-            labelField="Hiiii"
-            valueField="value"
-            // value={value}
-            placeholder="Select Item"
-            // backgroundColor="yellow"
-            color
-          /> */}
           <DropdownComponent
             style={styles.dropdown}
             value={ageRange}
+            // onChangeText={handleInputUpdate.bind(this, "ageRange")}
             onChange={(item) => {
               setAgeRange(item.value);
             }}
@@ -75,6 +98,9 @@ const styles = StyleSheet.create({
     // flex: 1,
     // flexDirection: "column",
     // justifyContent: "center",
+  },
+  selected: {
+    backgroundColor: "yellow",
   },
   //   subcontainer: {
   //     // marginBottom: 100,

@@ -32,7 +32,7 @@ function CreateAccount({ navigation }) {
       uid: response.localId,
       idToken: response.idToken,
     };
-    console.log(userData.idToken);
+    // console.log(userData.idToken);
     addData(userData);
     authCtx.authenticate(userData.idToken);
     // navigation.navigate("EnterEmail");
@@ -79,6 +79,7 @@ function CreateAccount({ navigation }) {
               style={styles.textInput}
               SecureTextEntry={true}
               autoCapitalize={"none"}
+              secureTextEntry={true}
               autoCorrect={false}
               onChangeText={handleInputUpdate.bind(this, "passwordPlaceholder")}
               value={userInputCtx.input.passwordPlaceholder}
