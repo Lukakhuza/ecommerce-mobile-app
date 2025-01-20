@@ -71,6 +71,7 @@ function TellUsAboutYourself({ navigation }) {
             // onChangeText={handleInputUpdate.bind(this, "ageRange")}
             onChange={(item) => {
               setAgeRange(item.value);
+              userInputCtx.updateInputs("ageRange", item.value);
             }}
           />
         </View>
