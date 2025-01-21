@@ -7,42 +7,11 @@ import { Colors } from "../../constants/colors";
 import IconButton from "../../components/ui/IconButton";
 import LoginInput from "./LoginInput";
 import Button3 from "../../components/ui/Button3";
-import { addData, createUser } from "../../util/auth";
-import LoadingOverlay from "../../components/ui/LoadingOverlay";
 
 function CreateAccount({ navigation }) {
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
-  const authCtx = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
   function handleInputUpdate(inputIdentifier, enteredText) {
-    // console.log(userInputCtx);
     userInputCtx.updateInputs(inputIdentifier, enteredText);
-  }
-
-  async function createAccountHandler() {
-    const email = userInputCtx.input.email;
-    const passwordPlaceholder = userInputCtx.input.passwordPlaceholder;
-    setIsAuthenticating(true);
-    const response = await createUser(email, passwordPlaceholder);
-    // console.log(response);
-    const userData = {
-      firstName: userInputCtx.input.firstName,
-      lastName: userInputCtx.input.lastName,
-      email: userInputCtx.input.email,
-      uid: response.localId,
-      idToken: response.idToken,
-    };
-    // console.log(userData.idToken);
-    addData(userData);
-    authCtx.authenticate(userData.idToken);
-    // navigation.navigate("EnterEmail");
-    setIsAuthenticating(false);
-    // console.log("Hello");
-    // console.log("user data ", userData);
-  }
-
-  if (isAuthenticating) {
-    return <LoadingOverlay message="Creating User..." />;
   }
 
   return (
@@ -85,7 +54,13 @@ function CreateAccount({ navigation }) {
               value={userInputCtx.input.passwordPlaceholder}
             ></TextInput>
           </View>
-          <PurpleButton onPress={createAccountHandler}>Continue</PurpleButton>
+          <PurpleButton
+            onPress={() => {
+              navigation.navigate("TellUsAboutYourself");
+            }}
+          >
+            Continue
+          </PurpleButton>
           <View style={styles.redirectText}>
             <Text>Forgot Password?</Text>
             <Text> </Text>

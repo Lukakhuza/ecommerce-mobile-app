@@ -23,13 +23,6 @@ function PasswordReset({ navigation }) {
         >
           Return to Login
         </PurpleButton>
-        <PurpleButton
-          onPress={() => {
-            navigation.replace("TellUsAboutYourself");
-          }}
-        >
-          Tell us
-        </PurpleButton>
       </View>
     </View>
   );

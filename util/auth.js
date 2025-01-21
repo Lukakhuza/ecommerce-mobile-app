@@ -6,6 +6,7 @@ const API_KEY = "AIzaSyAIvueNUIkdLgTBprMM4UQBDVFEfbskIt8";
 const BACKEND_API = "https://ecommerce-1e357-default-rtdb.firebaseio.com";
 
 export async function createUser(email, password) {
+  console.log(email);
   const response = await axios.post(
     "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + API_KEY,
     {
@@ -33,8 +34,6 @@ export async function loginUser(email, password) {
   return token;
 }
 
-export async function updateCurrentUser(uid) {}
-
 export async function loginOAuth() {
   const response = await axios.post(
     "https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=" +
@@ -55,6 +54,8 @@ export async function addData(data) {
     lastName: data.lastName,
     email: data.email,
     uid: data.uid,
+    shopFor: data.shopFor,
+    ageRange: data.ageRange,
   };
 
   const response = await axios.post(BACKEND_API + "/users.json", userData);
@@ -71,6 +72,8 @@ export async function fetchData() {
       firstName: response.data[key].firstName,
       lastName: response.data[key].lastName,
       email: response.data[key].email,
+      shopFor: response.data[key].shopFor,
+      ageRange: response.data[key].ageRange,
     };
 
     userData.push(userObj);

@@ -12,8 +12,6 @@ function AuthContextProvider({ children }) {
 
   function authenticate(token) {
     setAuthToken(token);
-    // console.log(authToken);
-    // console.log(authenticationToken);
   }
 
   function logout() {

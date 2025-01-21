@@ -4,6 +4,9 @@ import PurpleButton from "../../components/ui/PurpleButton";
 import { UserInputContext } from "../../store/context/userInputContext";
 import { Colors } from "../../constants/colors";
 import { Dropdown } from "react-native-element-dropdown";
+import { AuthContext } from "../../store/context/auth-context";
+import { addData, createUser } from "../../util/auth";
+import LoadingOverlay from "../../components/ui/LoadingOverlay";
 import DropdownComponent from "../../components/ui/Dropdown";
 
 const data = [
@@ -13,11 +16,39 @@ const data = [
 ];
 
 function TellUsAboutYourself({ navigation }) {
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const authCtx = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
   const [selection, setSelection] = useState("");
   const [ageRange, setAgeRange] = useState("");
   function handleInputUpdate(inputIdentifier, enteredText) {
     userInputCtx.updateInputs(inputIdentifier, enteredText);
+  }
+
+  async function createAccountHandler() {
+    const email = userInputCtx.input.email;
+    const passwordPlaceholder = userInputCtx.input.passwordPlaceholder;
+    setIsAuthenticating(true);
+    console.log(email);
+    console.log(passwordPlaceholder);
+    const response = await createUser(email, passwordPlaceholder);
+    console.log(response);
+    const userData = {
+      firstName: userInputCtx.input.firstName,
+      lastName: userInputCtx.input.lastName,
+      email: userInputCtx.input.email,
+      uid: response.localId,
+      idToken: response.idToken,
+      shopFor: userInputCtx.input.shopFor,
+      ageRange: userInputCtx.input.ageRange,
+    };
+    addData(userData);
+    authCtx.authenticate(userData.idToken);
+    setIsAuthenticating(false);
+  }
+
+  if (isAuthenticating) {
+    return <LoadingOverlay message="Creating User..." />;
   }
 
   return (
@@ -77,7 +108,9 @@ function TellUsAboutYourself({ navigation }) {
         </View>
       </ScrollView>
       <View style={styles.footer}>
-        <PurpleButton style={styles.button}>Finish</PurpleButton>
+        <PurpleButton onPress={createAccountHandler} style={styles.button}>
+          Finish
+        </PurpleButton>
       </View>
     </View>
   );

@@ -3,9 +3,11 @@ import PurpleButton from "../../components/ui/PurpleButton";
 import { AuthContext } from "../../store/context/auth-context";
 import { useContext, useEffect, useState } from "react";
 import { fetchData } from "../../util/auth";
+import { UserInputContext } from "../../store/context/userInputContext";
 
 function Welcome() {
   const authCtx = useContext(AuthContext);
+  const userInputCtx = useContext(UserInputContext);
   const [fetchedUserData, setFetchedUserData] = useState([]);
 
   useEffect(() => {
@@ -24,7 +26,14 @@ function Welcome() {
       <Text>You have been successfully Authenticated</Text>
       {/* <Text>{fetchedUserData}</Text> */}
 
-      <PurpleButton onPress={authCtx.logout}>Log Out</PurpleButton>
+      <PurpleButton
+        onPress={() => {
+          userInputCtx.resetInputs();
+          authCtx.logout();
+        }}
+      >
+        Log Out
+      </PurpleButton>
     </View>
   );
 }

@@ -59,6 +59,7 @@ function EnterPassword({ navigation }) {
             <Text> </Text>
             <Button3
               onPress={() => {
+                userInputCtx.resetInputs();
                 navigation.navigate("ForgotPassword");
               }}
             >

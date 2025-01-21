@@ -52,6 +52,7 @@ function EnterEmail({ navigation }) {
               <Text> </Text>
               <Button3
                 onPress={() => {
+                  userInputCtx.resetInputs();
                   navigation.navigate("CreateAccount");
                 }}
               >

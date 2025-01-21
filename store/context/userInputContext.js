@@ -26,7 +26,6 @@ function UserInputContextProvider({ children }) {
     });
   }
 
-  console.log(userInput);
   function resetInputs() {
     setUserInput({
       email: "",
@@ -41,7 +40,7 @@ function UserInputContextProvider({ children }) {
   const value = {
     input: userInput,
     updateInputs: updateInputs,
-    resetInput: resetInputs,
+    resetInputs: resetInputs,
   };
 
   return (
