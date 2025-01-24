@@ -1,5 +1,3 @@
-// import firebase from "firebase/app";
-
 import axios from "axios";
 
 const API_KEY = "AIzaSyAIvueNUIkdLgTBprMM4UQBDVFEfbskIt8";
@@ -80,4 +78,16 @@ export async function fetchData() {
   }
 
   return userData;
+}
+
+export async function fetchProductsData() {
+  // const response = await axios.get("https://api.escuelajs.co/api/v1/products");
+  const response = await axios.get("https://fakestoreapi.com/products");
+
+  // console.log(response.data[0].title);
+  // console.log(response.data.category.name);
+
+  // const userData = [];
+
+  return response.data;
 }

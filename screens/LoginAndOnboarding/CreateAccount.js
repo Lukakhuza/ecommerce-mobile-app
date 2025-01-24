@@ -16,7 +16,7 @@ function CreateAccount({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View></View>
+      {/* <View></View> */}
       <View style={styles.textContainer}>
         <Text style={styles.text}>Create Account</Text>
       </View>

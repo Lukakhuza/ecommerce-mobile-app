@@ -15,6 +15,7 @@ import PasswordReset from "./screens/LoginAndOnboarding/PasswordReset";
 import TellUsAboutYourself from "./screens/LoginAndOnboarding/TellUsAboutYourself";
 import UserInputContextProvider from "./store/context/userInputContext";
 import AuthContextProvider, { AuthContext } from "./store/context/auth-context";
+import FavoritesContextProvider from "./store/context/favoritesContext";
 // import Test2 from "./screens/LoginAndOnboarding/Test2";
 
 // SplashScreen.preventAutoHideAsync();
@@ -94,7 +95,9 @@ function AuthStack() {
       <Stack.Screen
         name="TellUsAboutYourself"
         component={TellUsAboutYourself}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+        }}
       />
     </Stack.Navigator>
   );
@@ -106,7 +109,18 @@ function AuthenticatedStack() {
       <Stack.Screen
         name="Welcome"
         component={Welcome}
-        options={{ headerShown: true }}
+        options={({ navigation }) => ({
+          title: "",
+          headerTransparent: true,
+          headerLeft: ({ tintColor }) => (
+            <IconButton
+              icon="chevron-back-circle-outline"
+              size={32}
+              color={tintColor}
+              onPress={() => navigation.goBack()}
+            />
+          ),
+        })}
       />
     </Stack.Navigator>
   );
@@ -119,8 +133,9 @@ function Navigation() {
   // console.log(authCtx);
   return (
     <NavigationContainer style={styles.container}>
-      {!authCtx.isAuthenticated && <AuthStack />}
-      {authCtx.isAuthenticated && <AuthenticatedStack />}
+      {/* {!authCtx.isAuthenticated && <AuthStack />}
+      {authCtx.isAuthenticated && <AuthenticatedStack />} */}
+      <AuthenticatedStack />
     </NavigationContainer>
   );
 }
@@ -138,7 +153,9 @@ export default function App() {
       <StatusBar style="dark" />
       <AuthContextProvider>
         <UserInputContextProvider>
-          <Navigation />
+          <FavoritesContextProvider>
+            <Navigation />
+          </FavoritesContextProvider>
         </UserInputContextProvider>
       </AuthContextProvider>
     </>

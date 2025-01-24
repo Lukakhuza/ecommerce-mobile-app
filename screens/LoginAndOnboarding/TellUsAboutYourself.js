@@ -29,10 +29,10 @@ function TellUsAboutYourself({ navigation }) {
     const email = userInputCtx.input.email;
     const passwordPlaceholder = userInputCtx.input.passwordPlaceholder;
     setIsAuthenticating(true);
-    console.log(email);
-    console.log(passwordPlaceholder);
+    // console.log(email);
+    // console.log(passwordPlaceholder);
     const response = await createUser(email, passwordPlaceholder);
-    console.log(response);
+    // console.log(response);
     const userData = {
       firstName: userInputCtx.input.firstName,
       lastName: userInputCtx.input.lastName,
