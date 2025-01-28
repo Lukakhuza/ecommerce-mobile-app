@@ -99,7 +99,6 @@ function TellUsAboutYourself({ navigation }) {
           <DropdownComponent
             style={styles.dropdown}
             value={ageRange}
-            // onChangeText={handleInputUpdate.bind(this, "ageRange")}
             onChange={(item) => {
               setAgeRange(item.value);
               userInputCtx.updateInputs("ageRange", item.value);

@@ -15,7 +15,7 @@ import { Colors } from "../../constants/colors";
 import { useNavigation } from "@react-navigation/native";
 import { addData } from "../../util/auth";
 import { UserInputContext } from "../../store/context/userInputContext";
-import { fetchProductsData } from "../../util/auth";
+// import { fetchProductsData } from "../../util/auth";
 
 function EnterEmail({ navigation }) {
   const userInputCtx = useContext(UserInputContext);
@@ -88,7 +88,7 @@ function EnterEmail({ navigation }) {
           >
             Continue with Facebook
           </Button2>
-          <Button2 onPress={fetchProductsData}>Hello</Button2>
+          {/* <Button2 onPress={fetchProductsData}>Hello</Button2> */}
         </View>
       </View>
     </ScrollView>

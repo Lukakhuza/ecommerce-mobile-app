@@ -91,3 +91,8 @@ export async function fetchProductsData() {
 
   return response.data;
 }
+
+export async function fetchProfilePicture() {
+  const response = await axios.get("https://dummyjson.com/users");
+  return response.data;
+}

@@ -15,11 +15,14 @@ import { Colors } from "../../constants/colors";
 import FavoriteIcon from "../../components/ui/FavoriteIcon";
 import { Ionicons } from "@expo/vector-icons";
 import { FavoritesContext } from "../../store/context/favoritesContext";
+import { ProductsContext } from "../../store/context/productsContext";
+import { jsx } from "react/jsx-runtime";
 
 function Welcome() {
   const authCtx = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
   const favoritesCtx = useContext(FavoritesContext);
+  const productsCtx = useContext(ProductsContext);
   const [fetchedUserData, setFetchedUserData] = useState([]);
   const [fetchedProductsData, setFetchedProductsData] = useState([]);
 
@@ -40,16 +43,36 @@ function Welcome() {
     getProductsData();
   }, []);
 
+  const filteredProducts = fetchedProductsData.filter((productData) => {
+    let categoryProductIds = [];
+    if (productsCtx.selectedCategory === "Jackets") {
+      categoryProductIds = [3, 15, 16, 17];
+    } else if (productsCtx.selectedCategory === "Tops") {
+      categoryProductIds = [2, 4, 18, 19, 20];
+    } else if (productsCtx.selectedCategory === "Computer Accessories") {
+      categoryProductIds = [9, 10, 11, 12];
+    } else if (productsCtx.selectedCategory === "TVs") {
+      categoryProductIds = [13, 14];
+    } else if (productsCtx.selectedCategory === "Jewelry & Other") {
+      categoryProductIds = [5, 6, 7, 8, 1];
+    }
+    if (categoryProductIds.includes(productData.id)) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
   return (
-    <View style={{ zIndex: -10 }}>
-      <View style={[styles.fl, { zIndex: -9 }]}>
+    <View>
+      <View style={styles.fl}>
         <View style={styles.header}></View>
-        <Text style={styles.category}>Hoodies (240)</Text>
-        {/* <Text> */}
-        {/* <Ionicons name="heart-outline" color="black" /> */}
-        {/* </Text> */}
+        <Text style={styles.category}>
+          {" "}
+          {productsCtx.selectedCategory} ({filteredProducts.length})
+        </Text>
         <FlatList
-          data={fetchedProductsData}
+          data={filteredProducts}
           renderItem={(itemData) => {
             const icon = "heart-outline";
             return (
@@ -114,6 +137,7 @@ function Welcome() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: 400,
     flexDirection: "row",
     flexWrap: "wrap",
     backgroundColor: Colors.bgLight2,

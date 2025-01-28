@@ -2,12 +2,13 @@ import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useContext, useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TextInput } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import EnterEmail from "./screens/LoginAndOnboarding/EnterEmail";
 import EnterPassword from "./screens/LoginAndOnboarding/EnterPassword";
 import Welcome from "./screens/Welcome/welcome";
+import HomePage from "./screens/Welcome/HomePage";
 import CreateAccount from "./screens/LoginAndOnboarding/CreateAccount";
 import IconButton from "./components/ui/IconButton";
 import ForgotPassword from "./screens/LoginAndOnboarding/ForgotPassword";
@@ -16,9 +17,14 @@ import TellUsAboutYourself from "./screens/LoginAndOnboarding/TellUsAboutYoursel
 import UserInputContextProvider from "./store/context/userInputContext";
 import AuthContextProvider, { AuthContext } from "./store/context/auth-context";
 import FavoritesContextProvider from "./store/context/favoritesContext";
+import ProductsContextProvider from "./store/context/productsContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Categories from "./screens/Welcome/Categories";
+// import AppLoading from "expo-app-loading";
 // import Test2 from "./screens/LoginAndOnboarding/Test2";
+// import HomePage
 
-// SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync();
 
 const Stack = createNativeStackNavigator();
 
@@ -105,10 +111,31 @@ function AuthStack() {
 
 function AuthenticatedStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="HomePage">
+      <Stack.Screen
+        name="HomePage"
+        component={HomePage}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="Welcome"
         component={Welcome}
+        options={({ navigation }) => ({
+          title: "",
+          headerTransparent: true,
+          headerLeft: ({ tintColor }) => (
+            <IconButton
+              icon="chevron-back-circle-outline"
+              size={32}
+              color={tintColor}
+              onPress={() => navigation.goBack()}
+            />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="CategoriesList"
+        component={Categories}
         options={({ navigation }) => ({
           title: "",
           headerTransparent: true,
@@ -128,33 +155,50 @@ function AuthenticatedStack() {
 
 function Navigation() {
   const authCtx = useContext(AuthContext);
-  // console.log(authCtx.isAuthenticated);
-  // console.log(authCtx.token);
-  // console.log(authCtx);
   return (
     <NavigationContainer style={styles.container}>
-      {/* {!authCtx.isAuthenticated && <AuthStack />}
-      {authCtx.isAuthenticated && <AuthenticatedStack />} */}
-      <AuthenticatedStack />
+      {!authCtx.isAuthenticated && <AuthStack />}
+      {authCtx.isAuthenticated && <AuthenticatedStack />}
     </NavigationContainer>
   );
 }
 
-export default function App() {
-  // const [userInput, setUserInput] = useState({
-  //   email: "",
-  //   passwordPlaceholder: "",
-  //   firstName: "",
-  //   lastName: "",
-  // });
+function Root() {
+  const [isTryingToLogin, setIsTryingToLogin] = useState(true);
 
+  const authCtx = useContext(AuthContext);
+  useEffect(() => {
+    async function fetchToken() {
+      const storedToken = await AsyncStorage.getItem("token");
+
+      if (storedToken) {
+        authCtx.authenticate(storedToken);
+      }
+
+      setIsTryingToLogin(false);
+    }
+
+    SplashScreen.hide();
+    fetchToken();
+  }, []);
+
+  if (isTryingToLogin) {
+    return null;
+  }
+
+  return <Navigation />;
+}
+
+export default function App() {
   return (
     <>
       <StatusBar style="dark" />
       <AuthContextProvider>
         <UserInputContextProvider>
           <FavoritesContextProvider>
-            <Navigation />
+            <ProductsContextProvider>
+              <Root />
+            </ProductsContextProvider>
           </FavoritesContextProvider>
         </UserInputContextProvider>
       </AuthContextProvider>
