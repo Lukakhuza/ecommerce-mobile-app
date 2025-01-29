@@ -40,12 +40,12 @@ function HomePage() {
       <ScrollView style={styles.container}>
         <View style={styles.headerContainer}>
           <View style={styles.imageContainer}>
-            {/* {dummyUserData.users && (
+            {dummyUserData.users && (
               <Image
                 source={{ uri: dummyUserData.users[8].image }}
                 style={styles.image}
               />
-            )} */}
+            )}
           </View>
           {/* <Text>One</Text> */}
           {/*Add an image here with profilePicture as the link  */}
@@ -204,6 +204,9 @@ const styles = StyleSheet.create({
   imageContainer2: {
     height: 78,
     width: 78,
+    padding: 2,
+    // borderColor: "orange",
+    // borderWidth: 3,
   },
   image: {
     flex: 1,
@@ -257,7 +260,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   categories: {
-    // flex: 1,
+    flex: 1,
     height: 160,
     marginTop: 10,
     paddingHorizontal: 5,
@@ -266,27 +269,30 @@ const styles = StyleSheet.create({
     // borderWidth: 5,
   },
   categoriesHeader: {
-    flex: 1,
+    // flex: 1,
     flexDirection: "row",
     // borderColor: "blue",
+    height: 40,
     // borderWidth: 5,
     // paddingHorizontal: 10,
-    marginBottom: 10,
+    // marginBottom: 10,
     justifyContent: "space-between",
   },
   categoriesContent: {
     flex: 1,
     flexDirection: "row",
-    alignItems: "flex-end",
+    alignItems: "flex-start",
     // borderColor: "green",
     // borderWidth: 5,
   },
   categoryItem: {
     flex: 1,
+
+    // marginHorizontal: 10,
     // height: 1,
     // borderColor: "purple",
     // borderWidth: 3,
-    height: 300,
+    // height: 300,
     // width: 300,
     // backgroundColor: "yellow",
   },
