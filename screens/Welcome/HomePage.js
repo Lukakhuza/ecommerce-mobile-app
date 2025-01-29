@@ -6,6 +6,7 @@ import {
   TextInput,
   ScrollView,
   SafeAreaView,
+  FlatList,
 } from "react-native";
 import { useContext, useEffect, useState } from "react";
 import { fetchProfilePicture } from "../../util/auth";
@@ -15,6 +16,8 @@ import DropdownComponent from "../../components/ui/Dropdown";
 import { UserInputContext } from "../../store/context/userInputContext";
 import { Dropdown } from "react-native-element-dropdown";
 import { Ionicons } from "@expo/vector-icons";
+import FavoriteIcon from "../../components/ui/FavoriteIcon";
+import { FavoritesContext } from "../../store/context/favoritesContext";
 
 const data = [
   { label: "Men", value: "Men" },
@@ -24,6 +27,7 @@ const data = [
 function HomePage() {
   const productsCtx = useContext(ProductsContext);
   const userInputCtx = useContext(UserInputContext);
+  const favoritesCtx = useContext(FavoritesContext);
   const [dummyUserData, setDummyUserData] = useState("");
   const [genderSelection, setGenderSelection] = useState("");
 
@@ -145,6 +149,97 @@ function HomePage() {
             <Text style={{ fontSize: 21, fontWeight: 700 }}>Top Selling</Text>
             <Text style={{ fontSize: 17 }}>See All</Text>
           </View>
+          <FlatList
+            horizontal={true}
+            data={productsCtx.products}
+            renderItem={(itemData) => {
+              return (
+                <View style={styles.productContainer}>
+                  <View style={styles.favIcon}>
+                    <FavoriteIcon
+                      name={
+                        favoritesCtx.favorites.includes(itemData.item.id)
+                          ? "heart"
+                          : "heart-outline"
+                      }
+                      size={30}
+                      color="black"
+                      onPress={() => {
+                        if (
+                          !favoritesCtx.favorites.includes(itemData.item.id)
+                        ) {
+                          favoritesCtx.addFavorite(itemData.item.id);
+                        } else {
+                          favoritesCtx.removeFavorite(itemData.item.id);
+                        }
+                      }}
+                    />
+                  </View>
+                  <Image
+                    source={{ uri: itemData.item.image }}
+                    style={styles.image1}
+                  />
+                  <Text numberOfLines={1}>{itemData.item.title}</Text>
+                  <Text
+                    style={{ fontWeight: 700 }}
+                  >{`$${itemData.item.price}`}</Text>
+                </View>
+              );
+            }}
+          />
+        </View>{" "}
+        <View style={styles.topSelling}>
+          <View style={styles.topSellingHeader}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: 600,
+                marginLeft: 10,
+                color: "purple",
+              }}
+            >
+              New In
+            </Text>
+            <Text style={{ fontSize: 17 }}>See All</Text>
+          </View>
+          <FlatList
+            horizontal={true}
+            data={productsCtx.products}
+            renderItem={(itemData) => {
+              return (
+                <View style={styles.productContainer}>
+                  <View style={styles.favIcon}>
+                    <FavoriteIcon
+                      name={
+                        favoritesCtx.favorites.includes(itemData.item.id)
+                          ? "heart"
+                          : "heart-outline"
+                      }
+                      size={30}
+                      color="black"
+                      onPress={() => {
+                        if (
+                          !favoritesCtx.favorites.includes(itemData.item.id)
+                        ) {
+                          favoritesCtx.addFavorite(itemData.item.id);
+                        } else {
+                          favoritesCtx.removeFavorite(itemData.item.id);
+                        }
+                      }}
+                    />
+                  </View>
+                  <Image
+                    source={{ uri: itemData.item.image }}
+                    style={styles.image1}
+                  />
+                  <Text numberOfLines={1}>{itemData.item.title}</Text>
+                  <Text
+                    style={{ fontWeight: 700 }}
+                  >{`$${itemData.item.price}`}</Text>
+                </View>
+              );
+            }}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -263,6 +358,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 160,
     marginTop: 10,
+    marginBottom: 15,
     paddingHorizontal: 5,
     marginHorizontal: 30,
     // borderColor: "brown",
@@ -287,7 +383,6 @@ const styles = StyleSheet.create({
   },
   categoryItem: {
     flex: 1,
-
     // marginHorizontal: 10,
     // height: 1,
     // borderColor: "purple",
@@ -297,7 +392,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "yellow",
   },
   topSelling: {
-    flex: 1,
+    flex: 5,
     marginHorizontal: 30,
     paddingHorizontal: 10,
   },
@@ -306,5 +401,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginBottom: 10,
     justifyContent: "space-between",
+  },
+  productContainer: {
+    flex: 1,
+    backgroundColor: "white",
+    height: "auto",
+    width: 150,
+    margin: 10,
+    padding: 20,
+    borderRadius: 20,
+  },
+  favIcon: { position: "absolute", right: 15, top: 15, zIndex: 1 },
+  image1: {
+    width: "100%",
+    height: 200,
+    zIndex: 0,
+    overflow: "hidden",
+    resizeMode: "contain",
   },
 });
