@@ -18,7 +18,9 @@ import UserInputContextProvider from "./store/context/userInputContext";
 import AuthContextProvider, { AuthContext } from "./store/context/auth-context";
 import FavoritesContextProvider from "./store/context/favoritesContext";
 import ProductsContextProvider from "./store/context/productsContext";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Ionicons } from "@expo/vector-icons";
 import Categories from "./screens/Welcome/Categories";
 // import AppLoading from "expo-app-loading";
 // import Test2 from "./screens/LoginAndOnboarding/Test2";
@@ -28,21 +30,52 @@ SplashScreen.preventAutoHideAsync();
 
 const Stack = createNativeStackNavigator();
 
+const BottomTabs = createBottomTabNavigator();
+
+function TabsOverview() {
+  return (
+    <BottomTabs.Navigator screenOptions={{ headerShown: false }}>
+      <BottomTabs.Screen
+        name="Home"
+        component={HomePage}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" size={25} color={color} />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
+        name="Notifications"
+        component={EnterPassword}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="notifications-outline" size={25} color={color} />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
+        name="Orders"
+        component={EnterPassword}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="receipt-outline" size={25} color={color} />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
+        name="Profile"
+        component={EnterPassword}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person-outline" size={size} color={color} />
+          ),
+        }}
+      />
+    </BottomTabs.Navigator>
+  );
+}
+
 function AuthStack() {
-  // const [loaded, error] = useFonts({
-  //   "Circular-Std": require("./assets/fonts/circular-std-medium-500.ttf"),
-  // });
-
-  // useEffect(() => {
-  //   if (loaded || error) {
-  //     SplashScreen.hideAsync();
-  //   }
-  // }, [!loaded && !error]);
-
-  // if (!loaded && !error) {
-  //   return null;
-  // }
-
   return (
     <Stack.Navigator initialRouteName="EnterEmail">
       <Stack.Screen
@@ -111,7 +144,12 @@ function AuthStack() {
 
 function AuthenticatedStack() {
   return (
-    <Stack.Navigator initialRouteName="HomePage">
+    <Stack.Navigator initialRouteName="Main">
+      <Stack.Screen
+        name="Main"
+        component={TabsOverview}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="HomePage"
         component={HomePage}

@@ -187,7 +187,7 @@ function HomePage() {
               );
             }}
           />
-        </View>{" "}
+        </View>
         <View style={styles.topSelling}>
           <View style={styles.topSellingHeader}>
             <Text
