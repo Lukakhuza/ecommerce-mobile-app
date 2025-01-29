@@ -85,7 +85,7 @@ function HomePage() {
             // value={userInputCtx.input.email}
           ></TextInput>
         </View>
-        {productsCtx.products && (
+        {productsCtx.products.length > 0 && (
           <View style={styles.categories}>
             <View style={styles.categoriesHeader}>
               <Text style={{ fontSize: 17, fontWeight: 700 }}>Categories</Text>
@@ -140,6 +140,12 @@ function HomePage() {
             </View>
           </View>
         )}
+        <View style={styles.topSelling}>
+          <View style={styles.topSellingHeader}>
+            <Text style={{ fontSize: 21, fontWeight: 700 }}>Top Selling</Text>
+            <Text style={{ fontSize: 17 }}>See All</Text>
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -251,7 +257,8 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   categories: {
-    flex: 1,
+    // flex: 1,
+    height: 160,
     marginTop: 10,
     paddingHorizontal: 5,
     marginHorizontal: 30,
@@ -282,5 +289,16 @@ const styles = StyleSheet.create({
     height: 300,
     // width: 300,
     // backgroundColor: "yellow",
+  },
+  topSelling: {
+    flex: 1,
+    marginHorizontal: 30,
+    paddingHorizontal: 10,
+  },
+  topSellingHeader: {
+    flex: 1,
+    flexDirection: "row",
+    marginBottom: 10,
+    justifyContent: "space-between",
   },
 });
