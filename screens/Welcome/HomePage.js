@@ -106,7 +106,7 @@ function HomePage({ navigation }) {
               <View style={styles.categoryItem}>
                 <View style={styles.imageContainer2}>
                   <Image
-                    source={{ uri: productsCtx.products[0].image }}
+                    source={{ uri: productsCtx.products[2].image }}
                     style={styles.image}
                   />
                 </View>
@@ -124,16 +124,7 @@ function HomePage({ navigation }) {
               <View style={styles.categoryItem}>
                 <View style={styles.imageContainer2}>
                   <Image
-                    source={{ uri: productsCtx.products[2].image }}
-                    style={styles.image}
-                  />
-                </View>
-                <Text style={{ textAlign: "center" }}>Hoodies</Text>
-              </View>
-              <View style={styles.categoryItem}>
-                <View style={styles.imageContainer2}>
-                  <Image
-                    source={{ uri: productsCtx.products[3].image }}
+                    source={{ uri: productsCtx.products[8].image }}
                     style={styles.image}
                   />
                 </View>
@@ -142,11 +133,20 @@ function HomePage({ navigation }) {
               <View style={styles.categoryItem}>
                 <View style={styles.imageContainer2}>
                   <Image
-                    source={{ uri: productsCtx.products[4].image }}
+                    source={{ uri: productsCtx.products[6].image }}
                     style={styles.image}
                   />
                 </View>
-                <Text style={{ textAlign: "center" }}>Jewelry & Other</Text>
+                <Text style={{ textAlign: "center" }}>Jewelry</Text>
+              </View>
+              <View style={styles.categoryItem}>
+                <View style={styles.imageContainer2}>
+                  <Image
+                    source={{ uri: productsCtx.products[0].image }}
+                    style={styles.image}
+                  />
+                </View>
+                <Text style={{ textAlign: "center" }}>Other</Text>
               </View>
             </View>
           </View>

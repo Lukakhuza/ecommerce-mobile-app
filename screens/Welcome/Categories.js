@@ -48,7 +48,7 @@ function Categories({ list, navigation }) {
             <View style={styles.imageContainer}>
               {productsCtx.products.length > 0 && (
                 <Image
-                  source={{ uri: productsCtx.products[3].image }}
+                  source={{ uri: productsCtx.products[1].image }}
                   style={styles.image}
                 />
               )}
@@ -58,41 +58,24 @@ function Categories({ list, navigation }) {
           <Pressable
             style={styles.category}
             onPress={() => {
-              productsCtx.updateSelectedCategory("Computer Accessories");
+              productsCtx.updateSelectedCategory("Tech");
               navigation.navigate("Welcome");
             }}
           >
             <View style={styles.imageContainer}>
               {productsCtx.products.length > 0 && (
                 <Image
-                  source={{ uri: productsCtx.products[9].image }}
+                  source={{ uri: productsCtx.products[8].image }}
                   style={styles.image}
                 />
               )}
             </View>
-            <Text style={styles.label}>Computer Accessories</Text>
+            <Text style={styles.label}>Tech</Text>
           </Pressable>
           <Pressable
             style={styles.category}
             onPress={() => {
-              productsCtx.updateSelectedCategory("TVs");
-              navigation.navigate("Welcome");
-            }}
-          >
-            <View style={styles.imageContainer}>
-              {productsCtx.products.length > 0 && (
-                <Image
-                  source={{ uri: productsCtx.products[12].image }}
-                  style={styles.image}
-                />
-              )}
-            </View>
-            <Text style={styles.label}>TVs</Text>
-          </Pressable>
-          <Pressable
-            style={styles.category}
-            onPress={() => {
-              productsCtx.updateSelectedCategory("Jewelry & Other");
+              productsCtx.updateSelectedCategory("Jewelry");
               navigation.navigate("Welcome");
             }}
           >
@@ -104,7 +87,24 @@ function Categories({ list, navigation }) {
                 />
               )}
             </View>
-            <Text style={styles.label}>Jewelry & Other</Text>
+            <Text style={styles.label}>Jewelry</Text>
+          </Pressable>
+          <Pressable
+            style={styles.category}
+            onPress={() => {
+              productsCtx.updateSelectedCategory("Other");
+              navigation.navigate("Welcome");
+            }}
+          >
+            <View style={styles.imageContainer}>
+              {productsCtx.products.length > 0 && (
+                <Image
+                  source={{ uri: productsCtx.products[0].image }}
+                  style={styles.image}
+                />
+              )}
+            </View>
+            <Text style={styles.label}>Other</Text>
           </Pressable>
         </ScrollView>
       </View>

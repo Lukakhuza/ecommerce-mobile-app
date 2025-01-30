@@ -49,12 +49,12 @@ function Welcome() {
       categoryProductIds = [3, 15, 16, 17];
     } else if (productsCtx.selectedCategory === "Tops") {
       categoryProductIds = [2, 4, 18, 19, 20];
-    } else if (productsCtx.selectedCategory === "Computer Accessories") {
-      categoryProductIds = [9, 10, 11, 12];
-    } else if (productsCtx.selectedCategory === "TVs") {
-      categoryProductIds = [13, 14];
-    } else if (productsCtx.selectedCategory === "Jewelry & Other") {
-      categoryProductIds = [5, 6, 7, 8, 1];
+    } else if (productsCtx.selectedCategory === "Tech") {
+      categoryProductIds = [9, 10, 11, 12, 13, 14];
+    } else if (productsCtx.selectedCategory === "Jewelry") {
+      categoryProductIds = [5, 6, 7, 8];
+    } else if (productsCtx.selectedCategory === "Other") {
+      categoryProductIds = [1];
     }
 
     if (
