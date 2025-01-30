@@ -274,17 +274,18 @@ const styles = StyleSheet.create({
     height: 80,
   },
   searchBar: {
-    // backgroundColor: "orange",
-    borderColor: "black",
+    backgroundColor: "white",
+    // borderColor: "black",
     flex: 1,
     height: 50,
-    paddingLeft: 35,
-    borderWidth: 4,
+    paddingLeft: 40,
+    // borderWidth: 4,
     borderRadius: 30,
   },
   searchIcon: {
     position: "absolute",
     left: 10,
+    zIndex: 1,
   },
   container: {
     // height: 800,
