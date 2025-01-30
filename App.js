@@ -22,6 +22,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
 import Categories from "./screens/Welcome/Categories";
+import Notifications from "./screens/Noficiations/Notifications";
+import Orders from "./screens/Orders/Orders";
 // import AppLoading from "expo-app-loading";
 // import Test2 from "./screens/LoginAndOnboarding/Test2";
 // import HomePage
@@ -46,7 +48,7 @@ function TabsOverview() {
       />
       <BottomTabs.Screen
         name="Notifications"
-        component={EnterPassword}
+        component={Notifications}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="notifications-outline" size={25} color={color} />
@@ -55,7 +57,7 @@ function TabsOverview() {
       />
       <BottomTabs.Screen
         name="Orders"
-        component={EnterPassword}
+        component={Orders}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="receipt-outline" size={25} color={color} />
