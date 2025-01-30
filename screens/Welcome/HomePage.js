@@ -104,48 +104,93 @@ function HomePage({ navigation }) {
             </View>
             <View style={styles.categoriesContent}>
               <View style={styles.categoryItem}>
-                <View style={styles.imageContainer2}>
+                <Pressable
+                  onPress={() => {
+                    productsCtx.updateSelectedCategory("Jackets");
+                    navigation.navigate("Welcome");
+                  }}
+                  style={({ pressed }) => [
+                    styles.imageContainer2,
+                    pressed && styles.pressed,
+                  ]}
+                >
                   <Image
                     source={{ uri: productsCtx.products[2].image }}
                     style={styles.image}
                   />
-                </View>
+                </Pressable>
                 <Text style={{ textAlign: "center" }}>Jackets</Text>
               </View>
               <View style={styles.categoryItem}>
-                <View style={styles.imageContainer2}>
+                <Pressable
+                  onPress={() => {
+                    productsCtx.updateSelectedCategory("Tops");
+                    navigation.navigate("Welcome");
+                  }}
+                  style={({ pressed }) => [
+                    styles.imageContainer2,
+                    pressed && styles.pressed,
+                  ]}
+                >
                   <Image
                     source={{ uri: productsCtx.products[1].image }}
                     style={styles.image}
                   />
-                </View>
+                </Pressable>
                 <Text style={{ textAlign: "center" }}>Tops</Text>
               </View>
               <View style={styles.categoryItem}>
-                <View style={styles.imageContainer2}>
+                <Pressable
+                  onPress={() => {
+                    productsCtx.updateSelectedCategory("Tech");
+                    navigation.navigate("Welcome");
+                  }}
+                  style={({ pressed }) => [
+                    styles.imageContainer2,
+                    pressed && styles.pressed,
+                  ]}
+                >
                   <Image
                     source={{ uri: productsCtx.products[8].image }}
                     style={styles.image}
                   />
-                </View>
+                </Pressable>
                 <Text style={{ textAlign: "center" }}>Tech</Text>
               </View>
               <View style={styles.categoryItem}>
-                <View style={styles.imageContainer2}>
+                <Pressable
+                  onPress={() => {
+                    productsCtx.updateSelectedCategory("Jewelry");
+                    navigation.navigate("Welcome");
+                  }}
+                  style={({ pressed }) => [
+                    styles.imageContainer2,
+                    pressed && styles.pressed,
+                  ]}
+                >
                   <Image
                     source={{ uri: productsCtx.products[6].image }}
                     style={styles.image}
                   />
-                </View>
+                </Pressable>
                 <Text style={{ textAlign: "center" }}>Jewelry</Text>
               </View>
               <View style={styles.categoryItem}>
-                <View style={styles.imageContainer2}>
+                <Pressable
+                  onPress={() => {
+                    productsCtx.updateSelectedCategory("Other");
+                    navigation.navigate("Welcome");
+                  }}
+                  style={({ pressed }) => [
+                    styles.imageContainer2,
+                    pressed && styles.pressed,
+                  ]}
+                >
                   <Image
                     source={{ uri: productsCtx.products[0].image }}
                     style={styles.image}
                   />
-                </View>
+                </Pressable>
                 <Text style={{ textAlign: "center" }}>Other</Text>
               </View>
             </View>
@@ -440,5 +485,8 @@ const styles = StyleSheet.create({
     zIndex: 0,
     overflow: "hidden",
     resizeMode: "contain",
+  },
+  pressed: {
+    opacity: 0.5,
   },
 });

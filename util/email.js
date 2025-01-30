@@ -15,7 +15,7 @@ export default Email;
 
 export function sendEmail() {
   const resend = new Resend("re_CCmZQdGU_5QfBZCWhxcX9FwVvxoKqhyZS");
-  // console.log(resend.emails);
+
   resend.emails.send({
     from: "onboarding@resend.dev",
     to: "lukacho7@gmail.com",

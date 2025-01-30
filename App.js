@@ -22,7 +22,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
 import Categories from "./screens/Welcome/Categories";
-import Notifications from "./screens/Noficiations/Notifications";
+import Notifications from "./screens/Notifications/Notifications";
 import Orders from "./screens/Orders/Orders";
 // import AppLoading from "expo-app-loading";
 // import Test2 from "./screens/LoginAndOnboarding/Test2";

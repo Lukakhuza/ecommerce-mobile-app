@@ -11,7 +11,6 @@ import { ProductsContext } from "../../store/context/productsContext";
 
 function Categories({ list, navigation }) {
   const productsCtx = useContext(ProductsContext);
-  console.log(productsCtx.products.length);
 
   return (
     <View>

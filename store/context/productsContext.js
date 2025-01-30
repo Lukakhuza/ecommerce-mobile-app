@@ -15,7 +15,6 @@ function ProductsContextProvider({ children }) {
     async function getProductsData() {
       const productsData = await fetchProductsData();
       setFetchedProductsData(productsData);
-      // console.log("fpc", productsData[0].image);
     }
     getProductsData();
   }, []);
@@ -29,8 +28,6 @@ function ProductsContextProvider({ children }) {
     selectedCategory: selectedCategory,
     updateSelectedCategory: updateSelectedCategory,
   };
-
-  // console.log("Selected Category: ", selectedCategory);
 
   return (
     <ProductsContext.Provider value={value}>

@@ -14,7 +14,6 @@ function EnterPassword({ navigation }) {
   const authCtx = useContext(AuthContext);
 
   function handleInputUpdate(inputIdentifier, enteredText) {
-    // console.log(userInputCtx);
     userInputCtx.updateInputs(inputIdentifier, enteredText);
   }
 
@@ -23,13 +22,8 @@ function EnterPassword({ navigation }) {
     const email = userInputCtx.input.email;
     const password = userInputCtx.input.passwordPlaceholder;
     const token = await loginUser(email, password);
-    // console.log("Test 908");
-    // console.log(token);
     authCtx.authenticate(token);
     setIsAuthenticating(false);
-    // console.log("Token is: ", authCtx);
-    // userInputCtx.
-    // console.log(response);
   }
 
   if (isAuthenticating) {

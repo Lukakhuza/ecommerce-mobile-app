@@ -4,7 +4,6 @@ const API_KEY = "AIzaSyAIvueNUIkdLgTBprMM4UQBDVFEfbskIt8";
 const BACKEND_API = "https://ecommerce-1e357-default-rtdb.firebaseio.com";
 
 export async function createUser(email, password) {
-  console.log(email);
   const response = await axios.post(
     "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + API_KEY,
     {
@@ -81,13 +80,7 @@ export async function fetchData() {
 }
 
 export async function fetchProductsData() {
-  // const response = await axios.get("https://api.escuelajs.co/api/v1/products");
   const response = await axios.get("https://fakestoreapi.com/products");
-
-  // console.log(response.data[0].title);
-  // console.log(response.data.category.name);
-
-  // const userData = [];
 
   return response.data;
 }
