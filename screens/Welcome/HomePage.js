@@ -7,6 +7,7 @@ import {
   ScrollView,
   SafeAreaView,
   FlatList,
+  Pressable,
 } from "react-native";
 import { useContext, useEffect, useState } from "react";
 import { fetchProfilePicture } from "../../util/auth";
@@ -24,7 +25,7 @@ const data = [
   { label: "Women", value: "Women" },
 ];
 
-function HomePage() {
+function HomePage({ navigation }) {
   const productsCtx = useContext(ProductsContext);
   const userInputCtx = useContext(UserInputContext);
   const favoritesCtx = useContext(FavoritesContext);
@@ -41,43 +42,43 @@ function HomePage() {
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
-      <ScrollView style={styles.container}>
-        <View style={styles.headerContainer}>
-          <View style={styles.imageContainer}>
-            {dummyUserData.users && (
-              <Image
-                source={{ uri: dummyUserData.users[8].image }}
-                style={styles.image}
-              />
-            )}
-          </View>
-          {/* <Text>One</Text> */}
-          {/*Add an image here with profilePicture as the link  */}
-          <View style={styles.dropdownContainer}>
-            <Dropdown
-              style={styles.dropdown}
-              placeholderStyle={styles.placeholderStyle}
-              selectedTextStyle={styles.selectedTextStyle}
-              inputSearchStyle={styles.inputSearchStyle}
-              iconStyle={styles.iconStyle}
-              data={data}
-              //   search
-              maxHeight={300}
-              labelField="label"
-              valueField="value"
-              placeholder="M / W"
-              //   searchPlaceholder="Search..."
-              value={genderSelection}
-              onChange={(item) => {
-                setGenderSelection(item.value);
-                userInputCtx.updateInputs("shopFor", item.value);
-              }}
+      <View style={styles.headerContainer}>
+        <View style={styles.imageContainer}>
+          {dummyUserData.users && (
+            <Image
+              source={{ uri: dummyUserData.users[8].image }}
+              style={styles.image}
             />
-          </View>
-          <View style={styles.cartButtonContainer}>
-            <CartButton />
-          </View>
+          )}
         </View>
+        {/*Add an image here with profilePicture as the link  */}
+        <View style={styles.dropdownContainer}>
+          <Dropdown
+            style={styles.dropdown}
+            placeholderStyle={styles.placeholderStyle}
+            selectedTextStyle={styles.selectedTextStyle}
+            inputSearchStyle={styles.inputSearchStyle}
+            iconStyle={styles.iconStyle}
+            data={data}
+            //   search
+            maxHeight={300}
+            labelField="label"
+            valueField="value"
+            placeholder="M / W"
+            //   searchPlaceholder="Search..."
+            value={genderSelection}
+            onChange={(item) => {
+              setGenderSelection(item.value);
+              userInputCtx.updateInputs("shopFor", item.value);
+            }}
+          />
+        </View>
+        <View style={styles.cartButtonContainer}>
+          <CartButton />
+        </View>
+      </View>
+
+      <ScrollView style={styles.container}>
         <View style={styles.searchBarContainer}>
           <Ionicons name="search-outline" size={25} style={styles.searchIcon} />
           <TextInput
@@ -93,7 +94,13 @@ function HomePage() {
           <View style={styles.categories}>
             <View style={styles.categoriesHeader}>
               <Text style={{ fontSize: 17, fontWeight: 700 }}>Categories</Text>
-              <Text style={{ fontSize: 17 }}>See All</Text>
+              <Pressable
+                onPress={() => {
+                  navigation.navigate("CategoriesList");
+                }}
+              >
+                <Text style={{ fontSize: 17 }}>See All</Text>
+              </Pressable>
             </View>
             <View style={styles.categoriesContent}>
               <View style={styles.categoryItem}>
@@ -147,7 +154,14 @@ function HomePage() {
         <View style={styles.topSelling}>
           <View style={styles.topSellingHeader}>
             <Text style={{ fontSize: 21, fontWeight: 700 }}>Top Selling</Text>
-            <Text style={{ fontSize: 17 }}>See All</Text>
+            <Pressable
+              onPress={() => {
+                productsCtx.updateSelectedCategory("All");
+                navigation.navigate("Welcome");
+              }}
+            >
+              <Text style={{ fontSize: 17 }}>See All</Text>
+            </Pressable>
           </View>
           <FlatList
             horizontal={true}
@@ -200,7 +214,14 @@ function HomePage() {
             >
               New In
             </Text>
-            <Text style={{ fontSize: 17 }}>See All</Text>
+            <Pressable
+              onPress={() => {
+                productsCtx.updateSelectedCategory("All");
+                navigation.navigate("Welcome");
+              }}
+            >
+              <Text style={{ fontSize: 17 }}>See All</Text>
+            </Pressable>
           </View>
           <FlatList
             horizontal={true}

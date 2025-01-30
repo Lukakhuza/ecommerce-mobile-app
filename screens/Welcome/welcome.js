@@ -56,7 +56,11 @@ function Welcome() {
     } else if (productsCtx.selectedCategory === "Jewelry & Other") {
       categoryProductIds = [5, 6, 7, 8, 1];
     }
-    if (categoryProductIds.includes(productData.id)) {
+
+    if (
+      categoryProductIds.includes(productData.id) ||
+      productsCtx.selectedCategory === "All"
+    ) {
       return true;
     } else {
       return false;
@@ -74,7 +78,6 @@ function Welcome() {
         <FlatList
           data={filteredProducts}
           renderItem={(itemData) => {
-            const icon = "heart-outline";
             return (
               <View style={styles.productContainer}>
                 <View style={styles.favIcon}>
