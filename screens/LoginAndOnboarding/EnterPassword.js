@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, Text, StyleSheet, TextInput, SafeAreaView } from "react-native";
 import { useContext, useState } from "react";
 import PurpleButton from "../../components/ui/PurpleButton";
 import { UserInputContext } from "../../store/context/userInputContext";
@@ -31,7 +31,7 @@ function EnterPassword({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.textContainer}>
         <Text style={styles.text}>Sign in</Text>
       </View>
@@ -62,7 +62,7 @@ function EnterPassword({ navigation }) {
           </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

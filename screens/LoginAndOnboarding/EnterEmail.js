@@ -6,6 +6,7 @@ import {
   ScrollView,
   Button,
   Input,
+  SafeAreaView,
 } from "react-native";
 import { useState, useContext } from "react";
 import PurpleButton from "../../components/ui/PurpleButton";
@@ -25,81 +26,87 @@ function EnterEmail({ navigation }) {
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Sign in</Text>
-      </View>
-      <View style={styles.inputsOuterContainer}>
-        <View style={styles.signInInputContainer}>
-          <View>
+    <SafeAreaView style={styles.safeAreaView}>
+      <ScrollView style={styles.container}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Sign in</Text>
+        </View>
+        <View style={styles.inputsOuterContainer}>
+          <View style={styles.signInInputContainer}>
             <View>
-              <TextInput
-                autoCorrect={false}
-                placeholder="Enter Email"
-                style={styles.textInput}
-                onChangeText={handleInputUpdate.bind(this, "email")}
-                value={userInputCtx.input.email}
-              ></TextInput>
-            </View>
-            <PurpleButton
-              onPress={() => {
-                navigation.navigate("EnterPassword");
-              }}
-            >
-              Continue
-            </PurpleButton>
-            <View style={styles.redirectText}>
-              <Text>Don't have an account?</Text>
-              <Text> </Text>
-              <Button3
+              <View>
+                <TextInput
+                  autoCorrect={false}
+                  placeholder="Enter Email"
+                  style={styles.textInput}
+                  onChangeText={handleInputUpdate.bind(this, "email")}
+                  value={userInputCtx.input.email}
+                ></TextInput>
+              </View>
+              <PurpleButton
                 onPress={() => {
-                  userInputCtx.resetInputs();
-                  navigation.navigate("CreateAccount");
+                  navigation.navigate("EnterPassword");
                 }}
               >
-                Create One
-              </Button3>
+                Continue
+              </PurpleButton>
+              <View style={styles.redirectText}>
+                <Text>Don't have an account?</Text>
+                <Text> </Text>
+                <Button3
+                  onPress={() => {
+                    userInputCtx.resetInputs();
+                    navigation.navigate("CreateAccount");
+                  }}
+                >
+                  Create One
+                </Button3>
+              </View>
             </View>
           </View>
+          <View style={styles.buttons2}>
+            <Button2
+              style={styles.button1}
+              onPress={() => {
+                // console.log("Log in with your Apple account.");
+              }}
+              imageSource={require("../../assets/apple-logo1.png")}
+            >
+              Continue with Apple
+            </Button2>
+            <Button2
+              onPress={() => {
+                // console.log("Log in with your Google account.");
+              }}
+              imageSource={require("../../assets/google-logo.png")}
+            >
+              Continue with Google{" "}
+            </Button2>
+            <Button2
+              onPress={() => {
+                // console.log("Log in with your Facebook account.");
+              }}
+              imageSource={require("../../assets/facebook-logo.png")}
+            >
+              Continue with Facebook
+            </Button2>
+            {/* <Button2 onPress={fetchProductsData}>Hello</Button2> */}
+          </View>
         </View>
-        <View style={styles.buttons2}>
-          <Button2
-            style={styles.button1}
-            onPress={() => {
-              // console.log("Log in with your Apple account.");
-            }}
-            imageSource={require("../../assets/apple-logo1.png")}
-          >
-            Continue with Apple
-          </Button2>
-          <Button2
-            onPress={() => {
-              // console.log("Log in with your Google account.");
-            }}
-            imageSource={require("../../assets/google-logo.png")}
-          >
-            Continue with Google{" "}
-          </Button2>
-          <Button2
-            onPress={() => {
-              // console.log("Log in with your Facebook account.");
-            }}
-            imageSource={require("../../assets/facebook-logo.png")}
-          >
-            Continue with Facebook
-          </Button2>
-          {/* <Button2 onPress={fetchProductsData}>Hello</Button2> */}
-        </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 export default EnterEmail;
 
 const styles = StyleSheet.create({
+  safeAreaView: {
+    backgroundColor: "white",
+  },
   container: {
-    flex: 1,
+    // flex: 1,
+    height: "100%",
     flexDirection: "column",
     backgroundColor: "white",
   },

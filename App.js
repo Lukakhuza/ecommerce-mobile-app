@@ -66,7 +66,7 @@ function TabsOverview() {
       />
       <BottomTabs.Screen
         name="Profile"
-        component={EnterPassword}
+        component={AuthenticatedStack}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" size={size} color={color} />
@@ -83,12 +83,6 @@ function AuthStack() {
       <Stack.Screen
         name="EnterEmail"
         component={EnterEmail}
-        // initialParams={{
-        // value: userInput.email,
-        //   textInputConfig={{
-        //     onChangeText: ()=>{}
-        //   }}
-        // }}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -146,7 +140,7 @@ function AuthStack() {
 
 function AuthenticatedStack() {
   return (
-    <Stack.Navigator initialRouteName="Main">
+    <Stack.Navigator initialRouteName="HomePage">
       <Stack.Screen
         name="Main"
         component={TabsOverview}

@@ -1,9 +1,9 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, SafeAreaView } from "react-native";
 import PurpleButton from "../../components/ui/PurpleButton";
 
 function PasswordReset({ navigation }) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
@@ -24,7 +24,7 @@ function PasswordReset({ navigation }) {
           Return to Login
         </PurpleButton>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

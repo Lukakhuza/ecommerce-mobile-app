@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, Text, StyleSheet, TextInput, SafeAreaView } from "react-native";
 import PurpleButton from "../../components/ui/PurpleButton";
 import { Colors } from "../../constants/colors";
 import IconButton from "../../components/ui/IconButton";
 
 function ForgotPassword({ navigation }) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View></View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>Forgot Password</Text>
@@ -27,7 +27,7 @@ function ForgotPassword({ navigation }) {
           </PurpleButton>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

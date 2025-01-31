@@ -6,6 +6,7 @@ import {
   ScrollView,
   Image,
   Pressable,
+  SafeAreaView,
 } from "react-native";
 import { ProductsContext } from "../../store/context/productsContext";
 
@@ -13,9 +14,8 @@ function Categories({ list, navigation }) {
   const productsCtx = useContext(ProductsContext);
 
   return (
-    <View>
+    <SafeAreaView>
       <View style={styles.container}>
-        <View style={styles.header}></View>
         <Text style={styles.title}>Shop by Categories</Text>
         <ScrollView style={styles.categoriesContainer}>
           <Pressable
@@ -108,7 +108,7 @@ function Categories({ list, navigation }) {
         </ScrollView>
       </View>
       <View></View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -117,9 +117,6 @@ export default Categories;
 const styles = StyleSheet.create({
   categories: {
     height: 840,
-  },
-  header: {
-    height: 100,
   },
   title: {
     marginLeft: 30,

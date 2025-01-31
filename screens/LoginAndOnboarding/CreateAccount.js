@@ -1,11 +1,10 @@
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, Text, StyleSheet, TextInput, SafeAreaView } from "react-native";
 import { useContext, useState } from "react";
 import { UserInputContext } from "../../store/context/userInputContext";
 import PurpleButton from "../../components/ui/PurpleButton";
 import { AuthContext } from "../../store/context/auth-context";
 import { Colors } from "../../constants/colors";
 import IconButton from "../../components/ui/IconButton";
-import LoginInput from "./LoginInput";
 import Button3 from "../../components/ui/Button3";
 
 function CreateAccount({ navigation }) {
@@ -15,8 +14,7 @@ function CreateAccount({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      {/* <View></View> */}
+    <SafeAreaView style={styles.container}>
       <View style={styles.textContainer}>
         <Text style={styles.text}>Create Account</Text>
       </View>
@@ -74,7 +72,7 @@ function CreateAccount({ navigation }) {
           </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -94,14 +92,14 @@ const styles = StyleSheet.create({
     letterSpacing: -0.41,
   },
   textContainer: {
-    top: 173,
+    top: 23,
     left: 27,
   },
   signInInputContainer: {
     margin: 6,
     width: 344,
     height: 152,
-    top: 190,
+    top: 40,
     left: 23,
   },
   textInput: {

@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+  SafeAreaView,
+} from "react-native";
 import { useState, useContext } from "react";
 import PurpleButton from "../../components/ui/PurpleButton";
 import { UserInputContext } from "../../store/context/userInputContext";
@@ -49,7 +56,7 @@ function TellUsAboutYourself({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView style={styles.innerContainer}>
         <View>
           <Text style={styles.text1}>Tell us about yourself</Text>
@@ -108,7 +115,7 @@ function TellUsAboutYourself({ navigation }) {
           Finish
         </PurpleButton>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -141,7 +148,7 @@ const styles = StyleSheet.create({
     fontWeight: 700,
     marginBottom: 50,
     marginLeft: 20,
-    marginTop: 200,
+    marginTop: 100,
     textAlign: "left",
     fontSize: 28,
   },
@@ -187,7 +194,7 @@ const styles = StyleSheet.create({
     margin: 16,
     height: 60,
     backgroundColor: "#F4F4F4",
-    borderRadius: 20,
+    borderRadius: 30,
     // borderBottomColor: "gray",
     // borderBottomWidth: 0.5,
   },
