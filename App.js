@@ -22,8 +22,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
 import Categories from "./screens/Welcome/Categories";
+import CategoriesSearchAndFilter from "./screens/SearchAndFilter/CategoriesSearchAndFilter";
+// import CategoriesSearchAndFilter from "./screens/SearchAndFilter/CategoriesSearchAndFilter";
 import Notifications from "./screens/Notifications/Notifications";
 import Orders from "./screens/Orders/Orders";
+import SearchComponent from "./components/ui/SearchComponent";
 // import AppLoading from "expo-app-loading";
 // import Test2 from "./screens/LoginAndOnboarding/Test2";
 // import HomePage
@@ -140,7 +143,7 @@ function AuthStack() {
 
 function AuthenticatedStack() {
   return (
-    <Stack.Navigator initialRouteName="HomePage">
+    <Stack.Navigator initialRouteName="CategoriesSearchAndFilter">
       <Stack.Screen
         name="Main"
         component={TabsOverview}
@@ -183,6 +186,13 @@ function AuthenticatedStack() {
           ),
         })}
       />
+      <Stack.Screen
+        name="CategoriesSearchAndFilter"
+        component={CategoriesSearchAndFilter}
+        options={({ navigation }) => ({
+          headerShown: false,
+        })}
+      />
     </Stack.Navigator>
   );
 }
@@ -191,8 +201,9 @@ function Navigation() {
   const authCtx = useContext(AuthContext);
   return (
     <NavigationContainer style={styles.container}>
-      {!authCtx.isAuthenticated && <AuthStack />}
-      {authCtx.isAuthenticated && <AuthenticatedStack />}
+      {/* {!authCtx.isAuthenticated && <AuthStack />}
+      {authCtx.isAuthenticated && <AuthenticatedStack />} */}
+      <AuthenticatedStack />
     </NavigationContainer>
   );
 }

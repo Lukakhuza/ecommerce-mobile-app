@@ -19,6 +19,7 @@ import { Dropdown } from "react-native-element-dropdown";
 import { Ionicons } from "@expo/vector-icons";
 import FavoriteIcon from "../../components/ui/FavoriteIcon";
 import { FavoritesContext } from "../../store/context/favoritesContext";
+import SearchComponent from "../../components/ui/SearchComponent";
 
 const data = [
   { label: "Men", value: "Men" },
@@ -79,17 +80,7 @@ function HomePage({ navigation }) {
       </View>
 
       <ScrollView style={styles.container}>
-        <View style={styles.searchBarContainer}>
-          <Ionicons name="search-outline" size={25} style={styles.searchIcon} />
-          <TextInput
-            autoCorrect={false}
-            placeholder="Search"
-            placeholderTextColor="gray"
-            style={styles.searchBar}
-            // onChangeText={handleInputUpdate.bind(this, "email")}
-            // value={userInputCtx.input.email}
-          ></TextInput>
-        </View>
+        <SearchComponent />
         {productsCtx.products.length > 0 && (
           <View style={styles.categories}>
             <View style={styles.categoriesHeader}>
@@ -330,29 +321,7 @@ const styles = StyleSheet.create({
     // borderWidth: 4,
     height: 100,
   },
-  searchBarContainer: {
-    marginHorizontal: 30,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    // borderColor: "red",
-    // borderWidth: 4,
-    height: 80,
-  },
-  searchBar: {
-    backgroundColor: "white",
-    // borderColor: "black",
-    flex: 1,
-    height: 50,
-    paddingLeft: 40,
-    // borderWidth: 4,
-    borderRadius: 30,
-  },
-  searchIcon: {
-    position: "absolute",
-    left: 10,
-    zIndex: 1,
-  },
+
   container: {
     // height: 800,
     // backgroundColor: "yellow",
