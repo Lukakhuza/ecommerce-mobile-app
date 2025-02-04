@@ -75,7 +75,11 @@ function HomePage({ navigation }) {
           />
         </View>
         <View style={styles.cartButtonContainer}>
-          <CartButton />
+          <CartButton
+            onPress={() => {
+              navigation.navigate("Cart");
+            }}
+          />
         </View>
       </View>
 

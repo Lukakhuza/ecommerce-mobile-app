@@ -22,6 +22,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
 import Categories from "./screens/Welcome/Categories";
+import Cart from "./screens/CartAndCheckout/Cart";
 import CategoriesSearchAndFilter from "./screens/SearchAndFilter/CategoriesSearchAndFilter";
 // import CategoriesSearchAndFilter from "./screens/SearchAndFilter/CategoriesSearchAndFilter";
 import Notifications from "./screens/Notifications/Notifications";
@@ -69,7 +70,7 @@ function TabsOverview() {
       />
       <BottomTabs.Screen
         name="Profile"
-        component={AuthenticatedStack}
+        component={Cart}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" size={size} color={color} />
@@ -143,7 +144,7 @@ function AuthStack() {
 
 function AuthenticatedStack() {
   return (
-    <Stack.Navigator initialRouteName="CategoriesSearchAndFilter">
+    <Stack.Navigator initialRouteName="Main">
       <Stack.Screen
         name="Main"
         component={TabsOverview}
@@ -193,6 +194,22 @@ function AuthenticatedStack() {
           headerShown: false,
         })}
       />
+      <Stack.Screen
+        name="Cart"
+        component={Cart}
+        options={({ navigation }) => ({
+          title: "",
+          headerTransparent: true,
+          headerLeft: ({ tintColor }) => (
+            <IconButton
+              icon="chevron-back-circle-outline"
+              size={32}
+              color={tintColor}
+              onPress={() => navigation.goBack()}
+            />
+          ),
+        })}
+      />
     </Stack.Navigator>
   );
 }
@@ -201,9 +218,9 @@ function Navigation() {
   const authCtx = useContext(AuthContext);
   return (
     <NavigationContainer style={styles.container}>
-      {/* {!authCtx.isAuthenticated && <AuthStack />}
-      {authCtx.isAuthenticated && <AuthenticatedStack />} */}
-      <AuthenticatedStack />
+      {!authCtx.isAuthenticated && <AuthStack />}
+      {authCtx.isAuthenticated && <AuthenticatedStack />}
+      {/* <AuthenticatedStack /> */}
     </NavigationContainer>
   );
 }
