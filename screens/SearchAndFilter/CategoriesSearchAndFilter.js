@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState } from "react";
 import {
   View,
   Text,
@@ -8,12 +8,11 @@ import {
   Pressable,
   SafeAreaView,
 } from "react-native";
-import { ProductsContext } from "../../store/context/productsContext";
 import IconButton from "../../components/ui/IconButton";
 import SearchComponent from "../../components/ui/SearchComponent";
 import CategoryButton from "../../components/ui/CategoryButton";
 
-const data = [
+const categories = [
   { label: "Jackets", imageId: 2 },
   { label: "Tops", imageId: 1 },
   { label: "Tech", imageId: 8 },
@@ -22,7 +21,19 @@ const data = [
 ];
 
 function CategoriesSearchAndFilter({ navigation }) {
-  const productsCtx = useContext(ProductsContext);
+  const [searchValue, setSearchValue] = useState("");
+  const filteredCategories = categories.filter((category) => {
+    if (category.label.toLowerCase().includes(searchValue.toLowerCase())) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  function updateSearchValue(enteredText) {
+    setSearchValue(enteredText);
+  }
+
   return (
     <SafeAreaView>
       <View style={styles.searchContainer}>
@@ -40,16 +51,22 @@ function CategoriesSearchAndFilter({ navigation }) {
             // borderWidth: 3,
             // paddingVertical: 0,
           }}
+          onChangeText={updateSearchValue.bind(this)}
+          value={searchValue}
         />
       </View>
       <View style={styles.container}>
         <Text style={styles.title}>Shop by Categories</Text>
         <ScrollView style={styles.categoriesContainer}>
-          <CategoryButton category="Jackets" imageId={2} />
-          <CategoryButton category="Tops" imageId={1} />
-          <CategoryButton category="Tech" imageId={8} />
-          <CategoryButton category="Jewelry" imageId={6} />
-          <CategoryButton category="Other" imageId={0} />
+          {filteredCategories.map((category) => {
+            return (
+              <CategoryButton
+                key={category.label}
+                category={category.label}
+                imageId={category.imageId}
+              />
+            );
+          })}
         </ScrollView>
       </View>
       <View></View>

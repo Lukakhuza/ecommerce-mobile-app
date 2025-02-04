@@ -1,7 +1,7 @@
 import { View, TextInput, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-function SearchComponent({ style }) {
+function SearchComponent({ style, onChangeText, value }) {
   return (
     <View style={[styles.searchBarContainer, style]}>
       <Ionicons name="search-outline" size={25} style={styles.searchIcon} />
@@ -11,8 +11,8 @@ function SearchComponent({ style }) {
         placeholderTextColor="gray"
         style={styles.searchBar}
         clearButtonMode="while-editing"
-        // onChangeText={handleInputUpdate.bind(this, "email")}
-        // value={userInputCtx.input.email}
+        onChangeText={onChangeText}
+        value={value}
       ></TextInput>
     </View>
   );
