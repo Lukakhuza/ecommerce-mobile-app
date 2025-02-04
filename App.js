@@ -24,13 +24,9 @@ import { Ionicons } from "@expo/vector-icons";
 import Categories from "./screens/Welcome/Categories";
 import Cart from "./screens/CartAndCheckout/Cart";
 import CategoriesSearchAndFilter from "./screens/SearchAndFilter/CategoriesSearchAndFilter";
-// import CategoriesSearchAndFilter from "./screens/SearchAndFilter/CategoriesSearchAndFilter";
 import Notifications from "./screens/Notifications/Notifications";
 import Orders from "./screens/Orders/Orders";
 import SearchComponent from "./components/ui/SearchComponent";
-// import AppLoading from "expo-app-loading";
-// import Test2 from "./screens/LoginAndOnboarding/Test2";
-// import HomePage
 
 SplashScreen.preventAutoHideAsync();
 
@@ -144,7 +140,7 @@ function AuthStack() {
 
 function AuthenticatedStack() {
   return (
-    <Stack.Navigator initialRouteName="Main">
+    <Stack.Navigator initialRouteName="CategoriesSearchAndFilter">
       <Stack.Screen
         name="Main"
         component={TabsOverview}
@@ -220,7 +216,6 @@ function Navigation() {
     <NavigationContainer style={styles.container}>
       {!authCtx.isAuthenticated && <AuthStack />}
       {authCtx.isAuthenticated && <AuthenticatedStack />}
-      {/* <AuthenticatedStack /> */}
     </NavigationContainer>
   );
 }

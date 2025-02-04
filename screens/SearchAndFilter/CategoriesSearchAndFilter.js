@@ -11,6 +11,15 @@ import {
 import { ProductsContext } from "../../store/context/productsContext";
 import IconButton from "../../components/ui/IconButton";
 import SearchComponent from "../../components/ui/SearchComponent";
+import CategoryButton from "../../components/ui/CategoryButton";
+
+const data = [
+  { label: "Jackets", imageId: 2 },
+  { label: "Tops", imageId: 1 },
+  { label: "Tech", imageId: 8 },
+  { label: "Jewelry", imageId: 6 },
+  { label: "Other", imageId: 0 },
+];
 
 function CategoriesSearchAndFilter({ navigation }) {
   const productsCtx = useContext(ProductsContext);
@@ -36,93 +45,11 @@ function CategoriesSearchAndFilter({ navigation }) {
       <View style={styles.container}>
         <Text style={styles.title}>Shop by Categories</Text>
         <ScrollView style={styles.categoriesContainer}>
-          <Pressable
-            onPress={() => {
-              productsCtx.updateSelectedCategory("Jackets");
-              navigation.navigate("Welcome");
-            }}
-            style={styles.category}
-          >
-            <View style={styles.imageContainer}>
-              {productsCtx.products.length > 0 && (
-                <Image
-                  source={{ uri: productsCtx.products[2].image }}
-                  style={styles.image}
-                />
-              )}
-            </View>
-            <View>
-              <Text style={styles.label}>Jackets</Text>
-            </View>
-          </Pressable>
-          <Pressable
-            style={styles.category}
-            onPress={() => {
-              productsCtx.updateSelectedCategory("Tops");
-              navigation.navigate("Welcome");
-            }}
-          >
-            <View style={styles.imageContainer}>
-              {productsCtx.products.length > 0 && (
-                <Image
-                  source={{ uri: productsCtx.products[1].image }}
-                  style={styles.image}
-                />
-              )}
-            </View>
-            <Text style={styles.label}>Tops</Text>
-          </Pressable>
-          <Pressable
-            style={styles.category}
-            onPress={() => {
-              productsCtx.updateSelectedCategory("Tech");
-              navigation.navigate("Welcome");
-            }}
-          >
-            <View style={styles.imageContainer}>
-              {productsCtx.products.length > 0 && (
-                <Image
-                  source={{ uri: productsCtx.products[8].image }}
-                  style={styles.image}
-                />
-              )}
-            </View>
-            <Text style={styles.label}>Tech</Text>
-          </Pressable>
-          <Pressable
-            style={styles.category}
-            onPress={() => {
-              productsCtx.updateSelectedCategory("Jewelry");
-              navigation.navigate("Welcome");
-            }}
-          >
-            <View style={styles.imageContainer}>
-              {productsCtx.products.length > 0 && (
-                <Image
-                  source={{ uri: productsCtx.products[6].image }}
-                  style={styles.image}
-                />
-              )}
-            </View>
-            <Text style={styles.label}>Jewelry</Text>
-          </Pressable>
-          <Pressable
-            style={styles.category}
-            onPress={() => {
-              productsCtx.updateSelectedCategory("Other");
-              navigation.navigate("Welcome");
-            }}
-          >
-            <View style={styles.imageContainer}>
-              {productsCtx.products.length > 0 && (
-                <Image
-                  source={{ uri: productsCtx.products[0].image }}
-                  style={styles.image}
-                />
-              )}
-            </View>
-            <Text style={styles.label}>Other</Text>
-          </Pressable>
+          <CategoryButton category="Jackets" imageId={2} />
+          <CategoryButton category="Tops" imageId={1} />
+          <CategoryButton category="Tech" imageId={8} />
+          <CategoryButton category="Jewelry" imageId={6} />
+          <CategoryButton category="Other" imageId={0} />
         </ScrollView>
       </View>
       <View></View>
