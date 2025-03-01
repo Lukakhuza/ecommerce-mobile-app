@@ -47,9 +47,6 @@ function CategoriesSearchAndFilter({ navigation }) {
           style={{
             marginLeft: 10,
             width: "82%",
-            // borderColor: "blue",
-            // borderWidth: 3,
-            // paddingVertical: 0,
           }}
           onChangeText={updateSearchValue.bind(this)}
           value={searchValue}
@@ -92,39 +89,24 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   categoriesContainer: {
-    // flex: 1,
-    // height: 00,
     display: "flex",
     flexDirection: "column",
     marginHorizontal: 20,
     paddingTop: 20,
     paddingBottom: 90,
-    // backgroundColor: "yellow",
-    // borderColor: "blue",
-    // borderWidth: 3,
   },
   category: {
     marginVertical: 5,
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    // justifyContent: "flex-start",
-    // borderColor: "orange",
-    // borderWidth: 5,
-    // alignItems: "flex-start",
-    // alignContent: "flex-start",
-    // alignItems: "ce?nter",
-    // justifyContent: "center",
     backgroundColor: "white",
     height: 80,
     // width:
     borderRadius: 20,
   },
   image: {
-    // width: "100%",
-    // height: 50,
     flex: 1,
-    // zIndex: 10,
     overflow: "hidden",
     resizeMode: "contain",
   },

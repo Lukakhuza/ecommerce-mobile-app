@@ -8,9 +8,7 @@ function CartButton({ children, onPress, style }) {
       style={({ pressed }) => [style, styles.button, pressed && styles.pressed]}
       onPress={onPress}
     >
-      {/* <Text>Hello</Text> */}
       <Ionicons name="cart-outline" size={30} />
-      {/* <Text style={styles.text}>{children}</Text> */}
     </Pressable>
   );
 }
