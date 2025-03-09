@@ -140,7 +140,7 @@ function AuthStack() {
 
 function AuthenticatedStack() {
   return (
-    <Stack.Navigator initialRouteName="CategoriesSearchAndFilter">
+    <Stack.Navigator initialRouteName="Main">
       <Stack.Screen
         name="Main"
         component={TabsOverview}
@@ -216,6 +216,7 @@ function Navigation() {
     <NavigationContainer style={styles.container}>
       {!authCtx.isAuthenticated && <AuthStack />}
       {authCtx.isAuthenticated && <AuthenticatedStack />}
+      {/* <AuthenStack /> */}
     </NavigationContainer>
   );
 }
