@@ -23,6 +23,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
 import Categories from "./screens/Welcome/Categories";
 import Cart from "./screens/CartAndCheckout/Cart";
+import ProfileSettings from "./screens/Settings/ProfileSettings";
 import CategoriesSearchAndFilter from "./screens/SearchAndFilter/CategoriesSearchAndFilter";
 import Notifications from "./screens/Notifications/Notifications";
 import Orders from "./screens/Orders/Orders";
@@ -66,7 +67,7 @@ function TabsOverview() {
       />
       <BottomTabs.Screen
         name="Profile"
-        component={Cart}
+        component={ProfileSettings}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" size={size} color={color} />
