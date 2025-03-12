@@ -11,7 +11,7 @@ import {
 import { ProductsContext } from "../../store/context/productsContext";
 import { Ionicons } from "@expo/vector-icons";
 
-function ProfileSettings({ list, navigation }) {
+function ProfileSettings({ navigation }) {
   const productsCtx = useContext(ProductsContext);
 
   return (
