@@ -17,7 +17,7 @@ function ProfileSettings({ navigation }) {
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        <Text style={styles.title}>Shop by Categories</Text>
+        {/* Add profile picture here and center it */}
         <ScrollView style={styles.categoriesContainer}>
           <Pressable
             onPress={() => {
