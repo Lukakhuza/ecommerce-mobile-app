@@ -27,7 +27,6 @@ import ProfileSettings from "./screens/Settings/ProfileSettings";
 import CategoriesSearchAndFilter from "./screens/SearchAndFilter/CategoriesSearchAndFilter";
 import Notifications from "./screens/Notifications/Notifications";
 import Orders from "./screens/Orders/Orders";
-import SearchComponent from "./components/ui/SearchComponent";
 
 SplashScreen.preventAutoHideAsync();
 
