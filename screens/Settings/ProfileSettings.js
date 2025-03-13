@@ -18,6 +18,7 @@ function ProfileSettings({ navigation }) {
     <SafeAreaView>
       <View style={styles.container}>
         {/* Add profile picture here and center it */}
+        {/* Add a box for accountholder name and address */}
         <ScrollView style={styles.categoriesContainer}>
           <Pressable
             onPress={() => {
