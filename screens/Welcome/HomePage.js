@@ -44,14 +44,19 @@ function HomePage({ navigation }) {
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
       <View style={styles.headerContainer}>
-        <View style={styles.imageContainer}>
+        <Pressable
+          style={styles.imageContainer}
+          onPress={() => {
+            navigation.navigate("Profile");
+          }}
+        >
           {dummyUserData.users && (
             <Image
               source={{ uri: dummyUserData.users[8].image }}
               style={styles.image}
             />
           )}
-        </View>
+        </Pressable>
         {/*Add an image here with profilePicture as the link  */}
         <View style={styles.dropdownContainer}>
           <Dropdown
