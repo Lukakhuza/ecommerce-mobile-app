@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -8,18 +8,59 @@ import {
   Pressable,
   SafeAreaView,
 } from "react-native";
+import { fetchProfilePicture } from "../../util/auth";
 import { ProductsContext } from "../../store/context/productsContext";
 import { Ionicons } from "@expo/vector-icons";
+import { AuthContext } from "../../store/context/auth-context";
+import { UserInputContext } from "../../store/context/userInputContext";
 
 function ProfileSettings({ navigation }) {
+  const [dummyUserData, setDummyUserData] = useState("");
+  const authCtx = useContext(AuthContext);
+  const userInputCtx = useContext(UserInputContext);
+
   const productsCtx = useContext(ProductsContext);
+
+  useEffect(() => {
+    async function getProfilePicture() {
+      const response = await fetchProfilePicture();
+      setDummyUserData(response);
+    }
+    getProfilePicture();
+  }, []);
 
   return (
     <SafeAreaView>
       <View style={styles.container}>
+        <View style={styles.containerProfilePic}>
+          <View style={styles.imageContainerProfilePic}>
+            {dummyUserData.users && (
+              <Image
+                source={{ uri: dummyUserData.users[8].image }}
+                style={styles.image}
+              />
+            )}
+          </View>
+        </View>
         {/* Add profile picture here and center it */}
         {/* Add a box for accountholder name and address */}
         <ScrollView style={styles.categoriesContainer}>
+          <Pressable
+            onPress={() => {
+              productsCtx.updateSelectedCategory("Jackets");
+              navigation.navigate("Welcome");
+            }}
+            style={styles.basicInfo}
+          >
+            <View>
+              <Text style={styles.label}>FirstName LastName</Text>
+              <Text style={styles.label}>test@someemail.com</Text>
+              <Text style={styles.label}>123-456-7890</Text>
+            </View>
+            <View>
+              <Text>Edit</Text>
+            </View>
+          </Pressable>
           <Pressable
             onPress={() => {
               productsCtx.updateSelectedCategory("Jackets");
@@ -90,6 +131,15 @@ function ProfileSettings({ navigation }) {
               <Ionicons name="chevron-forward-outline" size={35} />
             </View>
           </Pressable>
+          <Pressable
+            style={styles.signOutContainer}
+            onPress={() => {
+              userInputCtx.resetInputs();
+              authCtx.logout();
+            }}
+          >
+            <Text style={styles.signOut}>Sign Out</Text>
+          </Pressable>
         </ScrollView>
       </View>
       <View></View>
@@ -100,6 +150,11 @@ function ProfileSettings({ navigation }) {
 export default ProfileSettings;
 
 const styles = StyleSheet.create({
+  containerProfilePic: {
+    marginTop: 38,
+    marginHorizontal: 30,
+    alignItems: "center",
+  },
   categories: {
     height: 840,
   },
@@ -129,6 +184,16 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingHorizontal: 10,
   },
+  basicInfo: {
+    marginBottom: 35,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "white",
+    height: 110,
+    borderRadius: 20,
+    paddingHorizontal: 10,
+  },
   image: {
     flex: 1,
     overflow: "hidden",
@@ -140,5 +205,24 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 10,
     marginVertical: 5,
+  },
+  imageContainerProfilePic: {
+    height: 50,
+    width: 50,
+    marginHorizontal: 30,
+    backgroundColor: "brown",
+    borderRadius: 25,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 3,
+    borderColor: "black",
+  },
+  signOut: {
+    color: "red",
+    fontSize: 15,
+  },
+  signOutContainer: {
+    marginVertical: 10,
+    alignItems: "center",
   },
 });
