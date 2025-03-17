@@ -18,7 +18,6 @@ function ProfileSettings({ navigation }) {
   const [dummyUserData, setDummyUserData] = useState("");
   const authCtx = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
-
   const productsCtx = useContext(ProductsContext);
 
   useEffect(() => {
@@ -29,6 +28,7 @@ function ProfileSettings({ navigation }) {
     getProfilePicture();
   }, []);
 
+  console.log(userInputCtx.input.email);
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -42,24 +42,16 @@ function ProfileSettings({ navigation }) {
             )}
           </View>
         </View>
-        {/* Add profile picture here and center it */}
-        {/* Add a box for accountholder name and address */}
         <ScrollView style={styles.categoriesContainer}>
-          <Pressable
-            onPress={() => {
-              productsCtx.updateSelectedCategory("Jackets");
-              navigation.navigate("Welcome");
-            }}
-            style={styles.basicInfo}
-          >
+          <Pressable style={styles.basicInfo}>
             <View>
               <Text style={styles.label}>FirstName LastName</Text>
-              <Text style={styles.label}>test@someemail.com</Text>
+              <Text style={styles.label}>{userInputCtx.input.email}</Text>
               <Text style={styles.label}>123-456-7890</Text>
             </View>
-            <View>
+            <Pressable>
               <Text>Edit</Text>
-            </View>
+            </Pressable>
           </Pressable>
           <Pressable
             onPress={() => {

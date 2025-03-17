@@ -3,6 +3,11 @@ import { createContext, useContext, useState } from "react";
 export const UserInputContext = createContext({
   email: "",
   passwordPlaceHolder: "",
+  firstName: "",
+  lastName: "",
+  phoneNumber: "",
+  shopFor: "",
+  ageRange: "",
   updateInputs: (inputIdentifier, enteredText) => {},
   resetInputs: () => {},
 });
@@ -13,6 +18,7 @@ function UserInputContextProvider({ children }) {
     passwordPlaceholder: "",
     firstName: "",
     lastName: "",
+    phoneNumber: "",
     shopFor: "",
     ageRange: "",
   });
@@ -32,6 +38,7 @@ function UserInputContextProvider({ children }) {
       passwordPlaceholder: "",
       firstName: "",
       lastName: "",
+      phoneNumber: "",
       shopFor: "",
       ageRange: "",
     });
