@@ -29,6 +29,7 @@ function ProfileSettings({ navigation }) {
   }, []);
 
   console.log(userInputCtx.input.email);
+  console.log(userInputCtx);
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -45,7 +46,9 @@ function ProfileSettings({ navigation }) {
         <ScrollView style={styles.categoriesContainer}>
           <Pressable style={styles.basicInfo}>
             <View>
-              <Text style={styles.label}>FirstName LastName</Text>
+              <Text style={styles.label}>
+                {userInputCtx.input.firstName} {userInputCtx.input.lastName}
+              </Text>
               <Text style={styles.label}>{userInputCtx.input.email}</Text>
               <Text style={styles.label}>123-456-7890</Text>
             </View>

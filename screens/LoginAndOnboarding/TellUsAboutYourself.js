@@ -46,7 +46,9 @@ function TellUsAboutYourself({ navigation }) {
       shopFor: userInputCtx.input.shopFor,
       ageRange: userInputCtx.input.ageRange,
     };
+    console.log("test 1");
     addData(userData);
+    console.log("test 2");
     authCtx.authenticate(userData.idToken);
     setIsAuthenticating(false);
   }

@@ -19,7 +19,18 @@ import { UserInputContext } from "../../store/context/userInputContext";
 // import { fetchProductsData } from "../../util/auth";
 
 function EnterEmail({ navigation }) {
+  // for testing only - start
   const userInputCtx = useContext(UserInputContext);
+  // const email = userInputCtx.input.email;
+  const email = "luka@gmail.com";
+  const passwordPlaceholder = "somepassword";
+  console.log(email);
+  console.log(passwordPlaceholder);
+  const userData = {
+    email: email,
+    passwordPlaceholder: passwordPlaceholder,
+  };
+  // for testing only - end
 
   function handleInputUpdate(inputIdentifier, enteredText) {
     userInputCtx.updateInputs(inputIdentifier, enteredText);
@@ -65,6 +76,12 @@ function EnterEmail({ navigation }) {
             </View>
           </View>
           <View style={styles.buttons2}>
+            <Button
+              title="Hello World"
+              onPress={() => {
+                addData(userData);
+              }}
+            ></Button>
             <Button2
               style={styles.button1}
               onPress={() => {

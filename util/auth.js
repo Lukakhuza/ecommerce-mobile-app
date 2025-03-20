@@ -31,21 +31,23 @@ export async function loginUser(email, password) {
   return token;
 }
 
-export async function loginOAuth() {
-  const response = await axios.post(
-    "https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=" +
-      API_KEY,
-    // {"postBody":"id_token=[GOOGLE_ID_TOKEN]&providerId=[google.com]","requestUri":"[http://localhost]","returnIdpCredential":true,"returnSecureToken":true}'
-    {
-      postBody: "idToken=[GOOGLE_ID_TOKEN]&providerId=google.com",
-      requestUri: "[http://localhost]",
-      returnIdpCredential: true,
-      returnSecureToken: true,
-    }
-  );
-}
+// export async function loginOAuth() {
+//   const response = await axios.post(
+//     "https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=" +
+//       API_KEY,
+//     // {"postBody":"id_token=[GOOGLE_ID_TOKEN]&providerId=[google.com]","requestUri":"[http://localhost]","returnIdpCredential":true,"returnSecureToken":true}'
+//     {
+//       postBody: "idToken=[GOOGLE_ID_TOKEN]&providerId=google.com",
+//       requestUri: "[http://localhost]",
+//       returnIdpCredential: true,
+//       returnSecureToken: true,
+//     }
+//   );
+// }
 
 export async function addData(data) {
+  console.log("adding data:", data);
+
   const userData = {
     firstName: data.firstName,
     lastName: data.lastName,
@@ -55,29 +57,38 @@ export async function addData(data) {
     ageRange: data.ageRange,
   };
 
-  const response = await axios.post(BACKEND_API + "/users.json", userData);
+  const response = axios.post(
+    "https://ecommerce-1e357-default-rtdb.firebaseio.com/expenses.json",
+    userData
+  );
+
+  console.log(response);
+  ``;
+  // console.log(userData);
+  // const response = await axios.post(BACKEND_API + "/users.json", userData);
+  // console.log("this is the response:", response);
 }
 
-export async function fetchData() {
-  const response = await axios.get(BACKEND_API + "/users.json");
+// export async function fetchData() {
+//   const response = await axios.get(BACKEND_API + "/users.json");
 
-  const userData = [];
+//   const userData = [];
 
-  for (const key in response.data) {
-    const userObj = {
-      id: key,
-      firstName: response.data[key].firstName,
-      lastName: response.data[key].lastName,
-      email: response.data[key].email,
-      shopFor: response.data[key].shopFor,
-      ageRange: response.data[key].ageRange,
-    };
+//   for (const key in response.data) {
+//     const userObj = {
+//       id: key,
+//       firstName: response.data[key].firstName,
+//       lastName: response.data[key].lastName,
+//       email: response.data[key].email,
+//       shopFor: response.data[key].shopFor,
+//       ageRange: response.data[key].ageRange,
+//     };
 
-    userData.push(userObj);
-  }
+//     userData.push(userObj);
+//   }
 
-  return userData;
-}
+//   return userData;
+// }
 
 export async function fetchProductsData() {
   const response = await axios.get("https://fakestoreapi.com/products");
