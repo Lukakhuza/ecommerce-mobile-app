@@ -16,21 +16,14 @@ import { Colors } from "../../constants/colors";
 import { useNavigation } from "@react-navigation/native";
 import { addData } from "../../util/auth";
 import { UserInputContext } from "../../store/context/userInputContext";
-// import { fetchProductsData } from "../../util/auth";
 
 function EnterEmail({ navigation }) {
-  // for testing only - start
   const userInputCtx = useContext(UserInputContext);
-  // const email = userInputCtx.input.email;
-  const email = "luka@gmail.com";
-  const passwordPlaceholder = "somepassword";
-  console.log(email);
-  console.log(passwordPlaceholder);
+  console.log("email is", userInputCtx.email);
   const userData = {
-    email: email,
-    passwordPlaceholder: passwordPlaceholder,
+    email: userInputCtx.email,
+    passwordPlaceholder: userInputCtx.passwordPlaceHolder,
   };
-  // for testing only - end
 
   function handleInputUpdate(inputIdentifier, enteredText) {
     userInputCtx.updateInputs(inputIdentifier, enteredText);
