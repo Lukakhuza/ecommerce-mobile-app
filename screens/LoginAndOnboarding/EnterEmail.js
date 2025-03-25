@@ -19,10 +19,14 @@ import { UserInputContext } from "../../store/context/userInputContext";
 
 function EnterEmail({ navigation }) {
   const userInputCtx = useContext(UserInputContext);
-  console.log("email is", userInputCtx.email);
   const userData = {
     email: userInputCtx.email,
     passwordPlaceholder: userInputCtx.passwordPlaceHolder,
+    firstName: userInputCtx.firstName,
+    lastName: userInputCtx.lastName,
+    phoneNumber: userInputCtx.phoneNumber,
+    shopFor: userInputCtx.shopFor,
+    ageRange: userInputCtx.ageRange,
   };
 
   function handleInputUpdate(inputIdentifier, enteredText) {

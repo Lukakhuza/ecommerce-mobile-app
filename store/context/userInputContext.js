@@ -1,8 +1,8 @@
 import { createContext, useContext, useState } from "react";
 
 export const UserInputContext = createContext({
-  email: "luka777@gmail.com",
-  passwordPlaceHolder: "somepasswordhere",
+  email: "",
+  passwordPlaceHolder: "",
   firstName: "",
   lastName: "",
   phoneNumber: "",

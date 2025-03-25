@@ -46,6 +46,7 @@ export async function loginUser(email, password) {
 // }
 
 export async function addData(data) {
+  console.log("incoming data", data);
   const userData = {
     firstName: data.firstName,
     lastName: data.lastName,
