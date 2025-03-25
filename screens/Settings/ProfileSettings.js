@@ -28,8 +28,6 @@ function ProfileSettings({ navigation }) {
     getProfilePicture();
   }, []);
 
-  console.log(userInputCtx.input.email);
-  console.log(userInputCtx);
   return (
     <SafeAreaView>
       <View style={styles.container}>
