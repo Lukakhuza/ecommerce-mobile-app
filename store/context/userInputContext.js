@@ -24,6 +24,8 @@ function UserInputContextProvider({ children }) {
   });
 
   function updateInputs(inputIdentifier, enteredText) {
+    console.log("Test 1:", inputIdentifier);
+    console.log("Test 2:", enteredText);
     setUserInput((currInputValues) => {
       return {
         ...currInputValues,
@@ -50,6 +52,8 @@ function UserInputContextProvider({ children }) {
     resetInputs: resetInputs,
   };
 
+  const userInputCtx = useContext(UserInputContext);
+  console.log(userInputCtx);
   return (
     <UserInputContext.Provider value={value}>
       {children}

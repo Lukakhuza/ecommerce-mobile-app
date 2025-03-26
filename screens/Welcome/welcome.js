@@ -26,6 +26,8 @@ function Welcome() {
   const [fetchedUserData, setFetchedUserData] = useState([]);
   const [fetchedProductsData, setFetchedProductsData] = useState([]);
 
+  // console.log("This is user input:", userInputCtx);
+
   useEffect(() => {
     async function getUserData() {
       const userData = await fetchData();

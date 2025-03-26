@@ -48,7 +48,7 @@ function ProfileSettings({ navigation }) {
                 {userInputCtx.input.firstName} {userInputCtx.input.lastName}
               </Text>
               <Text style={styles.label}>{userInputCtx.input.email}</Text>
-              <Text style={styles.label}>123-456-7890</Text>
+              <Text style={styles.label}>{userInputCtx.input.phoneNumber}</Text>
             </View>
             <Pressable>
               <Text>Edit</Text>

@@ -4,7 +4,7 @@ import PurpleButton from "../../components/ui/PurpleButton";
 import { UserInputContext } from "../../store/context/userInputContext";
 import { Colors } from "../../constants/colors";
 import Button3 from "../../components/ui/Button3";
-import { loginUser } from "../../util/auth";
+import { fetchUserData, loginUser } from "../../util/auth";
 import { AuthContext } from "../../store/context/auth-context";
 import LoadingOverlay from "../../components/ui/LoadingOverlay";
 
@@ -19,10 +19,20 @@ function EnterPassword({ navigation }) {
 
   async function loginHandler() {
     setIsAuthenticating(true);
+    // console.log("Here we go: ", userInputCtx);
     const email = userInputCtx.input.email;
     const password = userInputCtx.input.passwordPlaceholder;
     const token = await loginUser(email, password);
     authCtx.authenticate(token);
+    const response = await fetchUserData(email);
+    console.log(response);
+    userInputCtx.updateInputs("phoneNumber", response[0].phoneNumber);
+    userInputCtx.updateInputs("firstName", response[0].firstName);
+    userInputCtx.updateInputs("lastName", response[0].lastName);
+    console.log(userInputCtx);
+    // console.log("Test 4:", response);
+    // const data = await response.data;
+    // console.log("This is the response: ", data);
     setIsAuthenticating(false);
   }
 

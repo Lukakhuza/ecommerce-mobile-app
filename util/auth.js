@@ -46,7 +46,6 @@ export async function loginUser(email, password) {
 // }
 
 export async function addData(data) {
-  console.log("incoming data", data);
   const userData = {
     firstName: data.firstName,
     lastName: data.lastName,
@@ -55,12 +54,31 @@ export async function addData(data) {
     shopFor: data.shopFor,
     ageRange: data.ageRange,
   };
-  console.log(userData);
 
-  const response = axios.post(
-    "https://ecommerce-1e357-default-rtdb.firebaseio.com/data.json",
-    userData
-  );
+  const response = axios.post(BACKEND_API + "/data.json", userData);
+}
+
+export async function fetchUserData(email) {
+  const response = await axios.get(BACKEND_API + "/data.json");
+  const users = [];
+  for (const key in response.data) {
+    if (response.data[key].email === email) {
+      const userObj = {
+        id: key,
+        email: response.data[key].email,
+        firstName: response.data[key].firstName,
+        lastName: response.data[key].lastName,
+        ageRange: response.data[key].ageRange,
+        shopFor: response.data[key].shopFor,
+        uid: response.data[key].uid,
+        phoneNumber: response.data[key].phoneNumber,
+      };
+
+      users.push(userObj);
+    }
+  }
+
+  return users;
 }
 
 export async function fetchProductsData() {

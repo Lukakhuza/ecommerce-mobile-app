@@ -13,7 +13,7 @@ function CreateAccount({ navigation }) {
     userInputCtx.updateInputs(inputIdentifier, enteredText);
   }
 
-  console.log(userInputCtx);
+  // console.log(userInputCtx);
 
   return (
     <SafeAreaView style={styles.container}>
