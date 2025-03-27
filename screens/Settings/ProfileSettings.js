@@ -20,6 +20,10 @@ function ProfileSettings({ navigation }) {
   const userInputCtx = useContext(UserInputContext);
   const productsCtx = useContext(ProductsContext);
 
+  function editPressHandler() {
+    console.log("Edit Button Pressed");
+  }
+
   useEffect(() => {
     async function getProfilePicture() {
       const response = await fetchProfilePicture();
@@ -44,14 +48,16 @@ function ProfileSettings({ navigation }) {
         <ScrollView style={styles.categoriesContainer}>
           <Pressable style={styles.basicInfo}>
             <View>
-              <Text style={styles.label}>
+              <Text style={styles.label1}>
                 {userInputCtx.input.firstName} {userInputCtx.input.lastName}
               </Text>
-              <Text style={styles.label}>{userInputCtx.input.email}</Text>
-              <Text style={styles.label}>{userInputCtx.input.phoneNumber}</Text>
+              <Text style={styles.label2}>{userInputCtx.input.email}</Text>
+              <Text style={styles.label2}>
+                {userInputCtx.input.phoneNumber}
+              </Text>
             </View>
-            <Pressable>
-              <Text>Edit</Text>
+            <Pressable onPress={editPressHandler}>
+              <Text style={{ color: "purple", fontSize: 15 }}>Edit</Text>
             </Pressable>
           </Pressable>
           <Pressable
@@ -161,6 +167,20 @@ const styles = StyleSheet.create({
     fontSize: 17,
     marginLeft: 10,
   },
+  label1: {
+    fontSize: 20,
+    fontWeight: 15,
+    marginLeft: 10,
+    marginVertical: 4,
+    fontWeight: 700,
+  },
+  label2: {
+    color: "gray",
+    fontSize: 17,
+    marginLeft: 10,
+    marginVertical: 4,
+  },
+
   categoriesContainer: {
     display: "flex",
     flexDirection: "column",
