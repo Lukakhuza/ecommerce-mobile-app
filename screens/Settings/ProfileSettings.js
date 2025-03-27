@@ -13,15 +13,20 @@ import { ProductsContext } from "../../store/context/productsContext";
 import { Ionicons } from "@expo/vector-icons";
 import { AuthContext } from "../../store/context/auth-context";
 import { UserInputContext } from "../../store/context/userInputContext";
+import { useNavigation } from "@react-navigation/native";
 
 function ProfileSettings({ navigation }) {
+  // const navi
   const [dummyUserData, setDummyUserData] = useState("");
   const authCtx = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
   const productsCtx = useContext(ProductsContext);
 
-  function editPressHandler() {
-    console.log("Edit Button Pressed");
+  function editPressHandler(basicInfo) {
+    navigation.navigate("ManageUserData"),
+      {
+        userDataType: basicInfo,
+      };
   }
 
   useEffect(() => {
@@ -46,7 +51,12 @@ function ProfileSettings({ navigation }) {
           </View>
         </View>
         <ScrollView style={styles.categoriesContainer}>
-          <Pressable style={styles.basicInfo}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.basicInfo,
+              pressed && styles.pressed,
+            ]}
+          >
             <View>
               <Text style={styles.label1}>
                 {userInputCtx.input.firstName} {userInputCtx.input.lastName}
@@ -56,8 +66,11 @@ function ProfileSettings({ navigation }) {
                 {userInputCtx.input.phoneNumber}
               </Text>
             </View>
-            <Pressable onPress={editPressHandler}>
-              <Text style={{ color: "purple", fontSize: 15 }}>Edit</Text>
+            <Pressable
+              onPress={editPressHandler}
+              style={({ pressed }) => pressed && styles.pressed}
+            >
+              <Text style={{ color: "purple", fontSize: 17 }}>Edit</Text>
             </Pressable>
           </Pressable>
           <Pressable
@@ -149,6 +162,10 @@ function ProfileSettings({ navigation }) {
 export default ProfileSettings;
 
 const styles = StyleSheet.create({
+  pressed: {
+    opacity: 0.75,
+    // backgroundColor: "gray",
+  },
   containerProfilePic: {
     marginTop: 38,
     marginHorizontal: 30,

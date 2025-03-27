@@ -27,6 +27,7 @@ import ProfileSettings from "./screens/Settings/ProfileSettings";
 import CategoriesSearchAndFilter from "./screens/SearchAndFilter/CategoriesSearchAndFilter";
 import Notifications from "./screens/Notifications/Notifications";
 import Orders from "./screens/Orders/Orders";
+import ManageUserData from "./screens/ManageUserData";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -206,6 +207,23 @@ function AuthenticatedStack() {
           ),
         })}
       />
+      <Stack.Screen
+        name="ManageUserData"
+        component={ManageUserData}
+        options={{ presentation: "modal" }}
+        // {({ navigation }) => ({
+        //   title: "",
+        //   headerTransparent: true,
+        //   headerLeft: ({ tintColor }) => (
+        //     <IconButton
+        //       icon="chevron-back-circle-outline"
+        //       size={32}
+        //       color={tintColor}
+        //       onPress={() => navigation.goBack()}
+        //     />
+        //   ),
+        // })}
+      />
     </Stack.Navigator>
   );
 }
@@ -216,7 +234,6 @@ function Navigation() {
     <NavigationContainer style={styles.container}>
       {!authCtx.isAuthenticated && <AuthStack />}
       {authCtx.isAuthenticated && <AuthenticatedStack />}
-      {/* <AuthenStack /> */}
     </NavigationContainer>
   );
 }
