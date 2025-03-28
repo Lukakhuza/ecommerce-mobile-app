@@ -13,6 +13,7 @@ import { ProductsContext } from "../../store/context/productsContext";
 import { Ionicons } from "@expo/vector-icons";
 import { AuthContext } from "../../store/context/auth-context";
 import { UserInputContext } from "../../store/context/userInputContext";
+import UserDataForm from "../../components/ui/UserDataForm";
 import { useNavigation } from "@react-navigation/native";
 
 function ProfileSettings({ navigation }) {
