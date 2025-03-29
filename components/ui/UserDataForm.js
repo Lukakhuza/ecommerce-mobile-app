@@ -1,21 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Input from "./Input";
-import { View } from "react-native";
+import { View, Text } from "react-native";
+import { UserInputContext } from "../../store/context/userInputContext";
 
 function UserDataForm() {
-  const [inputValues, setInputValues] = useState({
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-  });
+  const userInputCtx = useContext(UserInputContext);
 
-  function inputChangedHandler(inputIdentifier, enteredValue) {
-    setAmountValue((currInputValues) => {
-      return {
-        ...currInputValues,
-        [inputIdentifier]: enteredValue,
-      };
-    });
+  function handleInputUpdate(inputIdentifier, enteredText) {
+    userInputCtx.updateInputs(inputIdentifier, enteredText);
   }
 
   return (
@@ -24,26 +16,36 @@ function UserDataForm() {
         label="First Name"
         textInputConfig={{
           autoCapitalize: "sentences",
-          onChangeText: inputChangedHandler.bind(this, "firstName"),
-          value: inputValues.firstName,
+          onChangeText: handleInputUpdate.bind(this, "firstName"),
+          value: userInputCtx.input.firstName,
         }}
       />
       <Input
         label="Last Name"
         autoCapitalize={{ autoCapitalize: "sentences" }}
         textInputConfig={{
-          onChangeText: inputChangedHandler.bind(this, "lastName"),
-          value: inputValues.lastName,
+          onChangeText: handleInputUpdate.bind(this, "lastName"),
+          value: userInputCtx.input.lastName,
+        }}
+      />
+      <Input
+        label="Email Address"
+        textInputConfig={{
+          editable: false,
+          placeholder: "XXX-XXX-XXXX",
+          maxLength: 12,
+          value: userInputCtx.input.email,
+          style: { color: "black", fontSize: 17, backgroundColor: "none" },
         }}
       />
       <Input
         label="Phone Number"
         textInputConfig={{
           keyboardType: "numeric",
-          onChangeText: inputChangedHandler.bind(this, "phoneNumber"),
+          onChangeText: handleInputUpdate.bind(this, "phoneNumber"),
           placeholder: "XXX-XXX-XXXX",
           maxLength: 12,
-          value: inputValues.phoneNumber,
+          value: userInputCtx.input.phoneNumber,
         }}
       />
     </View>

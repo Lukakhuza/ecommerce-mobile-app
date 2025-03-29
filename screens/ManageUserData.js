@@ -5,6 +5,9 @@ import Button from "../components/ui/Button";
 import UserDataForm from "../components/ui/UserDataForm";
 
 function ManageUserData({ route, navigation }) {
+  function handleInputUpdate(inputIdentifier, enteredText) {
+    userInputCtx.updateInputs(inputIdentifier, enteredText);
+  }
   const editedUserDataBasicInfo = route.params?.basicInfo;
   const isEditing = !!editedUserDataBasicInfo;
 

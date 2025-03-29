@@ -1,8 +1,6 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
 function Input({ label, textInputConfig }) {
-  let inputStyles = [styles.input];
-
   return (
     <View style={styles.inputContainer}>
       <Text style={styles.label}>{label}</Text>

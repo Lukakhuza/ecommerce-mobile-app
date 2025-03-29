@@ -19,20 +19,14 @@ function EnterPassword({ navigation }) {
 
   async function loginHandler() {
     setIsAuthenticating(true);
-    // console.log("Here we go: ", userInputCtx);
     const email = userInputCtx.input.email;
     const password = userInputCtx.input.passwordPlaceholder;
     const token = await loginUser(email, password);
     authCtx.authenticate(token);
     const response = await fetchUserData(email);
-    console.log(response);
     userInputCtx.updateInputs("phoneNumber", response[0].phoneNumber);
     userInputCtx.updateInputs("firstName", response[0].firstName);
     userInputCtx.updateInputs("lastName", response[0].lastName);
-    console.log(userInputCtx);
-    // console.log("Test 4:", response);
-    // const data = await response.data;
-    // console.log("This is the response: ", data);
     setIsAuthenticating(false);
   }
 
