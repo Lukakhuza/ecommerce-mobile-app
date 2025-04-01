@@ -73,12 +73,12 @@ function EnterEmail({ navigation }) {
             </View>
           </View>
           <View style={styles.buttons2}>
-            <Button
+            {/* <Button
               title="Hello World"
               onPress={() => {
                 addData(userData);
               }}
-            ></Button>
+            ></Button> */}
             <Button2
               style={styles.button1}
               onPress={() => {

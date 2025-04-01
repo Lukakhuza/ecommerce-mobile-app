@@ -50,7 +50,6 @@ function UserInputContextProvider({ children }) {
     resetInputs: resetInputs,
   };
 
-  const userInputCtx = useContext(UserInputContext);
   return (
     <UserInputContext.Provider value={value}>
       {children}

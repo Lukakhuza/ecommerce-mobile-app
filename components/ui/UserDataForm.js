@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Input from "./Input";
 import { View, Text } from "react-native";
 import { UserInputContext } from "../../store/context/userInputContext";
@@ -6,35 +6,49 @@ import { UserInputContext } from "../../store/context/userInputContext";
 function UserDataForm() {
   const userInputCtx = useContext(UserInputContext);
 
-  function handleInputUpdate(inputIdentifier, enteredText) {
-    userInputCtx.updateInputs(inputIdentifier, enteredText);
-  }
+  // I need to raise the state management to the ManageUserData component.
+  // const [inputValues, setInputValues] = useState({
+  //   firstName: defaultValues
+  //     ? defaultValues.defaultValues.firstName.toString()
+  //     : "",
+  //   lastName: defaultValues
+  //     ? defaultValues.defaultValues.lastName.toString()
+  //     : "",
+  //   email: defaultValues ? defaultValues.defaultValues.email.toString() : "",
+  //   phoneNumber: defaultValues
+  //     ? defaultValues.defaultValues.phoneNumber.toString()
+  //     : "",
+  // });
 
+  // console.log("Test 3", inputValues);
+  // console.log("Test 4", userInputCtx.input.firstName);
   return (
     <View>
       <Input
         label="First Name"
         textInputConfig={{
           autoCapitalize: "sentences",
+          autoCorrect: false,
           onChangeText: handleInputUpdate.bind(this, "firstName"),
-          value: userInputCtx.input.firstName,
+          value: inputValues.firstName,
         }}
       />
       <Input
         label="Last Name"
-        autoCapitalize={{ autoCapitalize: "sentences" }}
         textInputConfig={{
+          autoCapitalize: "sentences",
+          autoCorrect: false,
           onChangeText: handleInputUpdate.bind(this, "lastName"),
-          value: userInputCtx.input.lastName,
+          value: inputValues.lastName,
         }}
       />
       <Input
         label="Email Address"
         textInputConfig={{
           editable: false,
-          placeholder: "XXX-XXX-XXXX",
+          placeholder: "Email Address",
           maxLength: 12,
-          value: userInputCtx.input.email,
+          value: inputValues.email,
           style: { color: "black", fontSize: 17, backgroundColor: "none" },
         }}
       />
@@ -43,9 +57,9 @@ function UserDataForm() {
         textInputConfig={{
           keyboardType: "numeric",
           onChangeText: handleInputUpdate.bind(this, "phoneNumber"),
-          placeholder: "XXX-XXX-XXXX",
+          placeholder: "###-###-####",
           maxLength: 12,
-          value: userInputCtx.input.phoneNumber,
+          value: inputValues.phoneNumber,
         }}
       />
     </View>

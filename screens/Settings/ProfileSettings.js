@@ -17,7 +17,6 @@ import UserDataForm from "../../components/ui/UserDataForm";
 import { useNavigation } from "@react-navigation/native";
 
 function ProfileSettings({ navigation }) {
-  // const navi
   const [dummyUserData, setDummyUserData] = useState("");
   const authCtx = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
