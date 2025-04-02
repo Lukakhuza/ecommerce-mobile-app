@@ -8,6 +8,10 @@ export const UserInputContext = createContext({
   phoneNumber: "",
   shopFor: "",
   ageRange: "",
+  addressLine1: "",
+  city: "",
+  state: "",
+  zipcode: "",
   updateInputs: (inputIdentifier, enteredText) => {},
   resetInputs: () => {},
 });
@@ -21,6 +25,10 @@ function UserInputContextProvider({ children }) {
     phoneNumber: "",
     shopFor: "",
     ageRange: "",
+    addressLine1: "",
+    city: "",
+    state: "",
+    zipcode: "",
   });
 
   function updateInputs(inputIdentifier, enteredText) {
@@ -41,6 +49,10 @@ function UserInputContextProvider({ children }) {
       phoneNumber: "",
       shopFor: "",
       ageRange: "",
+      addressLine1: "",
+      city: "",
+      state: "",
+      zipcode: "",
     });
   }
 

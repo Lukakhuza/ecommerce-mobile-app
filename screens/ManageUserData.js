@@ -19,10 +19,6 @@ function ManageUserData({ route, navigation }) {
       : "",
   });
 
-  function handleInputUpdate(inputIdentifier, enteredText) {
-    userInputCtx.updateInputs(inputIdentifier, enteredText);
-  }
-
   function handleTextChange(inputIdentifier, enteredText) {
     setInputValues((currInputValues) => {
       return {
@@ -32,27 +28,23 @@ function ManageUserData({ route, navigation }) {
     });
   }
 
-  const editedUserDataBasicInfo = route.params?.basicInfo;
-  const isEditing = !!editedUserDataBasicInfo;
-  const basicInfo = userInputCtx.input;
+  // const editedUserDataBasicInfo = route.params?.basicInfo;
+  // const isEditing = !!editedUserDataBasicInfo;
 
-  console.log("BI", basicInfo);
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: isEditing ? "Edit Basic Info" : "Add Other Info",
+      title: "Edit Basic Info",
     });
-  }, [navigation, isEditing]);
+  }, [navigation]);
 
   function cancelHandler() {
     navigation.goBack();
   }
   function confirmHandler() {
-    // console.log(userInputCtx.input.firstName);
     userInputCtx.updateInputs("firstName", inputValues.firstName);
     userInputCtx.updateInputs("lastName", inputValues.lastName);
     userInputCtx.updateInputs("phoneNumber", inputValues.phoneNumber);
     navigation.goBack();
-    // console.log(inputValues.firstName);
   }
 
   return (

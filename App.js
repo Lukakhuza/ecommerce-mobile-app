@@ -28,6 +28,7 @@ import CategoriesSearchAndFilter from "./screens/SearchAndFilter/CategoriesSearc
 import Notifications from "./screens/Notifications/Notifications";
 import Orders from "./screens/Orders/Orders";
 import ManageUserData from "./screens/ManageUserData";
+import ManageUserAddress from "./screens/ManageUserAddress";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -210,6 +211,23 @@ function AuthenticatedStack() {
       <Stack.Screen
         name="ManageUserData"
         component={ManageUserData}
+        options={{ presentation: "modal" }}
+        // {({ navigation }) => ({
+        //   title: "",
+        //   headerTransparent: true,
+        //   headerLeft: ({ tintColor }) => (
+        //     <IconButton
+        //       icon="chevron-back-circle-outline"
+        //       size={32}
+        //       color={tintColor}
+        //       onPress={() => navigation.goBack()}
+        //     />
+        //   ),
+        // })}
+      />
+      <Stack.Screen
+        name="ManageUserAddress"
+        component={ManageUserAddress}
         options={{ presentation: "modal" }}
         // {({ navigation }) => ({
         //   title: "",

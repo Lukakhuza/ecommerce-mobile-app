@@ -25,8 +25,12 @@ function ProfileSettings({ navigation }) {
   function editPressHandler(basicInfo) {
     navigation.navigate("ManageUserData"),
       {
-        userDataType: basicInfo,
+        userData: basicInfo,
       };
+  }
+
+  function editUserAddress() {
+    navigation.navigate("ManageUserAddress");
   }
 
   useEffect(() => {
@@ -73,13 +77,7 @@ function ProfileSettings({ navigation }) {
               <Text style={{ color: "purple", fontSize: 17 }}>Edit</Text>
             </Pressable>
           </Pressable>
-          <Pressable
-            onPress={() => {
-              productsCtx.updateSelectedCategory("Jackets");
-              navigation.navigate("Welcome");
-            }}
-            style={styles.category}
-          >
+          <Pressable onPress={editUserAddress} style={styles.category}>
             <View>
               <Text style={styles.label}>Address</Text>
             </View>
