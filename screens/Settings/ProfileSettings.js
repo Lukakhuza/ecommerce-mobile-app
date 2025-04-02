@@ -22,6 +22,8 @@ function ProfileSettings({ navigation }) {
   const userInputCtx = useContext(UserInputContext);
   const productsCtx = useContext(ProductsContext);
 
+  console.log("This is it: ", userInputCtx.input.addressLine1);
+
   function editPressHandler(basicInfo) {
     navigation.navigate("ManageUserData"),
       {
@@ -80,6 +82,12 @@ function ProfileSettings({ navigation }) {
           <Pressable onPress={editUserAddress} style={styles.category}>
             <View>
               <Text style={styles.label}>Address</Text>
+            </View>
+            <View></View>
+            <View>
+              <Text style={{ color: "gray" }}>
+                {userInputCtx.input.addressLine1} {userInputCtx.input.city}
+              </Text>
             </View>
             <View>
               <Ionicons name="chevron-forward-outline" size={35} />
