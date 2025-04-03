@@ -13,7 +13,6 @@ import { ProductsContext } from "../../store/context/productsContext";
 import { Ionicons } from "@expo/vector-icons";
 import { AuthContext } from "../../store/context/auth-context";
 import { UserInputContext } from "../../store/context/userInputContext";
-import UserDataForm from "../../components/ui/UserDataForm";
 import { useNavigation } from "@react-navigation/native";
 
 function ProfileSettings({ navigation }) {
@@ -21,8 +20,6 @@ function ProfileSettings({ navigation }) {
   const authCtx = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
   const productsCtx = useContext(ProductsContext);
-
-  console.log("This is it: ", userInputCtx.input.addressLine1);
 
   function editPressHandler(basicInfo) {
     navigation.navigate("ManageUserData"),
@@ -84,9 +81,10 @@ function ProfileSettings({ navigation }) {
               <Text style={styles.label}>Address</Text>
             </View>
             <View></View>
-            <View>
-              <Text style={{ color: "gray" }}>
-                {userInputCtx.input.addressLine1} {userInputCtx.input.city}
+            <View style={{ maxWidth: 200 }}>
+              <Text style={{ color: "gray" }} numberOfLines={1}>
+                {userInputCtx.input.addressLine1} {userInputCtx.input.city}{" "}
+                {userInputCtx.input.state}
               </Text>
             </View>
             <View>

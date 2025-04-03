@@ -3,12 +3,11 @@ import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Input from "../components/ui/Input";
 import IconButton from "../components/ui/IconButton";
 import Button from "../components/ui/Button";
-import UserDataForm from "../components/ui/UserDataForm";
 import { UserInputContext } from "../store/context/userInputContext";
 
 function ManageUserAddress({ route, navigation }) {
   const userInputCtx = useContext(UserInputContext);
-  console.log(userInputCtx);
+
   const [inputValues, setInputValues] = useState({
     addressLine1: userInputCtx.input
       ? userInputCtx.input.addressLine1.toString()
@@ -58,7 +57,7 @@ function ManageUserAddress({ route, navigation }) {
         <Input
           label="City"
           textInputConfig={{
-            autoCapitalize: "sentences",
+            autoCapitalize: "words",
             autoCorrect: false,
             onChangeText: handleTextChange.bind(this, "city"),
             value: inputValues.city,

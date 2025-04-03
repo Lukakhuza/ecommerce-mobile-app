@@ -3,7 +3,6 @@ import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Input from "../components/ui/Input";
 import IconButton from "../components/ui/IconButton";
 import Button from "../components/ui/Button";
-import UserDataForm from "../components/ui/UserDataForm";
 import { UserInputContext } from "../store/context/userInputContext";
 
 function ManageUserData({ route, navigation }) {
