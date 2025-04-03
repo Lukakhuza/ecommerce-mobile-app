@@ -13,14 +13,16 @@ import { ProductsContext } from "../../store/context/productsContext";
 import { Ionicons } from "@expo/vector-icons";
 import { AuthContext } from "../../store/context/auth-context";
 import { UserInputContext } from "../../store/context/userInputContext";
-import { useNavigation } from "@react-navigation/native";
+import { FavoritesContext } from "../../store/context/favoritesContext";
 
 function ProfileSettings({ navigation }) {
   const [dummyUserData, setDummyUserData] = useState("");
   const authCtx = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
   const productsCtx = useContext(ProductsContext);
+  const favoritesCtx = useContext(FavoritesContext);
 
+  console.log(favoritesCtx);
   function editPressHandler(basicInfo) {
     navigation.navigate("ManageUserData"),
       {
@@ -93,8 +95,9 @@ function ProfileSettings({ navigation }) {
           </Pressable>
           <Pressable
             onPress={() => {
-              productsCtx.updateSelectedCategory("Jackets");
-              navigation.navigate("Welcome");
+              // productsCtx.updateSelectedCategory("Jackets");
+              console.log("Hiiii");
+              navigation.navigate("Favorites");
             }}
             style={styles.category}
           >

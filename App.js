@@ -29,6 +29,7 @@ import Notifications from "./screens/Notifications/Notifications";
 import Orders from "./screens/Orders/Orders";
 import ManageUserData from "./screens/ManageUserData";
 import ManageUserAddress from "./screens/ManageUserAddress";
+import Favorites from "./screens/ProductPage/Favorites";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -241,6 +242,26 @@ function AuthenticatedStack() {
         //     />
         //   ),
         // })}
+      />
+      <Stack.Screen
+        name="Favorites"
+        component={Favorites}
+        options={({ navigation }) => ({
+          // headerShown: false,
+          title: "Favorites",
+          headerTitleStyle: { fontSize: 21 },
+          headerTransparent: true,
+          headerLeft: ({ tintColor }) => (
+            <IconButton
+              icon="chevron-back-circle-outline"
+              size={35}
+              color="white"
+              onPress={() => navigation.goBack()}
+              style={{ backgroundColor: "none" }}
+            />
+          ),
+          // header,
+        })}
       />
     </Stack.Navigator>
   );

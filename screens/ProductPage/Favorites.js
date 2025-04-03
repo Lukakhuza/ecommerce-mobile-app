@@ -16,9 +16,8 @@ import FavoriteIcon from "../../components/ui/FavoriteIcon";
 import { Ionicons } from "@expo/vector-icons";
 import { FavoritesContext } from "../../store/context/favoritesContext";
 import { ProductsContext } from "../../store/context/productsContext";
-import { jsx } from "react/jsx-runtime";
 
-function Welcome() {
+function Favorites() {
   const authCtx = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
   const favoritesCtx = useContext(FavoritesContext);
@@ -43,22 +42,11 @@ function Welcome() {
     getProductsData();
   }, []);
 
-  const filteredProducts = fetchedProductsData.filter((productData) => {
-    let categoryProductIds = [];
-    if (productsCtx.selectedCategory === "Jackets") {
-      categoryProductIds = [3, 15, 16, 17];
-    } else if (productsCtx.selectedCategory === "Tops") {
-      categoryProductIds = [2, 4, 18, 19, 20];
-    } else if (productsCtx.selectedCategory === "Tech") {
-      categoryProductIds = [9, 10, 11, 12, 13, 14];
-    } else if (productsCtx.selectedCategory === "Jewelry") {
-      categoryProductIds = [5, 6, 7, 8];
-    } else if (productsCtx.selectedCategory === "Other") {
-      categoryProductIds = [1];
-    }
-
+  const favoriteProducts = fetchedProductsData.filter((productData) => {
+    let favoriteProductIds = favoritesCtx.favorites;
+    console.log(favoriteProductIds);
     if (
-      categoryProductIds.includes(productData.id) ||
+      favoriteProductIds.includes(productData.id) ||
       productsCtx.selectedCategory === "All"
     ) {
       return true;
@@ -68,36 +56,17 @@ function Welcome() {
   });
 
   return (
-    <View style={{ backgroundColor }}>
+    <View style={{ backgroundColor: "#C6373C" }}>
       <View style={styles.fl}>
         <View style={styles.header}></View>
         <Text style={styles.category}>
-          {" "}
-          {productsCtx.selectedCategory} ({filteredProducts.length})
+          Favorites ({favoriteProducts.length})
         </Text>
         <FlatList
-          data={filteredProducts}
+          data={favoriteProducts}
           renderItem={(itemData) => {
             return (
               <View style={styles.productContainer}>
-                <View style={styles.favIcon}>
-                  <FavoriteIcon
-                    name={
-                      favoritesCtx.favorites.includes(itemData.item.id)
-                        ? "heart"
-                        : "heart-outline"
-                    }
-                    size={30}
-                    color="black"
-                    onPress={() => {
-                      if (!favoritesCtx.favorites.includes(itemData.item.id)) {
-                        favoritesCtx.addFavorite(itemData.item.id);
-                      } else {
-                        favoritesCtx.removeFavorite(itemData.item.id);
-                      }
-                    }}
-                  />
-                </View>
                 <Image
                   source={{ uri: itemData.item.image }}
                   style={styles.image}
@@ -111,15 +80,8 @@ function Welcome() {
             return item.id;
           }}
           numColumns={2}
-          // columnWrapperStyle={}
           contentContainerStyle={{
-            // alignItems: "stretch",
             padding: 15,
-            // borderColor: "brown",
-            // borderWidth: 4,
-            // rowGap: 10,
-            // columnGap: 0,
-            // alignContent: "flex-end",
           }}
         />
       </View>
@@ -144,22 +106,23 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     backgroundColor: Colors.bgLight2,
-    // marginBottom: 30,
   },
   favIcon: {
     position: "absolute",
     right: 15,
     top: 15,
     zIndex: 1,
-    // top: 10,
   },
   category: {
-    marginLeft: 30,
-    marginBottom: 20,
+    color: "black",
+    borderWidth: 4,
+    borderColor: "blue",
+    justifyContent: "center",
+    textAlign: "center",
+    marginHorizontal: 30,
+    marginBottom: 10,
     fontSize: 20,
     fontWeight: 500,
-    // borderColor: "yellow",
-    // borderWidth: 5,
   },
   header: {
     height: 100,
@@ -176,7 +139,6 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   productContainer: {
-    // width: "30%",
     flex: 1,
     backgroundColor: "white",
     margin: 10,
@@ -194,4 +156,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Welcome;
+export default Favorites;
