@@ -55,13 +55,34 @@ function Favorites() {
     }
   });
 
+  let content = <View></View>;
+
+  if (favoriteProducts.length === 0) {
+    content = <Text style={styles.noFavorites}>No Favorites Selected</Text>;
+  }
   return (
-    <View style={{ backgroundColor: "#C6373C" }}>
+    <View
+      style={{
+        backgroundColor: "#C6373C",
+        // borderColor: "brown",
+        // borderWidth: 10,
+        // alignItems: "center",
+        // justifyContent: "center",
+      }}
+    >
       <View style={styles.fl}>
         <View style={styles.header}></View>
-        <Text style={styles.category}>
-          Favorites ({favoriteProducts.length})
-        </Text>
+        <View
+          style={{
+            // borderWidth: 5,
+            // borderColor: "green",
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {content}
+        </View>
         <FlatList
           data={favoriteProducts}
           renderItem={(itemData) => {
@@ -85,7 +106,7 @@ function Favorites() {
           }}
         />
       </View>
-      <View>
+      {/* <View>
         <PurpleButton
           onPress={() => {
             userInputCtx.resetInputs();
@@ -94,7 +115,7 @@ function Favorites() {
         >
           Log Out
         </PurpleButton>
-      </View>
+      </View> */}
     </View>
   );
 }
@@ -113,10 +134,13 @@ const styles = StyleSheet.create({
     top: 15,
     zIndex: 1,
   },
-  category: {
-    color: "black",
-    borderWidth: 4,
-    borderColor: "blue",
+  noFavorites: {
+    // flex: 1,
+    // marginTop: 100,
+    // borderColor: "blue",
+    // borderWidth: 5,
+    color: "white",
+    textDecorationLine: "",
     justifyContent: "center",
     textAlign: "center",
     marginHorizontal: 30,

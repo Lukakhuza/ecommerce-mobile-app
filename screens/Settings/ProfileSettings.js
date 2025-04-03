@@ -150,7 +150,7 @@ function ProfileSettings({ navigation }) {
               <Ionicons name="chevron-forward-outline" size={35} />
             </View>
           </Pressable>
-          <Pressable
+          {/* <Pressable
             style={styles.signOutContainer}
             onPress={() => {
               userInputCtx.resetInputs();
@@ -158,7 +158,7 @@ function ProfileSettings({ navigation }) {
             }}
           >
             <Text style={styles.signOut}>Sign Out</Text>
-          </Pressable>
+          </Pressable> */}
         </ScrollView>
       </View>
       <View></View>

@@ -255,12 +255,11 @@ function AuthenticatedStack() {
             <IconButton
               icon="chevron-back-circle-outline"
               size={35}
-              color="white"
+              color="black"
               onPress={() => navigation.goBack()}
               style={{ backgroundColor: "none" }}
             />
           ),
-          // header,
         })}
       />
     </Stack.Navigator>
