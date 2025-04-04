@@ -29,7 +29,8 @@
     "react-dom": "18.3.1",
     "react-native": "0.76.5",
     "react-native-element-dropdown": "^2.12.2",
-    "resend": "^4.0.1"
+    "resend": "^4.0.1",
+    "@stripe/stripe-react-native": "0.38.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

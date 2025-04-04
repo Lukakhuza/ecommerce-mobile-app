@@ -106,7 +106,7 @@ function Favorites() {
           }}
         />
       </View>
-      {/* <View>
+      <View>
         <PurpleButton
           onPress={() => {
             userInputCtx.resetInputs();
@@ -115,7 +115,7 @@ function Favorites() {
         >
           Log Out
         </PurpleButton>
-      </View> */}
+      </View>
     </View>
   );
 }

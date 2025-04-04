@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    backgroundColor: "white",
+    // backgroundColor: "white",
     height: 80,
     borderRadius: 20,
   },

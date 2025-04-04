@@ -30,6 +30,7 @@ import Orders from "./screens/Orders/Orders";
 import ManageUserData from "./screens/ManageUserData";
 import ManageUserAddress from "./screens/ManageUserAddress";
 import Favorites from "./screens/ProductPage/Favorites";
+import Payment from "./screens/Settings/Payment";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -250,6 +251,7 @@ function AuthenticatedStack() {
           // headerShown: false,
           title: "Favorites",
           headerTitleStyle: { fontSize: 21 },
+          presentation: "card",
           headerTransparent: true,
           headerLeft: ({ tintColor }) => (
             <IconButton
@@ -261,6 +263,26 @@ function AuthenticatedStack() {
             />
           ),
         })}
+      />
+      <Stack.Screen
+        name="Payment"
+        component={Payment}
+        // options={({ navigation }) => ({
+        //   // headerShown: false,
+        //   title: "Favorites",
+        //   headerTitleStyle: { fontSize: 21 },
+        //   presentation: "card",
+        //   headerTransparent: true,
+        //   headerLeft: ({ tintColor }) => (
+        //     <IconButton
+        //       icon="chevron-back-circle-outline"
+        //       size={35}
+        //       color="black"
+        //       onPress={() => navigation.goBack()}
+        //       style={{ backgroundColor: "none" }}
+        //     />
+        //   ),
+        // })}
       />
     </Stack.Navigator>
   );

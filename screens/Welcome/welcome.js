@@ -68,7 +68,9 @@ function Welcome() {
   });
 
   return (
-    <View style={{ backgroundColor }}>
+    <View
+    //  style={{ backgroundColor }}
+    >
       <View style={styles.fl}>
         <View style={styles.header}></View>
         <Text style={styles.category}>

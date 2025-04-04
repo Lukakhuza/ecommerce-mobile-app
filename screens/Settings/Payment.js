@@ -15,7 +15,7 @@ import { AuthContext } from "../../store/context/auth-context";
 import { UserInputContext } from "../../store/context/userInputContext";
 import { FavoritesContext } from "../../store/context/favoritesContext";
 
-function ProfileSettings({ navigation }) {
+function Payment({ navigation }) {
   const [dummyUserData, setDummyUserData] = useState("");
   const authCtx = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
@@ -78,95 +78,23 @@ function ProfileSettings({ navigation }) {
               <Text style={{ color: "purple", fontSize: 17 }}>Edit</Text>
             </Pressable>
           </Pressable>
-          <Pressable onPress={editUserAddress} style={styles.category}>
-            <View>
-              <Text style={styles.label}>Address</Text>
-            </View>
-            <View></View>
-            <View style={{ maxWidth: 200 }}>
-              <Text style={{ color: "gray" }} numberOfLines={1}>
-                {userInputCtx.input.addressLine1} {userInputCtx.input.city}{" "}
-                {userInputCtx.input.state}
-              </Text>
-            </View>
-            <View>
-              <Ionicons name="chevron-forward-outline" size={35} />
-            </View>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              // productsCtx.updateSelectedCategory("Jackets");
-              console.log("Hiiii");
-              navigation.navigate("Favorites");
-            }}
-            style={styles.category}
-          >
-            <View>
-              <Text style={styles.label}>Wishlist</Text>
-            </View>
-            <View>
-              <Ionicons name="chevron-forward-outline" size={35} />
-            </View>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              // productsCtx.updateSelectedCategory("Jackets");
-              navigation.navigate("Payment");
-            }}
-            style={styles.category}
-          >
-            <View>
-              <Text style={styles.label}>Payment</Text>
-            </View>
-            <View>
-              <Ionicons name="chevron-forward-outline" size={35} />
-            </View>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              // productsCtx.updateSelectedCategory("Jackets");
-              // navigation.navigate("Payment");
-            }}
-            style={styles.category}
-          >
-            <View>
-              <Text style={styles.label}>Help</Text>
-            </View>
-            <View>
-              <Ionicons name="chevron-forward-outline" size={35} />
-            </View>
-          </Pressable>
-          <Pressable
-            onPress={() => {
-              productsCtx.updateSelectedCategory("Jackets");
-              navigation.navigate("Welcome");
-            }}
-            style={styles.category}
-          >
-            <View>
-              <Text style={styles.label}>Support</Text>
-            </View>
-            <View>
-              <Ionicons name="chevron-forward-outline" size={35} />
-            </View>
-          </Pressable>
-          <Pressable
-            style={styles.signOutContainer}
-            onPress={() => {
-              userInputCtx.resetInputs();
-              authCtx.logout();
-            }}
-          >
-            <Text style={styles.signOut}>Sign Out</Text>
-          </Pressable>
         </ScrollView>
+        <Pressable
+          style={styles.signOutContainer}
+          onPress={() => {
+            userInputCtx.resetInputs();
+            authCtx.logout();
+          }}
+        >
+          <Text style={styles.signOut}>Sign Out</Text>
+        </Pressable>
       </View>
       <View></View>
     </SafeAreaView>
   );
 }
 
-export default ProfileSettings;
+export default Payment;
 
 const styles = StyleSheet.create({
   pressed: {
