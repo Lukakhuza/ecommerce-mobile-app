@@ -22,7 +22,6 @@ function ProfileSettings({ navigation }) {
   const productsCtx = useContext(ProductsContext);
   const favoritesCtx = useContext(FavoritesContext);
 
-  console.log(favoritesCtx);
   function editPressHandler(basicInfo) {
     navigation.navigate("ManageUserData"),
       {
@@ -66,7 +65,7 @@ function ProfileSettings({ navigation }) {
               <Text style={styles.label1}>
                 {userInputCtx.input.firstName} {userInputCtx.input.lastName}
               </Text>
-              <Text style={styles.label2}>{userInputCtx.input.email}</Text>
+              <Text style={styles.label2}>{authCtx.authEmail}</Text>
               <Text style={styles.label2}>
                 {userInputCtx.input.phoneNumber}
               </Text>
@@ -96,7 +95,6 @@ function ProfileSettings({ navigation }) {
           <Pressable
             onPress={() => {
               // productsCtx.updateSelectedCategory("Jackets");
-              console.log("Hiiii");
               navigation.navigate("Favorites");
             }}
             style={styles.category}

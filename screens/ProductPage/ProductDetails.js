@@ -17,7 +17,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { FavoritesContext } from "../../store/context/favoritesContext";
 import { ProductsContext } from "../../store/context/productsContext";
 
-function Favorites() {
+function Product() {
   const authCtx = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
   const favoritesCtx = useContext(FavoritesContext);
@@ -179,4 +179,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Favorites;
+export default ProductDetails;

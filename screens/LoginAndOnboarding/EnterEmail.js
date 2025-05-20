@@ -14,7 +14,7 @@ import Button2 from "../../components/ui/Button2";
 import Button3 from "../../components/ui/Button3";
 import { Colors } from "../../constants/colors";
 import { useNavigation } from "@react-navigation/native";
-import { addData } from "../../util/auth";
+import { addData, fetchProductsData, fetchUserData } from "../../util/auth";
 import { UserInputContext } from "../../store/context/userInputContext";
 
 function EnterEmail({ navigation }) {
@@ -83,6 +83,10 @@ function EnterEmail({ navigation }) {
               style={styles.button1}
               onPress={() => {
                 // console.log("Log in with your Apple account.");
+                // console.log("Hello");
+                // fetchUserData("luka1@test.com");
+                // fetchProductsData();
+                fetchUserData();
               }}
               imageSource={require("../../assets/apple-logo1.png")}
             >

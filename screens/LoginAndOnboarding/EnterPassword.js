@@ -20,9 +20,10 @@ function EnterPassword({ navigation }) {
   async function loginHandler() {
     setIsAuthenticating(true);
     const email = userInputCtx.input.email;
+    authCtx.email = email;
     const password = userInputCtx.input.passwordPlaceholder;
     const token = await loginUser(email, password);
-    authCtx.authenticate(token);
+    authCtx.authenticate(token, email);
     const response = await fetchUserData(email);
     userInputCtx.updateInputs("phoneNumber", response[0].phoneNumber);
     userInputCtx.updateInputs("firstName", response[0].firstName);

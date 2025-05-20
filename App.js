@@ -31,6 +31,7 @@ import ManageUserData from "./screens/ManageUserData";
 import ManageUserAddress from "./screens/ManageUserAddress";
 import Favorites from "./screens/ProductPage/Favorites";
 import Payment from "./screens/Settings/Payment";
+import { fetchUserData } from "./util/auth";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -300,16 +301,15 @@ function Navigation() {
 
 function Root() {
   const [isTryingToLogin, setIsTryingToLogin] = useState(true);
-
   const authCtx = useContext(AuthContext);
   useEffect(() => {
     async function fetchToken() {
       const storedToken = await AsyncStorage.getItem("token");
-
-      if (storedToken) {
-        authCtx.authenticate(storedToken);
+      const storedEmail = await AsyncStorage.getItem("authEmail");
+      fetchUserData(storedEmail);
+      if (storedToken && storedEmail) {
+        authCtx.authenticate(storedToken, storedEmail);
       }
-
       setIsTryingToLogin(false);
     }
 
@@ -343,9 +343,9 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // backgroundColor: "orange",
-    // alignItems: "center",
-    // justifyContent: "center",
+    flex: 1,
+    backgroundColor: "orange",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

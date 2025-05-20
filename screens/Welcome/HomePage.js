@@ -20,6 +20,8 @@ import { Ionicons } from "@expo/vector-icons";
 import FavoriteIcon from "../../components/ui/FavoriteIcon";
 import { FavoritesContext } from "../../store/context/favoritesContext";
 import SearchComponent from "../../components/ui/SearchComponent";
+import { AuthContext } from "../../store/context/auth-context";
+// import { UserInputContext } from "../../store/context/userInputContext";
 
 const data = [
   { label: "Men", value: "Men" },

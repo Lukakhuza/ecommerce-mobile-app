@@ -22,7 +22,6 @@ function Payment({ navigation }) {
   const productsCtx = useContext(ProductsContext);
   const favoritesCtx = useContext(FavoritesContext);
 
-  console.log(favoritesCtx);
   function editPressHandler(basicInfo) {
     navigation.navigate("ManageUserData"),
       {

@@ -33,19 +33,25 @@ function TellUsAboutYourself({ navigation }) {
   }
 
   async function createAccountHandler() {
-    const email = userInputCtx.input.email;
-    const passwordPlaceholder = userInputCtx.input.passwordPlaceholder;
-    setIsAuthenticating(true);
-    const response = await createUser(email, passwordPlaceholder);
-    const userData = {
+    const user = {
+      email: userInputCtx.input.email,
+      password: userInputCtx.input.passwordPlaceholder,
       firstName: userInputCtx.input.firstName,
       lastName: userInputCtx.input.lastName,
-      email: userInputCtx.input.email,
-      uid: response.localId,
-      idToken: response.idToken,
+      phoneNumber: "123-456-7890",
+      address: {
+        addressLine1: "100 Main St.",
+        city: "Washington",
+        state: "NJ",
+        zipcode: "01234",
+      },
+      // uid: response.localId,
+      // idToken: response.idToken,
       shopFor: userInputCtx.input.shopFor,
       ageRange: userInputCtx.input.ageRange,
     };
+    setIsAuthenticating(true);
+    const response = await createUser(email, passwordPlaceholder);
     addData(userData);
     authCtx.authenticate(userData.idToken);
     setIsAuthenticating(false);
