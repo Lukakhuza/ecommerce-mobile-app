@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 export const UserInputContext = createContext({
   email: "",
@@ -13,6 +13,7 @@ export const UserInputContext = createContext({
   state: "",
   zipcode: "",
   updateInputs: (inputIdentifier, enteredText) => {},
+  updateAllInputs: () => {},
   resetInputs: () => {},
 });
 
@@ -20,8 +21,8 @@ function UserInputContextProvider({ children }) {
   const [userInput, setUserInput] = useState({
     email: "",
     passwordPlaceholder: "",
-    firstName: "",
-    lastName: "",
+    firstName: "LK",
+    lastName: "Khuza",
     phoneNumber: "",
     shopFor: "",
     ageRange: "",
@@ -30,6 +31,17 @@ function UserInputContextProvider({ children }) {
     state: "",
     zipcode: "",
   });
+  // const result = fetchUserData("Lukakhuz778@test.com");
+  // console.log("Result here is: ", result);
+  // useEffect(() => {
+  //   fetchUserData("Lukakhuz778@test.com")
+  //     .then((result) => {
+  //       console.log("Result 1: ", result);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   function updateInputs(inputIdentifier, enteredText) {
     setUserInput((currInputValues) => {
@@ -38,6 +50,16 @@ function UserInputContextProvider({ children }) {
         [inputIdentifier]: enteredText,
       };
     });
+  }
+
+  function updateAllInputs() {
+    //   const result = fetchUserData();
+    //   setUserInput((currInputValues) => {
+    //     return {
+    //       ...currInputValues,
+    //       firstName: "LukaTest1",
+    //     };
+    //   });
   }
 
   function resetInputs() {
@@ -59,6 +81,7 @@ function UserInputContextProvider({ children }) {
   const value = {
     input: userInput,
     updateInputs: updateInputs,
+    updateAllInputs: updateAllInputs,
     resetInputs: resetInputs,
   };
 

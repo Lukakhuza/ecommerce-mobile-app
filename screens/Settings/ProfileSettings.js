@@ -38,7 +38,11 @@ function ProfileSettings({ navigation }) {
       const response = await fetchProfilePicture();
       setDummyUserData(response);
     }
+
+    async function getUserData() {}
+
     getProfilePicture();
+    getUserData();
   }, []);
 
   return (
@@ -63,7 +67,7 @@ function ProfileSettings({ navigation }) {
           >
             <View>
               <Text style={styles.label1}>
-                {userInputCtx.input.firstName} {userInputCtx.input.lastName}
+                {userInputCtx.input.firstName} {userInputCtx.input.lastName}{" "}
               </Text>
               <Text style={styles.label2}>{authCtx.authEmail}</Text>
               <Text style={styles.label2}>

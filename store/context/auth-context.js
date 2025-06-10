@@ -13,6 +13,9 @@ function AuthContextProvider({ children }) {
   const [authToken, setAuthToken] = useState(null);
   const [authEmail, setAuthEmail] = useState(null);
 
+  console.log("Auth Email is: ", authEmail);
+  console.log("Auth Token is: ", authToken);
+
   useEffect(() => {
     async function fetchToken() {
       const storedToken = await AsyncStorage.getItem("token");

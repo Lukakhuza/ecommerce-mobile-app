@@ -81,13 +81,14 @@ function EnterEmail({ navigation }) {
             ></Button> */}
             <Button2
               style={styles.button1}
-              onPress={() => {
-                // console.log("Log in with your Apple account.");
-                // console.log("Hello");
-                // fetchUserData("luka1@test.com");
-                // fetchProductsData();
-                fetchUserData();
-              }}
+              // onPress={() => {
+              //   // console.log("Log in with your Apple account.");
+              //   // console.log("Hello");
+              //   // fetchUserData("luka1@test.com");
+              //   // fetchProductsData();
+              //   // fetchUserData();
+              //   createAccountHandler()
+              // }}
               imageSource={require("../../assets/apple-logo1.png")}
             >
               Continue with Apple

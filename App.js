@@ -14,7 +14,9 @@ import IconButton from "./components/ui/IconButton";
 import ForgotPassword from "./screens/LoginAndOnboarding/ForgotPassword";
 import PasswordReset from "./screens/LoginAndOnboarding/PasswordReset";
 import TellUsAboutYourself from "./screens/LoginAndOnboarding/TellUsAboutYourself";
-import UserInputContextProvider from "./store/context/userInputContext";
+import UserInputContextProvider, {
+  UserInputContext,
+} from "./store/context/userInputContext";
 import AuthContextProvider, { AuthContext } from "./store/context/auth-context";
 import FavoritesContextProvider from "./store/context/favoritesContext";
 import ProductsContextProvider from "./store/context/productsContext";
@@ -31,7 +33,6 @@ import ManageUserData from "./screens/ManageUserData";
 import ManageUserAddress from "./screens/ManageUserAddress";
 import Favorites from "./screens/ProductPage/Favorites";
 import Payment from "./screens/Settings/Payment";
-import { fetchUserData } from "./util/auth";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -144,6 +145,56 @@ function AuthStack() {
 }
 
 function AuthenticatedStack() {
+  const userInputCtx = useContext(UserInputContext);
+  console.log(userInputCtx.input);
+  const [userData1, setUserData] = useState({
+    email: "",
+    passwordPlaceholder: "",
+    firstName: "LukaK",
+    lastName: "",
+    phoneNumber: "",
+    shopFor: "",
+    ageRange: "",
+    addressLine1: "",
+    city: "",
+    state: "",
+    zipcode: "",
+  });
+  async function fetchUserData() {
+    const userData = {
+      email: "Lukakhuz778@test.com",
+    };
+    fetch(
+      "https://backend-ecommerce-mobile-app.onrender.com/user/get-user-by-email",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      }
+    )
+      .then((response) => {
+        console.log("Test 18", response.status);
+        return response.json();
+      })
+      .then((resData) => {
+        console.log(userInputCtx.input.firstName);
+        userInputCtx.input.firstName = resData.user.firstName;
+        userInputCtx.input.lastName = resData.user.lastName;
+        userInputCtx.input.email = resData.user.email;
+        userInputCtx.input.passwordPlaceholder = resData.user.password;
+        userInputCtx.input.phoneNumber = resData.user.phoneNumber;
+        userInputCtx.input.addressLine1 = resData.user.address.addressLine1;
+        userInputCtx.input.city = resData.user.address.city;
+        userInputCtx.input.state = resData.user.address.state;
+        userInputCtx.input.zipcode = resData.user.address.zipcode;
+        userInputCtx.input.shopFor = resData.user.shopFor;
+        console.log("Test 55", userInputCtx);
+        return resData.user;
+      });
+  }
+  fetchUserData();
   return (
     <Stack.Navigator initialRouteName="Main">
       <Stack.Screen
@@ -302,13 +353,14 @@ function Navigation() {
 function Root() {
   const [isTryingToLogin, setIsTryingToLogin] = useState(true);
   const authCtx = useContext(AuthContext);
+  const userInputCtx = useContext(UserInputContext);
   useEffect(() => {
     async function fetchToken() {
       const storedToken = await AsyncStorage.getItem("token");
       const storedEmail = await AsyncStorage.getItem("authEmail");
-      fetchUserData(storedEmail);
       if (storedToken && storedEmail) {
         authCtx.authenticate(storedToken, storedEmail);
+        userInputCtx.updateAllInputs();
       }
       setIsTryingToLogin(false);
     }

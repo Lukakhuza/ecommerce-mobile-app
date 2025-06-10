@@ -15,6 +15,7 @@ import { AuthContext } from "../../store/context/auth-context";
 import { addData, createUser } from "../../util/auth";
 import LoadingOverlay from "../../components/ui/LoadingOverlay";
 import DropdownComponent from "../../components/ui/Dropdown";
+import { formToJSON } from "axios";
 
 const data = [
   { label: "Item 1", value: "1" },
@@ -40,7 +41,7 @@ function TellUsAboutYourself({ navigation }) {
       lastName: userInputCtx.input.lastName,
       phoneNumber: "123-456-7890",
       address: {
-        addressLine1: "100 Main St.",
+        addressLine1: "103 Main St.",
         city: "Washington",
         state: "NJ",
         zipcode: "01234",
@@ -50,11 +51,56 @@ function TellUsAboutYourself({ navigation }) {
       shopFor: userInputCtx.input.shopFor,
       ageRange: userInputCtx.input.ageRange,
     };
-    setIsAuthenticating(true);
-    const response = await createUser(email, passwordPlaceholder);
-    addData(userData);
-    authCtx.authenticate(userData.idToken);
-    setIsAuthenticating(false);
+
+    fetch(
+      "https://backend-ecommerce-mobile-app.onrender.com/user/create-user/",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      }
+    )
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // const response = await axios.get("https://localhost:3000/user/create-user");
+
+    //   "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + API_KEY,
+    //   {
+    //     email: email,
+    //     password: password,
+    //     returnSecureToken: true,
+    //   }
+    // );
+    // const user = {
+    //   email: userInputCtx.input.email,
+    //   password: userInputCtx.input.passwordPlaceholder,
+    //   firstName: userInputCtx.input.firstName,
+    //   lastName: userInputCtx.input.lastName,
+    //   phoneNumber: "123-456-7890",
+    //   address: {
+    //     addressLine1: "100 Main St.",
+    //     city: "Washington",
+    //     state: "NJ",
+    //     zipcode: "01234",
+    //   },
+    //   // uid: response.localId,
+    //   // idToken: response.idToken,
+    //   shopFor: userInputCtx.input.shopFor,
+    //   ageRange: userInputCtx.input.ageRange,
+    // };
+    // setIsAuthenticating(true);
+    // const response = await createUser(email, password);
+    // addData(userData);
+    // authCtx.authenticate(userData.idToken);
+    // setIsAuthenticating(false);
+    userInputCtx.resetInputs();
+    navigation.navigate("EnterEmail");
   }
 
   if (isAuthenticating) {
