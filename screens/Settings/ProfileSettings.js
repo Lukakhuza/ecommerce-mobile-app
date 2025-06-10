@@ -88,8 +88,9 @@ function ProfileSettings({ navigation }) {
             <View></View>
             <View style={{ maxWidth: 200 }}>
               <Text style={{ color: "gray" }} numberOfLines={1}>
-                {userInputCtx.input.addressLine1} {userInputCtx.input.city}{" "}
-                {userInputCtx.input.state}
+                {userInputCtx.input.address.addressLine1}{" "}
+                {userInputCtx.input.address.city}{" "}
+                {userInputCtx.input.address.state}
               </Text>
             </View>
             <View>

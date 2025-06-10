@@ -10,11 +10,15 @@ function ManageUserAddress({ route, navigation }) {
 
   const [inputValues, setInputValues] = useState({
     addressLine1: userInputCtx.input
-      ? userInputCtx.input.addressLine1.toString()
+      ? userInputCtx.input.address.addressLine1.toString()
       : "",
-    city: userInputCtx.input ? userInputCtx.input.city.toString() : "",
-    state: userInputCtx.input ? userInputCtx.input.state.toString() : "",
-    zipcode: userInputCtx.input ? userInputCtx.input.zipcode.toString() : "",
+    city: userInputCtx.input ? userInputCtx.input.address.city.toString() : "",
+    state: userInputCtx.input
+      ? userInputCtx.input.address.state.toString()
+      : "",
+    zipcode: userInputCtx.input
+      ? userInputCtx.input.address.zipcode.toString()
+      : "",
   });
 
   function handleTextChange(inputIdentifier, enteredText) {

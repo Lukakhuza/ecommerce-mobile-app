@@ -147,22 +147,9 @@ function AuthStack() {
 function AuthenticatedStack() {
   const userInputCtx = useContext(UserInputContext);
   console.log(userInputCtx.input);
-  const [userData1, setUserData] = useState({
-    email: "",
-    passwordPlaceholder: "",
-    firstName: "LukaK",
-    lastName: "",
-    phoneNumber: "",
-    shopFor: "",
-    ageRange: "",
-    addressLine1: "",
-    city: "",
-    state: "",
-    zipcode: "",
-  });
   async function fetchUserData() {
     const userData = {
-      email: "Lukakhuz778@test.com",
+      email: userInputCtx.input.email,
     };
     fetch(
       "https://backend-ecommerce-mobile-app.onrender.com/user/get-user-by-email",
@@ -175,20 +162,14 @@ function AuthenticatedStack() {
       }
     )
       .then((response) => {
-        console.log("Test 18", response.status);
         return response.json();
       })
       .then((resData) => {
-        console.log(userInputCtx.input.firstName);
         userInputCtx.input.firstName = resData.user.firstName;
         userInputCtx.input.lastName = resData.user.lastName;
-        userInputCtx.input.email = resData.user.email;
         userInputCtx.input.passwordPlaceholder = resData.user.password;
         userInputCtx.input.phoneNumber = resData.user.phoneNumber;
-        userInputCtx.input.addressLine1 = resData.user.address.addressLine1;
-        userInputCtx.input.city = resData.user.address.city;
-        userInputCtx.input.state = resData.user.address.state;
-        userInputCtx.input.zipcode = resData.user.address.zipcode;
+        userInputCtx.input.address = resData.user.address;
         userInputCtx.input.shopFor = resData.user.shopFor;
         console.log("Test 55", userInputCtx);
         return resData.user;
