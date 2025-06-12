@@ -40,8 +40,6 @@ function ManageUserAddress({ route, navigation }) {
     navigation.goBack();
   }
   function confirmHandler() {
-    console.log("Test 1", userInputCtx);
-    console.log("Test 2", inputValues);
     // Update the values as they are displayed:
     userInputCtx.updateInputs("address", inputValues);
     // Update the user input context with new address:
