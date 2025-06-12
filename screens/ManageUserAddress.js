@@ -40,10 +40,43 @@ function ManageUserAddress({ route, navigation }) {
     navigation.goBack();
   }
   function confirmHandler() {
-    userInputCtx.updateInputs("addressLine1", inputValues.addressLine1);
-    userInputCtx.updateInputs("city", inputValues.city);
-    userInputCtx.updateInputs("state", inputValues.state);
-    userInputCtx.updateInputs("zipcode", inputValues.zipcode);
+    console.log("Test 1", userInputCtx);
+    console.log("Test 2", inputValues);
+    // Update the values as they are displayed:
+    userInputCtx.updateInputs("address", inputValues);
+    // Update the user input context with new address:
+    userInputCtx.input.address = inputValues;
+    // Save updated context to the database:
+    async function updateUserAddressHandler() {
+      const user = {
+        email: userInputCtx.input.email,
+        password: userInputCtx.input.passwordPlaceholder,
+        firstName: userInputCtx.input.firstName,
+        lastName: userInputCtx.input.lastName,
+        phoneNumber: userInputCtx.input.phoneNumber,
+        address: userInputCtx.input.address,
+        shopFor: userInputCtx.input.shopFor,
+        ageRange: userInputCtx.input.ageRange,
+      };
+
+      fetch(
+        "https://backend-ecommerce-mobile-app.onrender.com/user/update-user/68496fe68999df7164dcfc1f",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        }
+      )
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    updateUserAddressHandler();
     navigation.goBack();
   }
   return (

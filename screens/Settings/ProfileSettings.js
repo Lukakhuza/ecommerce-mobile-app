@@ -39,10 +39,7 @@ function ProfileSettings({ navigation }) {
       setDummyUserData(response);
     }
 
-    async function getUserData() {}
-
     getProfilePicture();
-    getUserData();
   }, []);
 
   return (

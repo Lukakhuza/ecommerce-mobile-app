@@ -83,8 +83,6 @@ function EnterEmail({ navigation }) {
               style={styles.button1}
               // onPress={() => {
               //   // console.log("Log in with your Apple account.");
-              //   // console.log("Hello");
-              //   // fetchUserData("luka1@test.com");
               //   // fetchProductsData();
               //   // fetchUserData();
               //   createAccountHandler()

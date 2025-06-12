@@ -97,14 +97,12 @@ export async function addData(data) {
 //       return response.json();
 //     })
 //     .then((resData) => {
-//       console.log(resData.user);
 //       return resData.user;
 //     });
 // }
 
 export async function fetchProductsData() {
   const response = await axios.get("https://fakestoreapi.com/products");
-  // console.log(response);
   return response.data;
 }
 

@@ -146,34 +146,35 @@ function AuthStack() {
 
 function AuthenticatedStack() {
   const userInputCtx = useContext(UserInputContext);
-  console.log(userInputCtx.input);
+  const authCtx = useContext(AuthContext);
   async function fetchUserData() {
     const userData = {
-      email: userInputCtx.input.email,
+      email: authCtx.authEmail,
     };
-    fetch(
-      "https://backend-ecommerce-mobile-app.onrender.com/user/get-user-by-email",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      }
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((resData) => {
-        userInputCtx.input.firstName = resData.user.firstName;
-        userInputCtx.input.lastName = resData.user.lastName;
-        userInputCtx.input.passwordPlaceholder = resData.user.password;
-        userInputCtx.input.phoneNumber = resData.user.phoneNumber;
-        userInputCtx.input.address = resData.user.address;
-        userInputCtx.input.shopFor = resData.user.shopFor;
-        console.log("Test 55", userInputCtx);
-        return resData.user;
-      });
+    if (authCtx.authEmail) {
+      fetch(
+        "https://backend-ecommerce-mobile-app.onrender.com/user/get-user-by-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((resData) => {
+          userInputCtx.input.firstName = resData.user.firstName;
+          userInputCtx.input.lastName = resData.user.lastName;
+          userInputCtx.input.passwordPlaceholder = resData.user.password;
+          userInputCtx.input.phoneNumber = resData.user.phoneNumber;
+          userInputCtx.input.address = resData.user.address;
+          userInputCtx.input.shopFor = resData.user.shopFor;
+          return resData.user;
+        });
+    }
   }
   fetchUserData();
   return (

@@ -4,9 +4,11 @@ import Input from "../components/ui/Input";
 import IconButton from "../components/ui/IconButton";
 import Button from "../components/ui/Button";
 import { UserInputContext } from "../store/context/userInputContext";
+import { AuthContext } from "../store/context/auth-context";
 
 function ManageUserData({ route, navigation }) {
   const userInputCtx = useContext(UserInputContext);
+  const authCtx = useContext(AuthContext);
   const [inputValues, setInputValues] = useState({
     firstName: userInputCtx.input
       ? userInputCtx.input.firstName.toString()
@@ -27,9 +29,6 @@ function ManageUserData({ route, navigation }) {
     });
   }
 
-  // const editedUserDataBasicInfo = route.params?.basicInfo;
-  // const isEditing = !!editedUserDataBasicInfo;
-
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Edit Basic Info",
@@ -40,9 +39,47 @@ function ManageUserData({ route, navigation }) {
     navigation.goBack();
   }
   function confirmHandler() {
+    // Update the values as they are displayed.
     userInputCtx.updateInputs("firstName", inputValues.firstName);
     userInputCtx.updateInputs("lastName", inputValues.lastName);
     userInputCtx.updateInputs("phoneNumber", inputValues.phoneNumber);
+    userInputCtx.updateInputs("email", authCtx.authEmail);
+    // Update the user input context with the new values
+    userInputCtx.input.firstName = inputValues.firstName;
+    userInputCtx.input.lastName = inputValues.lastName;
+    userInputCtx.input.phoneNumber = inputValues.phoneNumber;
+    userInputCtx.input.email = authCtx.authEmail;
+    // save the updated context to the database
+    async function updateUserHandler() {
+      const user = {
+        email: userInputCtx.input.email,
+        password: userInputCtx.input.passwordPlaceholder,
+        firstName: userInputCtx.input.firstName,
+        lastName: userInputCtx.input.lastName,
+        phoneNumber: userInputCtx.input.phoneNumber,
+        address: userInputCtx.input.address,
+        shopFor: userInputCtx.input.shopFor,
+        ageRange: userInputCtx.input.ageRange,
+      };
+
+      fetch(
+        "https://backend-ecommerce-mobile-app.onrender.com/user/update-user/68496fe68999df7164dcfc1f",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        }
+      )
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    updateUserHandler();
     navigation.goBack();
   }
 

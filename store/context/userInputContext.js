@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { AuthContext } from "./auth-context";
 
 export const UserInputContext = createContext({
   email: "",
@@ -8,52 +9,34 @@ export const UserInputContext = createContext({
   phoneNumber: "",
   shopFor: "",
   ageRange: "",
-  addressLine1: "",
   address: {
-    addressLine1: "103 Main St.",
-    city: "Washington",
-    state: "NJ",
-    zipcode: "01234",
+    addressLine1: "",
+    city: "",
+    state: "",
+    zipcode: "",
   },
-  city: "",
-  state: "",
-  zipcode: "",
   updateInputs: (inputIdentifier, enteredText) => {},
   updateAllInputs: () => {},
   resetInputs: () => {},
 });
 
 function UserInputContextProvider({ children }) {
+  const authCtx = useContext(AuthContext);
   const [userInput, setUserInput] = useState({
-    email: "",
+    email: authCtx.authEmail ? authCtx.authEmail : "",
     passwordPlaceholder: "",
     firstName: "LK",
     lastName: "Khuza",
     phoneNumber: "",
     shopFor: "",
     ageRange: "",
-    addressLine1: "",
     address: {
-      addressLine1: "103 Main St.",
-      city: "Washington",
-      state: "NJ",
-      zipcode: "01234",
+      addressLine1: "",
+      city: "",
+      state: "",
+      zipcode: "",
     },
-    city: "",
-    state: "",
-    zipcode: "",
   });
-  // const result = fetchUserData("Lukakhuz778@test.com");
-  // console.log("Result here is: ", result);
-  // useEffect(() => {
-  //   fetchUserData("Lukakhuz778@test.com")
-  //     .then((result) => {
-  //       console.log("Result 1: ", result);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
 
   function updateInputs(inputIdentifier, enteredText) {
     setUserInput((currInputValues) => {
@@ -83,16 +66,12 @@ function UserInputContextProvider({ children }) {
       phoneNumber: "",
       shopFor: "",
       ageRange: "",
-      addressLine1: "",
       address: {
-        addressLine1: "103 Main St.",
-        city: "Washington",
-        state: "NJ",
-        zipcode: "01234",
+        addressLine1: "",
+        city: "",
+        state: "",
+        zipcode: "",
       },
-      city: "",
-      state: "",
-      zipcode: "",
     });
   }
 

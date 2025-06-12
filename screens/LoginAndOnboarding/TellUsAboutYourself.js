@@ -41,7 +41,7 @@ function TellUsAboutYourself({ navigation }) {
       lastName: userInputCtx.input.lastName,
       phoneNumber: "123-456-7890",
       address: {
-        addressLine1: "103 Main St.",
+        addressLine1: "500 Main St.",
         city: "Washington",
         state: "NJ",
         zipcode: "01234",
