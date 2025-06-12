@@ -5,6 +5,8 @@ import {
   ScrollView,
   Image,
   FlatList,
+  SafeAreaView,
+  Pressable,
 } from "react-native";
 import PurpleButton from "../../components/ui/PurpleButton";
 import { AuthContext } from "../../store/context/auth-context";
@@ -17,105 +19,130 @@ import { Ionicons } from "@expo/vector-icons";
 import { FavoritesContext } from "../../store/context/favoritesContext";
 import { ProductsContext } from "../../store/context/productsContext";
 
-function Product() {
-  const authCtx = useContext(AuthContext);
-  const userInputCtx = useContext(UserInputContext);
-  const favoritesCtx = useContext(FavoritesContext);
+function ProductDetails() {
   const productsCtx = useContext(ProductsContext);
-  const [fetchedUserData, setFetchedUserData] = useState([]);
-  const [fetchedProductsData, setFetchedProductsData] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(0);
+  // const authCtx = useContext(AuthContext);
+  // const userInputCtx = useContext(UserInputContext);
+  // const favoritesCtx = useContext(FavoritesContext);
+  // const productsCtx = useContext(ProductsContext);
+  // const [fetchedUserData, setFetchedUserData] = useState([]);
+  // const [fetchedProductsData, setFetchedProductsData] = useState([]);
 
-  useEffect(() => {
-    async function getUserData() {
-      const userData = await fetchData();
-      setFetchedUserData(userData);
-    }
+  // useEffect(() => {
+  //   async function getUserData() {
+  //     const userData = await fetchData();
+  //     setFetchedUserData(userData);
+  //   }
 
-    getUserData();
-  }, []);
+  //   getUserData();
+  // }, []);
 
-  useEffect(() => {
-    async function getProductsData() {
-      const productsData = await fetchProductsData();
-      setFetchedProductsData(productsData);
-    }
-    getProductsData();
-  }, []);
+  // useEffect(() => {
+  //   async function getProductsData() {
+  //     const productsData = await fetchProductsData();
+  //     setFetchedProductsData(productsData);
+  //   }
+  //   getProductsData();
+  // }, []);
 
-  const favoriteProducts = fetchedProductsData.filter((productData) => {
-    let favoriteProductIds = favoritesCtx.favorites;
-    if (
-      favoriteProductIds.includes(productData.id) ||
-      productsCtx.selectedCategory === "All"
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  });
+  // const favoriteProducts = fetchedProductsData.filter((productData) => {
+  //   let favoriteProductIds = favoritesCtx.favorites;
+  //   if (
+  //     favoriteProductIds.includes(productData.id) ||
+  //     productsCtx.selectedCategory === "All"
+  //   ) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // });
 
-  let content = <View></View>;
+  // let content = <View></View>;
 
-  if (favoriteProducts.length === 0) {
-    content = <Text style={styles.noFavorites}>No Favorites Selected</Text>;
-  }
+  // if (favoriteProducts.length === 0) {
+  //   content = <Text style={styles.noFavorites}>No Favorites Selected</Text>;
+  // }
   return (
-    <View
-      style={{
-        backgroundColor: "#C6373C",
-        // borderColor: "brown",
-        // borderWidth: 10,
-        // alignItems: "center",
-        // justifyContent: "center",
-      }}
-    >
-      <View style={styles.fl}>
-        <View style={styles.header}></View>
-        <View
-          style={{
-            // borderWidth: 5,
-            // borderColor: "green",
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {content}
-        </View>
-        <FlatList
-          data={favoriteProducts}
-          renderItem={(itemData) => {
-            return (
-              <View style={styles.productContainer}>
-                <Image
-                  source={{ uri: itemData.item.image }}
-                  style={styles.image}
-                />
-                <Text numberOfLines={1}>{itemData.item.title}</Text>
-                <Text>{`$${itemData.item.price}`}</Text>
-              </View>
-            );
-          }}
-          keyExtractor={(item, index) => {
-            return item.id;
-          }}
-          numColumns={2}
-          contentContainerStyle={{
-            padding: 15,
-          }}
-        />
-      </View>
-      <View>
-        <PurpleButton
+    // <View
+    //   style={{
+    //     backgroundColor: "#C6373C",
+    //     // borderColor: "brown",
+    //     // borderWidth: 10,
+    //     // alignItems: "center",
+    //     // justifyContent: "center",
+    //   }}
+    // >
+    //   <View style={styles.fl}>
+    //     <View style={styles.header}></View>
+    //     <View
+    //       style={{
+    //         // borderWidth: 5,
+    //         // borderColor: "green",
+    //         flex: 1,
+    //         alignItems: "center",
+    //         justifyContent: "center",
+    //       }}
+    //     >
+    //       {content}
+    //     </View>
+    //     <FlatList
+    //       data={favoriteProducts}
+    //       renderItem={(itemData) => {
+    //         return (
+    //           <View style={styles.productContainer}>
+    //             <Image
+    //               source={{ uri: itemData.item.image }}
+    //               style={styles.image}
+    //             />
+    //             <Text numberOfLines={1}>{itemData.item.title}</Text>
+    //             <Text>{`$${itemData.item.price}`}</Text>
+    //           </View>
+    //         );
+    //       }}
+    //       keyExtractor={(item, index) => {
+    //         return item.id;
+    //       }}
+    //       numColumns={2}
+    //       contentContainerStyle={{
+    //         padding: 15,
+    //       }}
+    //     />
+    //   </View>
+    //   <View>
+    //     <PurpleButton
+    //       onPress={() => {
+    //         userInputCtx.resetInputs();
+    //         authCtx.logout();
+    //       }}
+    //     >
+    //       Log Out
+    //     </PurpleButton>
+    //   </View>
+    // </View>
+    <SafeAreaView>
+      <ScrollView>
+        <Pressable
+          style={styles.productStyle}
           onPress={() => {
-            userInputCtx.resetInputs();
-            authCtx.logout();
+            navigation.navigate("ProductDetails");
           }}
         >
-          Log Out
-        </PurpleButton>
-      </View>
-    </View>
+          <Image
+            source={{ uri: productsCtx.products[0].image }}
+            style={styles.image1}
+          />
+          <Text numberOfLines={1} style={styles.title}>
+            {productsCtx.products[0].title}
+          </Text>
+          <Text
+            style={styles.price}
+          >{`$${productsCtx.products[0].price}`}</Text>
+          <Text>{productsCtx.products[0].description}</Text>
+          <Text>Rating: {productsCtx.products[0].rating.rate} Stars</Text>
+        </Pressable>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -133,20 +160,6 @@ const styles = StyleSheet.create({
     top: 15,
     zIndex: 1,
   },
-  noFavorites: {
-    // flex: 1,
-    // marginTop: 100,
-    // borderColor: "blue",
-    // borderWidth: 5,
-    color: "white",
-    textDecorationLine: "",
-    justifyContent: "center",
-    textAlign: "center",
-    marginHorizontal: 30,
-    marginBottom: 10,
-    fontSize: 20,
-    fontWeight: 500,
-  },
   header: {
     height: 100,
   },
@@ -154,12 +167,25 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 30,
   },
+  title: {
+    fontWeight: 600,
+    marginBottom: 10,
+    marginLeft: 10,
+  },
   image: {
     width: "100%",
     height: 300,
     zIndex: 0,
     overflow: "hidden",
     resizeMode: "contain",
+  },
+  image1: {
+    width: "100%",
+    height: 200,
+    zIndex: 0,
+    overflow: "hidden",
+    resizeMode: "contain",
+    marginBottom: 20,
   },
   productContainer: {
     flex: 1,
@@ -171,6 +197,10 @@ const styles = StyleSheet.create({
   flatlistContainer: {
     // marginBottom: 30,
     // backgroundColor: "blue",
+  },
+  price: {
+    marginLeft: 10,
+    fontWeight: 400,
   },
   fl: {
     // flex: 2,

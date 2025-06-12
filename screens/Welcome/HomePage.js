@@ -236,14 +236,21 @@ function HomePage({ navigation }) {
                       }}
                     />
                   </View>
-                  <Image
-                    source={{ uri: itemData.item.image }}
-                    style={styles.image1}
-                  />
-                  <Text numberOfLines={1}>{itemData.item.title}</Text>
-                  <Text
-                    style={{ fontWeight: 700 }}
-                  >{`$${itemData.item.price}`}</Text>
+                  <Pressable
+                    style={styles.productStyle}
+                    onPress={() => {
+                      navigation.navigate("ProductDetails");
+                    }}
+                  >
+                    <Image
+                      source={{ uri: itemData.item.image }}
+                      style={styles.image1}
+                    />
+                    <Text numberOfLines={1}>{itemData.item.title}</Text>
+                    <Text
+                      style={{ fontWeight: 700 }}
+                    >{`$${itemData.item.price}`}</Text>
+                  </Pressable>
                 </View>
               );
             }}
@@ -468,5 +475,8 @@ const styles = StyleSheet.create({
   },
   pressed: {
     opacity: 0.5,
+  },
+  productStyle: {
+    // backgroundColor: "yellow",
   },
 });

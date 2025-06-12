@@ -12,6 +12,7 @@ import HomePage from "./screens/Welcome/HomePage";
 import CreateAccount from "./screens/LoginAndOnboarding/CreateAccount";
 import IconButton from "./components/ui/IconButton";
 import ForgotPassword from "./screens/LoginAndOnboarding/ForgotPassword";
+import ProductDetails from "./screens/ProductPage/ProductDetails";
 import PasswordReset from "./screens/LoginAndOnboarding/PasswordReset";
 import TellUsAboutYourself from "./screens/LoginAndOnboarding/TellUsAboutYourself";
 import UserInputContextProvider, {
@@ -188,6 +189,25 @@ function AuthenticatedStack() {
         name="HomePage"
         component={HomePage}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ProductDetails"
+        component={ProductDetails}
+        options={({ navigation }) => ({
+          title: "",
+          headerTransparent: true,
+          headerLeft: ({ tintColor }) => (
+            <IconButton
+              icon="chevron-back-circle-outline"
+              size={32}
+              color={tintColor}
+              onPress={() => navigation.goBack()}
+            />
+          ),
+          headerRight: ({ tintColor }) => (
+            <IconButton icon="heart-circle" size={32} color={tintColor} />
+          ),
+        })}
       />
       <Stack.Screen
         name="Welcome"
