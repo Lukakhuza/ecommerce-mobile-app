@@ -1,13 +1,17 @@
-import { useContext, useLayoutEffect, useState } from "react";
+import { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Input from "../components/ui/Input";
 import IconButton from "../components/ui/IconButton";
 import Button from "../components/ui/Button";
 import { UserInputContext } from "../store/context/userInputContext";
+import { AuthContext } from "../store/context/auth-context";
 
 function ManageUserAddress({ route, navigation }) {
   const userInputCtx = useContext(UserInputContext);
-
+  const authCtx = useContext(AuthContext);
+  useEffect(() => {
+    userInputCtx.updateInputs("email", authCtx.authEmail);
+  }, []);
   const [inputValues, setInputValues] = useState({
     addressLine1: userInputCtx.input
       ? userInputCtx.input.address.addressLine1.toString()
@@ -44,6 +48,9 @@ function ManageUserAddress({ route, navigation }) {
     userInputCtx.updateInputs("address", inputValues);
     // Update the user input context with new address:
     userInputCtx.input.address = inputValues;
+
+    console.log("Test 10", userInputCtx.input);
+    console.log("Test 11", inputValues);
     // Save updated context to the database:
     async function updateUserAddressHandler() {
       const user = {
@@ -56,6 +63,8 @@ function ManageUserAddress({ route, navigation }) {
         shopFor: userInputCtx.input.shopFor,
         ageRange: userInputCtx.input.ageRange,
       };
+
+      console.log("Test 6", user);
 
       fetch(
         "https://backend-ecommerce-mobile-app.onrender.com/user/update-user/68496fe68999df7164dcfc1f",
@@ -75,6 +84,8 @@ function ManageUserAddress({ route, navigation }) {
         });
     }
     updateUserAddressHandler();
+    console.log("Test 8", userInputCtx.input);
+    console.log("Test 9", inputValues);
     navigation.goBack();
   }
   return (

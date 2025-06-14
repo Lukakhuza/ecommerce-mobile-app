@@ -25,8 +25,8 @@ function UserInputContextProvider({ children }) {
   const [userInput, setUserInput] = useState({
     email: authCtx.authEmail ? authCtx.authEmail : "",
     passwordPlaceholder: "",
-    firstName: "LK",
-    lastName: "Khuza",
+    firstName: "",
+    lastName: "",
     phoneNumber: "",
     shopFor: "",
     ageRange: "",
