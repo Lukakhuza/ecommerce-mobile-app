@@ -21,27 +21,109 @@ import { ProductsContext } from "../../store/context/productsContext";
 
 function ProductDetails({ route }) {
   const productsCtx = useContext(ProductsContext);
+  const [quantity, setQuantity] = useState(1);
   const product = route.params.product;
   return (
     <SafeAreaView>
       <ScrollView>
-        <View style={styles.productStyle} onPress={() => {}}>
-          <Image source={{ uri: product.image }} style={styles.image1} />
-          <View style={styles.productInfoContainer}>
-            <Text numberOfLines={2} style={styles.title}>
-              {product.title}
-            </Text>
-            <Text style={styles.price}>{`$${product.price.toFixed(2)}`}</Text>
-            <Text style={styles.description}>{product.description}</Text>
-            <Text style={styles.prodDescHeader}>Shipping & Returns</Text>
-            <Text style={{ marginBottom: 10 }}>
-              Free standard shipping and free 60-day returns
-            </Text>
-            <Text style={styles.prodDescHeader}>Reviews</Text>
-            <Text style={styles.rating}>{product.rating.rate} Ratings</Text>
+        <View style={styles.outerContainer}>
+          <View>
+            <Image source={{ uri: product.image }} style={styles.image1} />
+            <View style={styles.productInfoContainer}>
+              <Text numberOfLines={2} style={styles.title}>
+                {product.title}
+              </Text>
+              <Text style={styles.price}>{`$${product.price.toFixed(2)}`}</Text>
+              <View
+                style={{
+                  borderColor: "black",
+                  borderWidth: 2,
+                  borderRadius: 40,
+                  paddingVertical: 10,
+                  paddingHorizontal: 20,
+                  marginBottom: 20,
+                  marginTop: 10,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <View
+                  style={{
+                    justifyContent: "center",
+                  }}
+                >
+                  <Text style={{ fontSize: 15, fontWeight: 500 }}>
+                    Quantity
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Ionicons
+                    name="remove-circle-outline"
+                    size={35}
+                    onPress={() => {
+                      if (quantity > 1) {
+                        setQuantity(quantity - 1);
+                      }
+                    }}
+                  />
+                  <Text
+                    style={{
+                      fontSize: 17,
+                      marginHorizontal: 5,
+                    }}
+                  >
+                    {quantity}
+                  </Text>
+                  <Ionicons
+                    name="add-circle-outline"
+                    size={35}
+                    onPress={() => {
+                      setQuantity(quantity + 1);
+                    }}
+                  />
+                </View>
+              </View>
+              <Text style={styles.description}>{product.description}</Text>
+              <Text style={styles.prodDescHeader}>Shipping & Returns</Text>
+              <Text style={{ marginBottom: 10 }}>
+                Free standard shipping and free 60-day returns
+              </Text>
+              <Text style={styles.prodDescHeader}>Reviews</Text>
+              <Text style={styles.rating}>
+                {product.rating.rate.toFixed(1)} Ratings
+              </Text>
+            </View>
           </View>
+          <PurpleButton>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                width: "100%",
+                justifyContent: "space-between",
+                // borderWidth: 3,
+                // borderColor: "brown",
+              }}
+            >
+              <View>
+                <Text style={{ color: "white", fontWeight: 700 }}>
+                  ${(product.price * quantity).toFixed(2)}
+                </Text>
+              </View>
+              <View>
+                <Text style={{ color: "white", fontWeight: 700 }}>
+                  Add to Cart
+                </Text>
+              </View>
+            </View>
+          </PurpleButton>
         </View>
-        <PurpleButton>Add to Cart</PurpleButton>
       </ScrollView>
     </SafeAreaView>
   );
@@ -54,6 +136,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     backgroundColor: Colors.bgLight2,
+  },
+  outerContainer: {
+    height: 800,
+    justifyContent: "space-between",
   },
   favIcon: {
     position: "absolute",
