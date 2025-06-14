@@ -19,128 +19,29 @@ import { Ionicons } from "@expo/vector-icons";
 import { FavoritesContext } from "../../store/context/favoritesContext";
 import { ProductsContext } from "../../store/context/productsContext";
 
-function ProductDetails() {
+function ProductDetails({ route }) {
   const productsCtx = useContext(ProductsContext);
-  const [selectedProduct, setSelectedProduct] = useState(0);
-  // const authCtx = useContext(AuthContext);
-  // const userInputCtx = useContext(UserInputContext);
-  // const favoritesCtx = useContext(FavoritesContext);
-  // const productsCtx = useContext(ProductsContext);
-  // const [fetchedUserData, setFetchedUserData] = useState([]);
-  // const [fetchedProductsData, setFetchedProductsData] = useState([]);
-
-  // useEffect(() => {
-  //   async function getUserData() {
-  //     const userData = await fetchData();
-  //     setFetchedUserData(userData);
-  //   }
-
-  //   getUserData();
-  // }, []);
-
-  // useEffect(() => {
-  //   async function getProductsData() {
-  //     const productsData = await fetchProductsData();
-  //     setFetchedProductsData(productsData);
-  //   }
-  //   getProductsData();
-  // }, []);
-
-  // const favoriteProducts = fetchedProductsData.filter((productData) => {
-  //   let favoriteProductIds = favoritesCtx.favorites;
-  //   if (
-  //     favoriteProductIds.includes(productData.id) ||
-  //     productsCtx.selectedCategory === "All"
-  //   ) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // });
-
-  // let content = <View></View>;
-
-  // if (favoriteProducts.length === 0) {
-  //   content = <Text style={styles.noFavorites}>No Favorites Selected</Text>;
-  // }
+  const product = route.params.product;
   return (
-    // <View
-    //   style={{
-    //     backgroundColor: "#C6373C",
-    //     // borderColor: "brown",
-    //     // borderWidth: 10,
-    //     // alignItems: "center",
-    //     // justifyContent: "center",
-    //   }}
-    // >
-    //   <View style={styles.fl}>
-    //     <View style={styles.header}></View>
-    //     <View
-    //       style={{
-    //         // borderWidth: 5,
-    //         // borderColor: "green",
-    //         flex: 1,
-    //         alignItems: "center",
-    //         justifyContent: "center",
-    //       }}
-    //     >
-    //       {content}
-    //     </View>
-    //     <FlatList
-    //       data={favoriteProducts}
-    //       renderItem={(itemData) => {
-    //         return (
-    //           <View style={styles.productContainer}>
-    //             <Image
-    //               source={{ uri: itemData.item.image }}
-    //               style={styles.image}
-    //             />
-    //             <Text numberOfLines={1}>{itemData.item.title}</Text>
-    //             <Text>{`$${itemData.item.price}`}</Text>
-    //           </View>
-    //         );
-    //       }}
-    //       keyExtractor={(item, index) => {
-    //         return item.id;
-    //       }}
-    //       numColumns={2}
-    //       contentContainerStyle={{
-    //         padding: 15,
-    //       }}
-    //     />
-    //   </View>
-    //   <View>
-    //     <PurpleButton
-    //       onPress={() => {
-    //         userInputCtx.resetInputs();
-    //         authCtx.logout();
-    //       }}
-    //     >
-    //       Log Out
-    //     </PurpleButton>
-    //   </View>
-    // </View>
     <SafeAreaView>
       <ScrollView>
-        <Pressable
-          style={styles.productStyle}
-          onPress={() => {
-            navigation.navigate("ProductDetails");
-          }}
-        >
-          <Image
-            source={{ uri: productsCtx.products[0].image }}
-            style={styles.image1}
-          />
-          <Text numberOfLines={1} style={styles.title}>
-            {productsCtx.products[0].title}
-          </Text>
-          <Text
-            style={styles.price}
-          >{`$${productsCtx.products[0].price}`}</Text>
-          <Text>{productsCtx.products[0].description}</Text>
-          <Text>Rating: {productsCtx.products[0].rating.rate} Stars</Text>
-        </Pressable>
+        <View style={styles.productStyle} onPress={() => {}}>
+          <Image source={{ uri: product.image }} style={styles.image1} />
+          <View style={styles.productInfoContainer}>
+            <Text numberOfLines={2} style={styles.title}>
+              {product.title}
+            </Text>
+            <Text style={styles.price}>{`$${product.price.toFixed(2)}`}</Text>
+            <Text style={styles.description}>{product.description}</Text>
+            <Text style={styles.prodDescHeader}>Shipping & Returns</Text>
+            <Text style={{ marginBottom: 10 }}>
+              Free standard shipping and free 60-day returns
+            </Text>
+            <Text style={styles.prodDescHeader}>Reviews</Text>
+            <Text style={styles.rating}>{product.rating.rate} Ratings</Text>
+          </View>
+        </View>
+        <PurpleButton>Add to Cart</PurpleButton>
       </ScrollView>
     </SafeAreaView>
   );
@@ -170,7 +71,6 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 600,
     marginBottom: 10,
-    marginLeft: 10,
   },
   image: {
     width: "100%",
@@ -198,9 +98,25 @@ const styles = StyleSheet.create({
     // marginBottom: 30,
     // backgroundColor: "blue",
   },
+  productInfoContainer: {
+    marginHorizontal: 25,
+  },
+  description: {
+    fontWeight: 350,
+    marginBottom: 20,
+  },
   price: {
-    marginLeft: 10,
+    color: "purple",
     fontWeight: 400,
+    marginBottom: 10,
+  },
+  prodDescHeader: {
+    fontWeight: 600,
+    marginBottom: 10,
+  },
+  rating: {
+    fontSize: 25,
+    fontWeight: 700,
   },
   fl: {
     // flex: 2,

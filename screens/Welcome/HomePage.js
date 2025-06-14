@@ -239,7 +239,9 @@ function HomePage({ navigation }) {
                   <Pressable
                     style={styles.productStyle}
                     onPress={() => {
-                      navigation.navigate("ProductDetails");
+                      navigation.navigate("ProductDetails", {
+                        product: itemData.item,
+                      });
                     }}
                   >
                     <Image
