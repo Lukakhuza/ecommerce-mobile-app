@@ -169,6 +169,7 @@ function AuthenticatedStack() {
         .then((resData) => {
           userInputCtx.input.firstName = resData.user.firstName;
           userInputCtx.input.lastName = resData.user.lastName;
+          userInputCtx.input.email = resData.user.email;
           userInputCtx.input.passwordPlaceholder = resData.user.password;
           userInputCtx.input.phoneNumber = resData.user.phoneNumber;
           userInputCtx.input.address = resData.user.address;
