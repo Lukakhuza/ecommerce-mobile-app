@@ -362,7 +362,6 @@ function Root() {
       const storedEmail = await AsyncStorage.getItem("authEmail");
       if (storedToken && storedEmail) {
         authCtx.authenticate(storedToken, storedEmail);
-        userInputCtx.updateAllInputs();
       }
       setIsTryingToLogin(false);
     }

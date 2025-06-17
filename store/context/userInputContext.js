@@ -16,7 +16,6 @@ export const UserInputContext = createContext({
     zipcode: "",
   },
   updateInputs: (inputIdentifier, enteredText) => {},
-  updateAllInputs: () => {},
   resetInputs: () => {},
 });
 
@@ -47,16 +46,6 @@ function UserInputContextProvider({ children }) {
     });
   }
 
-  function updateAllInputs() {
-    //   const result = fetchUserData();
-    //   setUserInput((currInputValues) => {
-    //     return {
-    //       ...currInputValues,
-    //       firstName: "LukaTest1",
-    //     };
-    //   });
-  }
-
   function resetInputs() {
     setUserInput({
       email: "",
@@ -78,7 +67,6 @@ function UserInputContextProvider({ children }) {
   const value = {
     input: userInput,
     updateInputs: updateInputs,
-    updateAllInputs: updateAllInputs,
     resetInputs: resetInputs,
   };
 

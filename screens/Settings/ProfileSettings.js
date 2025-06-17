@@ -22,7 +22,6 @@ function ProfileSettings({ navigation }) {
   const productsCtx = useContext(ProductsContext);
   const favoritesCtx = useContext(FavoritesContext);
 
-  console.log("Test 19", userInputCtx.input);
   function editPressHandler(basicInfo) {
     navigation.navigate("ManageUserData"),
       {

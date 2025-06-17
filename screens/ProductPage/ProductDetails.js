@@ -21,8 +21,85 @@ import { ProductsContext } from "../../store/context/productsContext";
 
 function ProductDetails({ route }) {
   const productsCtx = useContext(ProductsContext);
+  const userInputCtx = useContext(UserInputContext);
+  const authCtx = useContext(AuthContext);
   const [quantity, setQuantity] = useState(1);
   const product = route.params.product;
+
+  //
+  // userInputCtx.updateInputs("address", inputValues);
+  //   // Update the user input context with new address:
+  //   userInputCtx.input.address = inputValues;
+
+  //   console.log("Test 10", userInputCtx.input);
+  //   console.log("Test 11", inputValues);
+  //   // Save updated context to the database:
+  //   async function updateUserAddressHandler() {
+  //     const user = {
+  //       email: userInputCtx.input.email,
+  //       password: userInputCtx.input.passwordPlaceholder,
+  //       firstName: userInputCtx.input.firstName,
+  //       lastName: userInputCtx.input.lastName,
+  //       phoneNumber: userInputCtx.input.phoneNumber,
+  //       address: userInputCtx.input.address,
+  //       shopFor: userInputCtx.input.shopFor,
+  //       ageRange: userInputCtx.input.ageRange,
+  //     };
+
+  //     console.log("Test 6", user);
+
+  //     fetch(
+  //       "https://backend-ecommerce-mobile-app.onrender.com/user/update-user/68496fe68999df7164dcfc1f",
+  //       {
+  //         method: "PUT",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(user),
+  //       }
+  //     )
+  //       .then((result) => {
+  //         console.log(result);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   }
+  //   updateUserAddressHandler();
+  //   console.log("Test 8", userInputCtx.input);
+  //   console.log("Test 9", inputValues);
+  //   navigation.goBack();
+  //
+
+  async function addProductToCart() {
+    const productData = {
+      id: route.params.product.id,
+      title: route.params.product.title,
+      price: route.params.product.price,
+      quantity: quantity,
+    };
+    console.log("Test 46", userInputCtx.input);
+    console.log("Test 46.5", authCtx.authEmail);
+    userInputCtx.updateInputs("email", authCtx.authEmail);
+    console.log("Test 47", userInputCtx.input);
+    fetch(
+      "https://backend-ecommerce-mobile-app.onrender.com/product/add-to-cart",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productData),
+      }
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((resData) => {
+        console.log(resData.title);
+      });
+  }
+  // addProductToCart();
   return (
     <SafeAreaView>
       <ScrollView>
@@ -100,7 +177,11 @@ function ProductDetails({ route }) {
               </Text>
             </View>
           </View>
-          <PurpleButton>
+          <PurpleButton
+            onPress={() => {
+              addProductToCart();
+            }}
+          >
             <View
               style={{
                 flex: 1,
