@@ -5,6 +5,7 @@ import {
   ScrollView,
   Image,
   FlatList,
+  Pressable,
 } from "react-native";
 import PurpleButton from "../../components/ui/PurpleButton";
 import { AuthContext } from "../../store/context/auth-context";
@@ -18,7 +19,7 @@ import { FavoritesContext } from "../../store/context/favoritesContext";
 import { ProductsContext } from "../../store/context/productsContext";
 import { jsx } from "react/jsx-runtime";
 
-function Welcome() {
+function Welcome({ navigation }) {
   const authCtx = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
   const favoritesCtx = useContext(FavoritesContext);
@@ -100,12 +101,20 @@ function Welcome() {
                     }}
                   />
                 </View>
-                <Image
-                  source={{ uri: itemData.item.image }}
-                  style={styles.image}
-                />
-                <Text numberOfLines={1}>{itemData.item.title}</Text>
-                <Text>{`$${itemData.item.price}`}</Text>
+                <Pressable
+                  onPress={() => {
+                    navigation.navigate("ProductDetails", {
+                      product: itemData.item,
+                    });
+                  }}
+                >
+                  <Image
+                    source={{ uri: itemData.item.image }}
+                    style={styles.image}
+                  />
+                  <Text numberOfLines={1}>{itemData.item.title}</Text>
+                  <Text>{`$${itemData.item.price}`}</Text>
+                </Pressable>
               </View>
             );
           }}
