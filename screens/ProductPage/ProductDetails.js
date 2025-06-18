@@ -26,6 +26,9 @@ function ProductDetails({ route }) {
   const [quantity, setQuantity] = useState(1);
   const product = route.params.product;
 
+  console.log("Test 50", userInputCtx.input);
+  // console.log("Test 51", productsCtx.products);
+  console.log("Test 52", product);
   //
   // userInputCtx.updateInputs("address", inputValues);
   //   // Update the user input context with new address:
@@ -72,16 +75,30 @@ function ProductDetails({ route }) {
   //
 
   async function addProductToCart() {
+    // work here and send both product data, as well as user data.
     const productData = {
       id: route.params.product.id,
       title: route.params.product.title,
       price: route.params.product.price,
       quantity: quantity,
     };
-    console.log("Test 46", userInputCtx.input);
-    console.log("Test 46.5", authCtx.authEmail);
-    userInputCtx.updateInputs("email", authCtx.authEmail);
-    console.log("Test 47", userInputCtx.input);
+
+    const userData = {
+      email: userInputCtx.input.email,
+      password: userInputCtx.input.passwordPlaceholder,
+      firstName: userInputCtx.input.firstName,
+      lastName: userInputCtx.input.lastName,
+      phoneNumber: userInputCtx.input.phoneNumber,
+      address: userInputCtx.input.address,
+      shopFor: userInputCtx.input.shopFor,
+      ageRange: userInputCtx.input.ageRange,
+    };
+
+    const data = {
+      productData: productData,
+      userData: userData,
+    };
+
     fetch(
       "https://backend-ecommerce-mobile-app.onrender.com/product/add-to-cart",
       {
@@ -89,7 +106,7 @@ function ProductDetails({ route }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(productData),
+        body: JSON.stringify(data),
       }
     )
       .then((response) => {

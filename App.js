@@ -19,7 +19,9 @@ import UserInputContextProvider, {
   UserInputContext,
 } from "./store/context/userInputContext";
 import AuthContextProvider, { AuthContext } from "./store/context/auth-context";
-import FavoritesContextProvider from "./store/context/favoritesContext";
+import FavoritesContextProvider, {
+  FavoritesContext,
+} from "./store/context/favoritesContext";
 import ProductsContextProvider from "./store/context/productsContext";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -148,6 +150,7 @@ function AuthStack() {
 function AuthenticatedStack() {
   const userInputCtx = useContext(UserInputContext);
   const authCtx = useContext(AuthContext);
+  const favoritesCtx = useContext(FavoritesContext);
   async function fetchUserData() {
     const userData = {
       email: authCtx.authEmail,
@@ -194,7 +197,7 @@ function AuthenticatedStack() {
       <Stack.Screen
         name="ProductDetails"
         component={ProductDetails}
-        options={({ navigation }) => ({
+        options={({ navigation, route }) => ({
           title: "",
           headerTransparent: true,
           headerLeft: ({ tintColor }) => (
@@ -206,7 +209,22 @@ function AuthenticatedStack() {
             />
           ),
           headerRight: ({ tintColor }) => (
-            <IconButton icon="heart-circle" size={32} color={tintColor} />
+            <IconButton
+              icon={
+                favoritesCtx.favorites.includes(route.params.product.id)
+                  ? "heart"
+                  : "heart-outline"
+              }
+              size={32}
+              color={tintColor}
+              onPress={() => {
+                if (!favoritesCtx.favorites.includes(route.params.product.id)) {
+                  favoritesCtx.addFavorite(route.params.product.id);
+                } else {
+                  favoritesCtx.removeFavorite(route.params.product.id);
+                }
+              }}
+            />
           ),
         })}
       />
