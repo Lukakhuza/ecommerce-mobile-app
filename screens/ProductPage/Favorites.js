@@ -3,6 +3,7 @@ import {
   Text,
   StyleSheet,
   ScrollView,
+  Pressable,
   Image,
   FlatList,
 } from "react-native";
@@ -17,7 +18,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { FavoritesContext } from "../../store/context/favoritesContext";
 import { ProductsContext } from "../../store/context/productsContext";
 
-function Favorites() {
+function Favorites({ navigation }) {
   const authCtx = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
   const favoritesCtx = useContext(FavoritesContext);
@@ -86,14 +87,21 @@ function Favorites() {
           data={favoriteProducts}
           renderItem={(itemData) => {
             return (
-              <View style={styles.productContainer}>
+              <Pressable
+                style={styles.productContainer}
+                onPress={() => {
+                  navigation.navigate("ProductDetails", {
+                    product: itemData.item,
+                  });
+                }}
+              >
                 <Image
                   source={{ uri: itemData.item.image }}
                   style={styles.image}
                 />
                 <Text numberOfLines={1}>{itemData.item.title}</Text>
                 <Text>{`$${itemData.item.price}`}</Text>
-              </View>
+              </Pressable>
             );
           }}
           keyExtractor={(item, index) => {
