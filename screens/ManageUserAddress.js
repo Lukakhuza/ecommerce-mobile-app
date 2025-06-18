@@ -49,8 +49,6 @@ function ManageUserAddress({ route, navigation }) {
     // Update the user input context with new address:
     userInputCtx.input.address = inputValues;
 
-    console.log("Test 10", userInputCtx.input);
-    console.log("Test 11", inputValues);
     // Save updated context to the database:
     async function updateUserAddressHandler() {
       const user = {
@@ -63,8 +61,6 @@ function ManageUserAddress({ route, navigation }) {
         shopFor: userInputCtx.input.shopFor,
         ageRange: userInputCtx.input.ageRange,
       };
-
-      console.log("Test 6", user);
 
       fetch(
         "https://backend-ecommerce-mobile-app.onrender.com/user/update-user/68496fe68999df7164dcfc1f",
@@ -84,8 +80,6 @@ function ManageUserAddress({ route, navigation }) {
         });
     }
     updateUserAddressHandler();
-    console.log("Test 8", userInputCtx.input);
-    console.log("Test 9", inputValues);
     navigation.goBack();
   }
   return (

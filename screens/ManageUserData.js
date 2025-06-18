@@ -9,7 +9,6 @@ import { AuthContext } from "../store/context/auth-context";
 function ManageUserData({ route, navigation }) {
   const userInputCtx = useContext(UserInputContext);
   const authCtx = useContext(AuthContext);
-  console.log("Test 7", userInputCtx.input);
   const [inputValues, setInputValues] = useState({
     firstName: userInputCtx.input
       ? userInputCtx.input.firstName.toString()
@@ -45,11 +44,8 @@ function ManageUserData({ route, navigation }) {
     userInputCtx.updateInputs("lastName", inputValues.lastName);
     userInputCtx.updateInputs("phoneNumber", inputValues.phoneNumber);
     userInputCtx.updateInputs("email", authCtx.authEmail);
-    console.log("Test 20", inputValues);
-    console.log("Test 21", userInputCtx.input);
     // userInputCtx.updateInputs("address", inputValues.address);
-    console.log("Test 4", inputValues.address);
-    console.log("Test 5", userInputCtx.input.address);
+
     // Update the user input context with the new values
     userInputCtx.input.firstName = inputValues.firstName;
     userInputCtx.input.lastName = inputValues.lastName;
