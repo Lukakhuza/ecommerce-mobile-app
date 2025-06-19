@@ -177,6 +177,7 @@ function AuthenticatedStack() {
           userInputCtx.input.phoneNumber = resData.user.phoneNumber;
           userInputCtx.input.address = resData.user.address;
           userInputCtx.input.shopFor = resData.user.shopFor;
+          userInputCtx.input.cart = resData.user.cart;
           return resData.user;
         });
     }

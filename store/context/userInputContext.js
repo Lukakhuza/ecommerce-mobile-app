@@ -15,6 +15,7 @@ export const UserInputContext = createContext({
     state: "",
     zipcode: "",
   },
+  cart: { items: [] },
   updateInputs: (inputIdentifier, enteredText) => {},
   resetInputs: () => {},
 });
@@ -34,6 +35,9 @@ function UserInputContextProvider({ children }) {
       city: "",
       state: "",
       zipcode: "",
+    },
+    cart: {
+      items: [],
     },
   });
 
@@ -60,6 +64,9 @@ function UserInputContextProvider({ children }) {
         city: "",
         state: "",
         zipcode: "",
+      },
+      cart: {
+        items: [],
       },
     });
   }

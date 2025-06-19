@@ -62,6 +62,7 @@ function ManageUserData({ route, navigation }) {
         address: userInputCtx.input.address,
         shopFor: userInputCtx.input.shopFor,
         ageRange: userInputCtx.input.ageRange,
+        cart: userInputCtx.input.cart,
       };
 
       fetch(

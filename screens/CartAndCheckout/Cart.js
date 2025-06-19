@@ -1,5 +1,6 @@
 import {
   BackHandler,
+  FlatList,
   Image,
   SafeAreaView,
   ScrollView,
@@ -8,11 +9,16 @@ import {
   View,
 } from "react-native";
 import PurpleButton from "../../components/ui/PurpleButton";
+import { UserInputContext } from "../../store/context/userInputContext";
+import { useContext } from "react";
 
 function Cart({ navigation }) {
+  const userInputCtx = useContext(UserInputContext);
+  console.log(userInputCtx);
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.root}>
+        <View>{/* <FlatList horizontal={true} data={UserInp} /> */}</View>
         <View style={styles.content}>
           <Image
             style={styles.image}
