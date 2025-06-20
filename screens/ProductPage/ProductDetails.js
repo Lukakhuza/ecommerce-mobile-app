@@ -46,12 +46,10 @@ function ProductDetails({ route }) {
       ageRange: userInputCtx.input.ageRange,
       cart: userInputCtx.input.cart,
     };
-
     const data = {
       productData: productData,
       userData: userData,
     };
-
     fetch(
       "https://backend-ecommerce-mobile-app.onrender.com/product/add-to-cart",
       {
@@ -69,7 +67,7 @@ function ProductDetails({ route }) {
         console.log(resData.title);
       });
   }
-  // addProductToCart();
+  addProductToCart();
   return (
     <SafeAreaView>
       <ScrollView>

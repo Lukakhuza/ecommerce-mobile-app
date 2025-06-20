@@ -36,9 +36,7 @@ function UserInputContextProvider({ children }) {
       state: "",
       zipcode: "",
     },
-    cart: {
-      items: [],
-    },
+    cart: { items: [] },
   });
 
   function updateInputs(inputIdentifier, enteredText) {
@@ -65,9 +63,7 @@ function UserInputContextProvider({ children }) {
         state: "",
         zipcode: "",
       },
-      cart: {
-        items: [],
-      },
+      cart: { items: [] },
     });
   }
 

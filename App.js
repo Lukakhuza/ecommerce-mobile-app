@@ -178,6 +178,7 @@ function AuthenticatedStack() {
           userInputCtx.input.address = resData.user.address;
           userInputCtx.input.shopFor = resData.user.shopFor;
           userInputCtx.input.cart = resData.user.cart;
+          // resData.user.cart.items[i]
           return resData.user;
         });
     }

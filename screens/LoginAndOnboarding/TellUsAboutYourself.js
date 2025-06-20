@@ -50,7 +50,7 @@ function TellUsAboutYourself({ navigation }) {
       // idToken: response.idToken,
       shopFor: userInputCtx.input.shopFor,
       ageRange: userInputCtx.input.ageRange,
-      cart: userInputCtx.input.cart,
+      cart: { items: [] },
     };
 
     fetch(
