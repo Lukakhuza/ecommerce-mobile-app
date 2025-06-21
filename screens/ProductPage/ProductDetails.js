@@ -19,7 +19,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { FavoritesContext } from "../../store/context/favoritesContext";
 import { ProductsContext } from "../../store/context/productsContext";
 
-function ProductDetails({ route }) {
+function ProductDetails({ route, navigation }) {
   const productsCtx = useContext(ProductsContext);
   const userInputCtx = useContext(UserInputContext);
   const authCtx = useContext(AuthContext);
@@ -34,7 +34,6 @@ function ProductDetails({ route }) {
       price: route.params.product.price,
       quantity: quantity,
     };
-
     const userData = {
       email: userInputCtx.input.email,
       password: userInputCtx.input.passwordPlaceholder,
@@ -50,6 +49,7 @@ function ProductDetails({ route }) {
       productData: productData,
       userData: userData,
     };
+
     fetch(
       "https://backend-ecommerce-mobile-app.onrender.com/product/add-to-cart",
       {
@@ -61,6 +61,7 @@ function ProductDetails({ route }) {
       }
     )
       .then((response) => {
+        console.log(response);
         return response.json();
       })
       .then((resData) => {
@@ -148,6 +149,7 @@ function ProductDetails({ route }) {
           <PurpleButton
             onPress={() => {
               addProductToCart();
+              navigation.navigate("Cart");
             }}
           >
             <View
