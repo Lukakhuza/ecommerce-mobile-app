@@ -15,6 +15,13 @@ import { useContext } from "react";
 function Cart({ navigation }) {
   const userInputCtx = useContext(UserInputContext);
   console.log(userInputCtx.input.cart.items.length > 4);
+  // calculate the total:
+  let total = 0;
+  for (i = 0; i < userInputCtx.input.cart.items.length; i++) {
+    total +=
+      userInputCtx.input.cart.items[i].product.price *
+      userInputCtx.input.cart.items[i].quantity;
+  }
   return (
     <SafeAreaView style={styles.safeArea}>
       {userInputCtx.input.cart.items.length > 0 && (
@@ -74,6 +81,10 @@ function Cart({ navigation }) {
                             <Text style={{ fontWeight: 800 }}>Quantity: </Text>{" "}
                             {itemData.item.quantity}
                           </Text>
+                          <Text>
+                            <Text style={{ fontWeight: 800 }}>Price: </Text> $
+                            {itemData.item.product.price}
+                          </Text>
                         </View>
                       );
                     }}
@@ -82,12 +93,34 @@ function Cart({ navigation }) {
               </View>
             </View>
           </View>
+
           <PurpleButton
             onPress={() => {
               navigation.navigate("Main", { screen: "Orders" });
             }}
           >
-            Place Order
+            <View
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                width: "100%",
+                justifyContent: "space-between",
+                // borderWidth: 3,
+                // borderColor: "brown",
+              }}
+            >
+              <View style={{ flexDirection: "row" }}>
+                <Text style={{ color: "white", fontWeight: 700 }}>Total: </Text>
+                <Text style={{ color: "white", fontWeight: 700 }}>
+                  ${total.toFixed(2)}
+                </Text>
+              </View>
+              <View>
+                <Text style={{ color: "white", fontWeight: 700 }}>
+                  Place Order
+                </Text>
+              </View>
+            </View>
           </PurpleButton>
         </View>
       )}
