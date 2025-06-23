@@ -68,6 +68,43 @@ function ProductDetails({ route, navigation }) {
         console.log(resData.title);
       });
   }
+
+  async function testStripe() {
+    const productData = {
+      id: route.params.product.id,
+      title: route.params.product.title,
+      price: route.params.product.price,
+      quantity: quantity,
+    };
+    const userData = {
+      email: userInputCtx.input.email,
+      password: userInputCtx.input.passwordPlaceholder,
+      firstName: userInputCtx.input.firstName,
+      lastName: userInputCtx.input.lastName,
+      phoneNumber: userInputCtx.input.phoneNumber,
+      address: userInputCtx.input.address,
+      shopFor: userInputCtx.input.shopFor,
+      ageRange: userInputCtx.input.ageRange,
+      cart: userInputCtx.input.cart,
+    };
+    const data = {
+      productData: productData,
+      userData: userData,
+    };
+    fetch(
+      "https://backend-ecommerce-mobile-app.onrender.com/product/test-url",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    ).then((response) => {
+      console.log("Test 58", response);
+      return response.json();
+    });
+  }
   addProductToCart();
   return (
     <SafeAreaView>
@@ -145,6 +182,13 @@ function ProductDetails({ route, navigation }) {
                 {product.rating.rate.toFixed(1)} Ratings
               </Text>
             </View>
+            <PurpleButton
+              onPress={() => {
+                testStripe();
+              }}
+            >
+              Test Stripe
+            </PurpleButton>
           </View>
           <PurpleButton
             onPress={() => {
