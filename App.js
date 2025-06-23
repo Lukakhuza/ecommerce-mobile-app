@@ -36,6 +36,7 @@ import ManageUserData from "./screens/ManageUserData";
 import ManageUserAddress from "./screens/ManageUserAddress";
 import Favorites from "./screens/ProductPage/Favorites";
 import Payment from "./screens/Settings/Payment";
+import { StripeProvider } from "@stripe/stripe-react-native";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -399,18 +400,45 @@ function Root() {
 }
 
 export default function App() {
+  const [publishableKey, setPublishableKey] = useState("");
+
+  const fetchPublishableKey = async () => {
+    fetch(
+      "https://backend-ecommerce-mobile-app.onrender.com/auth/fetch-publishable-key"
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((resData) => {
+        setPublishableKey(resData.publishableKey);
+        // console.log("Test 100", resData.publishableKey);
+      });
+    // const key = await fetch();
+    // setPublishableKey(key);
+  };
+
+  useEffect(() => {
+    fetchPublishableKey();
+  }, []);
+
   return (
     <>
       <StatusBar style="dark" />
-      <AuthContextProvider>
-        <UserInputContextProvider>
-          <FavoritesContextProvider>
-            <ProductsContextProvider>
-              <Root />
-            </ProductsContextProvider>
-          </FavoritesContextProvider>
-        </UserInputContextProvider>
-      </AuthContextProvider>
+      <StripeProvider
+        publishableKey={publishableKey}
+        merchantIdentifier="merchant.identifier"
+        urlScheme="test-url-scheme"
+      >
+        <AuthContextProvider>
+          <UserInputContextProvider>
+            <FavoritesContextProvider>
+              <ProductsContextProvider>
+                <Root />
+              </ProductsContextProvider>
+            </FavoritesContextProvider>
+          </UserInputContextProvider>
+        </AuthContextProvider>
+      </StripeProvider>
     </>
   );
 }
