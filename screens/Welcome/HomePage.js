@@ -21,6 +21,7 @@ import FavoriteIcon from "../../components/ui/FavoriteIcon";
 import { FavoritesContext } from "../../store/context/favoritesContext";
 import SearchComponent from "../../components/ui/SearchComponent";
 import { AuthContext } from "../../store/context/auth-context";
+import LoadingOverlay from "../../components/ui/LoadingOverlay";
 // import { UserInputContext } from "../../store/context/userInputContext";
 
 const data = [
@@ -34,14 +35,21 @@ function HomePage({ navigation }) {
   const favoritesCtx = useContext(FavoritesContext);
   const [dummyUserData, setDummyUserData] = useState("");
   const [genderSelection, setGenderSelection] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
+  console.log("Test 2", productsCtx);
   useEffect(() => {
     async function getProfilePicture() {
       const response = await fetchProfilePicture();
       setDummyUserData(response);
     }
     getProfilePicture();
+    setIsLoading(false);
   }, []);
+
+  if (productsCtx.products.length === 0) {
+    return <LoadingOverlay message="Loading Home Screen..." />;
+  }
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
@@ -59,7 +67,6 @@ function HomePage({ navigation }) {
             />
           )}
         </Pressable>
-        {/*Add an image here with profilePicture as the link  */}
         <View style={styles.dropdownContainer}>
           <Dropdown
             style={styles.dropdown}

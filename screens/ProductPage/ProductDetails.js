@@ -92,7 +92,7 @@ function ProductDetails({ route, navigation }) {
       userData: userData,
     };
     fetch(
-      "https://backend-ecommerce-mobile-app.onrender.com/product/test-url",
+      "https://backend-ecommerce-mobile-app.onrender.com/product/payment-sheet",
       {
         method: "POST",
         headers: {
@@ -100,10 +100,13 @@ function ProductDetails({ route, navigation }) {
         },
         body: JSON.stringify(data),
       }
-    ).then((response) => {
-      console.log("Test 58", response);
-      return response.json();
-    });
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((resData) => {
+        console.log("Test 59", resData.data);
+      });
   }
   addProductToCart();
   return (
@@ -184,7 +187,9 @@ function ProductDetails({ route, navigation }) {
             </View>
             <PurpleButton
               onPress={() => {
-                testStripe();
+                // console.log("Hello World");
+                // testStripe();
+                navigation.navigate("Checkout");
               }}
             >
               Test Stripe

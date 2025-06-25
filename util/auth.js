@@ -107,6 +107,8 @@ export async function fetchProductsData() {
 }
 
 export async function fetchProfilePicture() {
-  const response = await axios.get("https://dummyjson.com/users");
+  const response = await axios.get(
+    "https://static.vecteezy.com/system/resources/thumbnails/030/504/836/small_2x/avatar-account-flat-isolated-on-transparent-background-for-graphic-and-web-design-default-social-media-profile-photo-symbol-profile-and-people-silhouette-user-icon-vector.jpg"
+  );
   return response.data;
 }

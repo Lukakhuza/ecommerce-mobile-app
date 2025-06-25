@@ -37,6 +37,7 @@ import ManageUserAddress from "./screens/ManageUserAddress";
 import Favorites from "./screens/ProductPage/Favorites";
 import Payment from "./screens/Settings/Payment";
 import { StripeProvider } from "@stripe/stripe-react-native";
+import Checkout from "./screens/Orders/Checkout";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -153,6 +154,7 @@ function AuthenticatedStack() {
   const authCtx = useContext(AuthContext);
   const favoritesCtx = useContext(FavoritesContext);
   async function fetchUserData() {
+    console.log("Test 1");
     const userData = {
       email: authCtx.authEmail,
     };
@@ -179,7 +181,6 @@ function AuthenticatedStack() {
           userInputCtx.input.address = resData.user.address;
           userInputCtx.input.shopFor = resData.user.shopFor;
           userInputCtx.input.cart = resData.user.cart;
-          // resData.user.cart.items[i]
           return resData.user;
         });
     }
@@ -360,6 +361,7 @@ function AuthenticatedStack() {
         //   ),
         // })}
       />
+      <Stack.Screen name="Checkout" component={Checkout} />
     </Stack.Navigator>
   );
 }
