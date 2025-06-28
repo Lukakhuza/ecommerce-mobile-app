@@ -37,7 +37,6 @@ function HomePage({ navigation }) {
   const [genderSelection, setGenderSelection] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log("Test 2", productsCtx);
   useEffect(() => {
     async function getProfilePicture() {
       const response = await fetchProfilePicture();

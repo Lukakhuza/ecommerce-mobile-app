@@ -14,7 +14,6 @@ import { useContext } from "react";
 
 function Cart({ navigation }) {
   const userInputCtx = useContext(UserInputContext);
-  console.log(userInputCtx.input.cart.items.length > 4);
   // calculate the total:
   let total = 0;
   for (i = 0; i < userInputCtx.input.cart.items.length; i++) {

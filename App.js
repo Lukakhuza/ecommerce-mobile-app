@@ -154,7 +154,6 @@ function AuthenticatedStack() {
   const authCtx = useContext(AuthContext);
   const favoritesCtx = useContext(FavoritesContext);
   async function fetchUserData() {
-    console.log("Test 1");
     const userData = {
       email: authCtx.authEmail,
     };
@@ -413,10 +412,7 @@ export default function App() {
       })
       .then((resData) => {
         setPublishableKey(resData.publishableKey);
-        // console.log("Test 100", resData.publishableKey);
       });
-    // const key = await fetch();
-    // setPublishableKey(key);
   };
 
   useEffect(() => {

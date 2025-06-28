@@ -187,8 +187,6 @@ function ProductDetails({ route, navigation }) {
             </View>
             <PurpleButton
               onPress={() => {
-                // console.log("Hello World");
-                // testStripe();
                 navigation.navigate("Checkout");
               }}
             >
