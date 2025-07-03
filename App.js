@@ -38,6 +38,7 @@ import Favorites from "./screens/ProductPage/Favorites";
 import Payment from "./screens/Settings/Payment";
 import { StripeProvider } from "@stripe/stripe-react-native";
 import Checkout from "./screens/Orders/Checkout";
+import CartContextProvider from "./store/context/cartContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -431,7 +432,9 @@ export default function App() {
           <UserInputContextProvider>
             <FavoritesContextProvider>
               <ProductsContextProvider>
-                <Root />
+                <CartContextProvider>
+                  <Root />
+                </CartContextProvider>
               </ProductsContextProvider>
             </FavoritesContextProvider>
           </UserInputContextProvider>

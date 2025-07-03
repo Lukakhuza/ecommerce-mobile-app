@@ -69,45 +69,45 @@ function ProductDetails({ route, navigation }) {
       });
   }
 
-  async function testStripe() {
-    const productData = {
-      id: route.params.product.id,
-      title: route.params.product.title,
-      price: route.params.product.price,
-      quantity: quantity,
-    };
-    const userData = {
-      email: userInputCtx.input.email,
-      password: userInputCtx.input.passwordPlaceholder,
-      firstName: userInputCtx.input.firstName,
-      lastName: userInputCtx.input.lastName,
-      phoneNumber: userInputCtx.input.phoneNumber,
-      address: userInputCtx.input.address,
-      shopFor: userInputCtx.input.shopFor,
-      ageRange: userInputCtx.input.ageRange,
-      cart: userInputCtx.input.cart,
-    };
-    const data = {
-      productData: productData,
-      userData: userData,
-    };
-    fetch(
-      "https://backend-ecommerce-mobile-app.onrender.com/product/payment-sheet",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((resData) => {
-        console.log("Test 59", resData.data);
-      });
-  }
+  // async function testStripe() {
+  //   const productData = {
+  //     id: route.params.product.id,
+  //     title: route.params.product.title,
+  //     price: route.params.product.price,
+  //     quantity: quantity,
+  //   };
+  //   const userData = {
+  //     email: userInputCtx.input.email,
+  //     password: userInputCtx.input.passwordPlaceholder,
+  //     firstName: userInputCtx.input.firstName,
+  //     lastName: userInputCtx.input.lastName,
+  //     phoneNumber: userInputCtx.input.phoneNumber,
+  //     address: userInputCtx.input.address,
+  //     shopFor: userInputCtx.input.shopFor,
+  //     ageRange: userInputCtx.input.ageRange,
+  //     cart: userInputCtx.input.cart,
+  //   };
+  //   const data = {
+  //     productData: productData,
+  //     userData: userData,
+  //   };
+  //   fetch(
+  //     "https://backend-ecommerce-mobile-app.onrender.com/product/payment-sheet",
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(data),
+  //     }
+  //   )
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((resData) => {
+  //       console.log(resData.data);
+  //     });
+  // }
   addProductToCart();
   return (
     <SafeAreaView>

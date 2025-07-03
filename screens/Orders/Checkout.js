@@ -14,7 +14,6 @@ import { useStripe } from "@stripe/stripe-react-native";
 function Checkout({ navigation }) {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [loading, setLoading] = useState(false);
-  console.log("Test 1");
 
   const fetchPaymentSheetParams = async () => {
     const response = await fetch(

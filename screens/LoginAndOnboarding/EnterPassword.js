@@ -25,7 +25,6 @@ function EnterPassword({ navigation }) {
     const token = await loginUser(email, password);
     authCtx.authenticate(token, email);
     // const response = await fetchUserData(email);
-    // console.log("Test 21", response);
     // userInputCtx.updateInputs("phoneNumber", response[0].phoneNumber);
     // userInputCtx.updateInputs("firstName", response[0].firstName);
     // userInputCtx.updateInputs("lastName", response[0].lastName);

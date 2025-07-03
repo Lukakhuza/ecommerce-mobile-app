@@ -1,5 +1,4 @@
 import {
-  BackHandler,
   FlatList,
   Image,
   SafeAreaView,
@@ -10,20 +9,25 @@ import {
 } from "react-native";
 import PurpleButton from "../../components/ui/PurpleButton";
 import { UserInputContext } from "../../store/context/userInputContext";
-import { useContext } from "react";
+import { ProductsContext } from "../../store/context/productsContext";
+import { useContext, useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
+import { CurrentRenderContext } from "@react-navigation/native";
+import { CartContext } from "../../store/context/cartContext";
 
 function Cart({ navigation }) {
   const userInputCtx = useContext(UserInputContext);
+  const productsCtx = useContext(ProductsContext);
+  const cartCtx = useContext(CartContext);
+  // const [cartItems, setCartItems] = useState(userInputCtx.input.cart.items);
   // calculate the total:
   let total = 0;
-  for (i = 0; i < userInputCtx.input.cart.items.length; i++) {
-    total +=
-      userInputCtx.input.cart.items[i].product.price *
-      userInputCtx.input.cart.items[i].quantity;
+  for (let i = 0; i < cartCtx.cartItems.length; i++) {
+    total += cartCtx.cartItems[i].product.price * cartCtx.cartItems[i].quantity;
   }
   return (
     <SafeAreaView style={styles.safeArea}>
-      {userInputCtx.input.cart.items.length > 0 && (
+      {cartCtx.cartItems.length > 0 && (
         <View
           style={{
             flex: 1,
@@ -39,7 +43,7 @@ function Cart({ navigation }) {
                 marginBottom: 20,
               }}
             >
-              Your Cart
+              Cart
             </Text>
             <View contentContainerStyle={styles.root}>
               <View>
@@ -50,40 +54,105 @@ function Cart({ navigation }) {
                 >
                   <FlatList
                     horizontal={false}
-                    data={userInputCtx.input.cart.items}
+                    data={cartCtx.cartItems}
                     renderItem={(itemData) => {
                       return (
-                        <View
-                          style={{
-                            marginHorizontal: 20,
-                            marginVertical: 10,
-                            borderWidth: 3,
-                            borderColor: "purple",
-                            borderRadius: 20,
-                            paddingVertical: 5,
-                            paddingHorizontal: 10,
-                          }}
-                        >
-                          <Text>
-                            <Text style={{ fontWeight: 800 }}>
-                              Product Id:{" "}
-                            </Text>{" "}
-                            {itemData.item.product.id}
-                          </Text>
-                          <Text>
-                            <Text style={{ fontWeight: 800 }}>
-                              Product Name:{" "}
-                            </Text>{" "}
-                            {itemData.item.product.title}
-                          </Text>
-                          <Text>
-                            <Text style={{ fontWeight: 800 }}>Quantity: </Text>{" "}
-                            {itemData.item.quantity}
-                          </Text>
-                          <Text>
-                            <Text style={{ fontWeight: 800 }}>Price: </Text> $
-                            {itemData.item.product.price}
-                          </Text>
+                        <View style={styles.cartItem}>
+                          <View>
+                            <Image
+                              style={styles.image}
+                              source={{
+                                uri: productsCtx.products[
+                                  itemData.item.product.id
+                                ].image,
+                              }}
+                            />
+                          </View>
+                          <View
+                            style={{
+                              marginLeft: 20,
+                              flexDirection: "row",
+                              justifyContent: "space-evenly",
+                            }}
+                          >
+                            <View>
+                              <View width={190}>
+                                <Text numberOfLines={1}>
+                                  {itemData.item.product.title}
+                                </Text>
+                              </View>
+                              <View
+                                style={{
+                                  flexDirection: "row",
+                                }}
+                              >
+                                <Text style={{ marginRight: 5 }}>
+                                  <Text
+                                    style={{
+                                      fontWeight: 800,
+                                    }}
+                                  >
+                                    Id:{" "}
+                                  </Text>{" "}
+                                  {itemData.item.product.id}
+                                </Text>
+                                <Text style={{ marginHorizontal: 5 }}>
+                                  <Text
+                                    style={{
+                                      fontWeight: 800,
+                                    }}
+                                  >
+                                    Price:{" "}
+                                  </Text>{" "}
+                                  ${itemData.item.product.price.toFixed(2)}
+                                </Text>
+                                <Text style={{ marginHorizontal: 5 }}>
+                                  <Text
+                                    style={{
+                                      fontWeight: 800,
+                                    }}
+                                  >
+                                    Qty:{" "}
+                                  </Text>{" "}
+                                  {itemData.item.quantity}
+                                </Text>
+                              </View>
+                            </View>
+                            <View
+                              style={{
+                                flex: 1,
+                                justifyContent: "space-around",
+                              }}
+                            >
+                              <View>
+                                <Text>
+                                  $
+                                  {(
+                                    itemData.item.product.price *
+                                    itemData.item.quantity
+                                  ).toFixed(2)}
+                                </Text>
+                              </View>
+                              <View style={{ flexDirection: "row" }}>
+                                <Ionicons
+                                  name="remove-circle"
+                                  size={35}
+                                  color={"blue"}
+                                  onPress={() => {
+                                    cartCtx.removeItem(itemData.item._id);
+                                  }}
+                                />
+                                <Ionicons
+                                  name="add-circle"
+                                  size={35}
+                                  color={"blue"}
+                                  onPress={() => {
+                                    cartCtx.addItem(itemData.item);
+                                  }}
+                                />
+                              </View>
+                            </View>
+                          </View>
                         </View>
                       );
                     }}
@@ -103,27 +172,32 @@ function Cart({ navigation }) {
                 flex: 1,
                 flexDirection: "row",
                 width: "100%",
-                justifyContent: "space-between",
+                justifyContent: "center",
                 // borderWidth: 3,
                 // borderColor: "brown",
               }}
             >
-              <View style={{ flexDirection: "row" }}>
+              {/* <View style={{ flexDirection: "row" }}>
                 <Text style={{ color: "white", fontWeight: 700 }}>Total: </Text>
                 <Text style={{ color: "white", fontWeight: 700 }}>
                   ${total.toFixed(2)}
                 </Text>
-              </View>
+              </View> */}
               <View>
-                <Text style={{ color: "white", fontWeight: 700 }}>
-                  Place Order
+                <Text
+                  style={{
+                    color: "white",
+                    fontWeight: 700,
+                  }}
+                >
+                  Checkout
                 </Text>
               </View>
             </View>
           </PurpleButton>
         </View>
       )}
-      {userInputCtx.input.cart.items.length === 0 && (
+      {cartCtx.cartItems.length === 0 && (
         <View style={styles.content}>
           <Image
             style={styles.image}
@@ -178,7 +252,18 @@ const styles = StyleSheet.create({
     borderWidth: 4,
   },
   image: {
-    width: 100,
+    width: 40,
+    height: 40,
+  },
+  cartItem: {
+    marginVertical: 10,
+    marginHorizontal: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "white",
     height: 100,
+    borderRadius: 20,
+    paddingHorizontal: 20,
   },
 });
