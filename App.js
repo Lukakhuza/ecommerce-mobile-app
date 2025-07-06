@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useContext, useEffect, useState } from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, Text, View, TextInput, SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import EnterEmail from "./screens/LoginAndOnboarding/EnterEmail";
@@ -370,8 +370,10 @@ function Navigation() {
   const authCtx = useContext(AuthContext);
   return (
     <NavigationContainer style={styles.container}>
-      {!authCtx.isAuthenticated && <AuthStack />}
-      {authCtx.isAuthenticated && <AuthenticatedStack />}
+      <SafeAreaView style={{ flex: 1, paddingTop: 30 }}>
+        {!authCtx.isAuthenticated && <AuthStack />}
+        {authCtx.isAuthenticated && <AuthenticatedStack />}
+      </SafeAreaView>
     </NavigationContainer>
   );
 }
@@ -423,6 +425,7 @@ export default function App() {
   return (
     <>
       <StatusBar style="dark" />
+      {/* <SafeAreaView> */}
       <StripeProvider
         publishableKey={publishableKey}
         merchantIdentifier="merchant.identifier"
@@ -440,6 +443,7 @@ export default function App() {
           </UserInputContextProvider>
         </AuthContextProvider>
       </StripeProvider>
+      {/* </SafeAreaView> */}
     </>
   );
 }

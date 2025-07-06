@@ -129,7 +129,16 @@ function ManageUserData({ route, navigation }) {
         />
       </View>
       <View style={styles.buttons}>
-        <Button mode="flat" onPress={cancelHandler} style={styles.button}>
+        <Button
+          onPress={cancelHandler}
+          mode="flat2"
+          style={{
+            minWidth: 120,
+            marginHorizontal: 8,
+            marginTop: 20,
+            borderColor: "blue",
+          }}
+        >
           Cancel
         </Button>
         <Button onPress={confirmHandler} style={styles.button}>
@@ -157,6 +166,7 @@ const styles = StyleSheet.create({
     minWidth: 120,
     marginHorizontal: 8,
     marginTop: 20,
+    borderColor: "blue",
   },
   deleteContainer: {
     marginTop: 16,

@@ -68,6 +68,7 @@ function ProductDetails({ route, navigation }) {
         console.log(resData.title);
       });
   }
+  // addProductToCart();
 
   // async function testStripe() {
   //   const productData = {
@@ -108,9 +109,8 @@ function ProductDetails({ route, navigation }) {
   //       console.log(resData.data);
   //     });
   // }
-  addProductToCart();
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1, paddingTop: 60 }}>
       <ScrollView>
         <View style={styles.outerContainer}>
           <View>
@@ -185,44 +185,35 @@ function ProductDetails({ route, navigation }) {
                 {product.rating.rate.toFixed(1)} Ratings
               </Text>
             </View>
-            <PurpleButton
-              onPress={() => {
-                navigation.navigate("Checkout");
-              }}
-            >
-              Test Stripe
-            </PurpleButton>
           </View>
-          <PurpleButton
-            onPress={() => {
-              addProductToCart();
-              navigation.navigate("Cart");
-            }}
-          >
-            <View
-              style={{
-                flex: 1,
-                flexDirection: "row",
-                width: "100%",
-                justifyContent: "space-between",
-                // borderWidth: 3,
-                // borderColor: "brown",
-              }}
-            >
-              <View>
-                <Text style={{ color: "white", fontWeight: 700 }}>
-                  ${(product.price * quantity).toFixed(2)}
-                </Text>
-              </View>
-              <View>
-                <Text style={{ color: "white", fontWeight: 700 }}>
-                  Add to Cart
-                </Text>
-              </View>
-            </View>
-          </PurpleButton>
         </View>
       </ScrollView>
+      <PurpleButton
+        onPress={() => {
+          addProductToCart();
+          navigation.navigate("Cart");
+        }}
+      >
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            width: "100%",
+            justifyContent: "space-between",
+            // borderWidth: 3,
+            // borderColor: "brown",
+          }}
+        >
+          <View>
+            <Text style={{ color: "white", fontWeight: 700 }}>
+              ${(product.price * quantity).toFixed(2)}
+            </Text>
+          </View>
+          <View>
+            <Text style={{ color: "white", fontWeight: 700 }}>Add to Cart</Text>
+          </View>
+        </View>
+      </PurpleButton>
     </SafeAreaView>
   );
 }
@@ -236,7 +227,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.bgLight2,
   },
   outerContainer: {
-    height: 800,
+    height: 850,
     justifyContent: "space-between",
   },
   favIcon: {

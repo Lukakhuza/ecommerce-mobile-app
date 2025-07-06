@@ -19,12 +19,99 @@ function Cart({ navigation }) {
   const userInputCtx = useContext(UserInputContext);
   const productsCtx = useContext(ProductsContext);
   const cartCtx = useContext(CartContext);
-  // const [cartItems, setCartItems] = useState(userInputCtx.input.cart.items);
   // calculate the total:
   let total = 0;
   for (let i = 0; i < cartCtx.cartItems.length; i++) {
     total += cartCtx.cartItems[i].product.price * cartCtx.cartItems[i].quantity;
   }
+
+  async function removeProductFromCart(itemData) {
+    // console.log(itemData);
+    // work here and send both product data, as well as user data.
+    const productData = {
+      id: itemData.item.product.id,
+      title: itemData.item.product.title,
+      price: itemData.item.product.price,
+      quantity: itemData.item.quantity,
+    };
+    const userData = {
+      email: userInputCtx.input.email,
+      password: userInputCtx.input.passwordPlaceholder,
+      firstName: userInputCtx.input.firstName,
+      lastName: userInputCtx.input.lastName,
+      phoneNumber: userInputCtx.input.phoneNumber,
+      address: userInputCtx.input.address,
+      shopFor: userInputCtx.input.shopFor,
+      ageRange: userInputCtx.input.ageRange,
+      cart: userInputCtx.input.cart,
+    };
+    const data = {
+      productData: productData,
+      userData: userData,
+    };
+    fetch(
+      "https://backend-ecommerce-mobile-app.onrender.com/product/delete-from-cart",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    )
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((resData) => {
+        console.log(resData.title);
+      });
+  }
+
+  function addProductToCart(itemData) {
+    cartCtx.addItem(itemData);
+    const productData = {
+      id: itemData.product.id,
+      title: itemData.product.title,
+      price: itemData.product.price,
+      quantity: itemData.quantity,
+    };
+    // console.log("Test 3", cartCtx);
+    // const userData = {
+    //   email: userInputCtx.input.email,
+    //   password: userInputCtx.input.passwordPlaceholder,
+    //   firstName: userInputCtx.input.firstName,
+    //   lastName: userInputCtx.input.lastName,
+    //   phoneNumber: userInputCtx.input.phoneNumber,
+    //   address: userInputCtx.input.address,
+    //   shopFor: userInputCtx.input.shopFor,
+    //   ageRange: userInputCtx.input.ageRange,
+    //   cart: userInputCtx.input.cart,
+    // };
+    // const data = {
+    //   productData: productData,
+    //   userData: userData,
+    // };
+
+    // fetch(
+    //   "https://backend-ecommerce-mobile-app.onrender.com/product/add-to-cart",
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(data),
+    //   }
+    // )
+    //   .then((response) => {
+    //     console.log(response);
+    //     return response.json();
+    //   })
+    //   .then((resData) => {
+    //     console.log(resData.title);
+    //   });
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
       {cartCtx.cartItems.length > 0 && (
@@ -139,6 +226,7 @@ function Cart({ navigation }) {
                                   size={35}
                                   color={"blue"}
                                   onPress={() => {
+                                    removeProductFromCart(itemData);
                                     cartCtx.removeItem(itemData.item._id);
                                   }}
                                 />
@@ -147,7 +235,7 @@ function Cart({ navigation }) {
                                   size={35}
                                   color={"blue"}
                                   onPress={() => {
-                                    cartCtx.addItem(itemData.item);
+                                    addProductToCart(itemData.item);
                                   }}
                                 />
                               </View>

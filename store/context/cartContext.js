@@ -13,13 +13,6 @@ function CartContextProvider({ children }) {
   useEffect(() => {
     setCartItems(userInputCtx.input.cart.items);
   }, [userInputCtx.input.cart.items]);
-  //   useEffect(() => {
-  //     async function getProductsData() {
-  //       const productsData = await fetchProductsData();
-  //       setFetchedProductsData(productsData);
-  //     }
-  //     getProductsData();
-  //   }, []);
 
   function addItem(item) {
     setCartItems((currentCartItems) => {
@@ -42,8 +35,10 @@ function CartContextProvider({ children }) {
           return c;
         }
       });
+      console.log("Test 7", updatedCartItems);
       return updatedCartItems;
     });
+    return cartItems;
   }
 
   function removeItem(id) {
@@ -55,7 +50,6 @@ function CartContextProvider({ children }) {
           return false;
         }
       });
-      console.log(index);
       let updatedCartItems = currentCartItems.map((c, i) => {
         if (i === index) {
           if (c.quantity > 1) {
@@ -68,8 +62,6 @@ function CartContextProvider({ children }) {
           } else {
             return c;
           }
-
-          return updatedItem;
         } else {
           return c;
         }

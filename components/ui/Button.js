@@ -7,8 +7,20 @@ function Button({ children, onPress, mode, style }) {
         onPress={onPress}
         style={({ pressed }) => pressed && styles.pressed}
       >
-        <View style={[styles.button, mode === "flat" && styles.flat]}>
-          <Text style={[styles.buttonText, mode === "flat" && styles.flatText]}>
+        <View
+          style={[
+            styles.button,
+            mode === "flat" && styles.flat,
+            mode === "flat2" && styles.flat2,
+          ]}
+        >
+          <Text
+            style={[
+              styles.buttonText,
+              mode === "flat" && styles.flatText,
+              mode === "flat2" && styles.flat2Text,
+            ]}
+          >
             {children}
           </Text>
         </View>
@@ -28,12 +40,19 @@ const styles = StyleSheet.create({
   flat: {
     backgroundColor: "transparent",
   },
+  flat2: {
+    backgroundColor: "white",
+  },
   buttonText: {
     color: "white",
     textAlign: "center",
   },
   flatText: {
     color: "lightpurple",
+  },
+  flat2Text: {
+    color: "darkblue",
+    fontWeight: 500,
   },
   pressed: {
     opacity: 0.75,
