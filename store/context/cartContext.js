@@ -10,6 +10,7 @@ export const CartContext = createContext({
 function CartContextProvider({ children }) {
   const userInputCtx = useContext(UserInputContext);
   const [cartItems, setCartItems] = useState(userInputCtx.input.cart.items);
+
   useEffect(() => {
     setCartItems(userInputCtx.input.cart.items);
   }, [userInputCtx.input.cart.items]);

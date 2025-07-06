@@ -39,15 +39,14 @@ function UserInputContextProvider({ children }) {
     cart: { items: [] },
   });
 
-  console.log("Test 16");
   useEffect(() => {
     async function fetchUserData() {
       const userData = {
         email: authCtx.authEmail,
       };
       console.log("Test 17");
+      console.log("Test 18", authCtx.authEmail);
       if (authCtx.authEmail) {
-        console.log("Test 18");
         fetch(
           "https://backend-ecommerce-mobile-app.onrender.com/user/get-user-by-email",
           {
@@ -63,20 +62,11 @@ function UserInputContextProvider({ children }) {
           })
           .then((resData) => {
             console.log("Test 11", resData);
-            // userInputCtx.input.firstName = resData.user.firstName;
-            // userInputCtx.input.lastName = resData.user.lastName;
-            // userInputCtx.input.email = resData.user.email;
-            // userInputCtx.input.passwordPlaceholder = resData.user.password;
-            // userInputCtx.input.phoneNumber = resData.user.phoneNumber;
-            // userInputCtx.input.address = resData.user.address;
-            // userInputCtx.input.shopFor = resData.user.shopFor;
-            // userInputCtx.input.cart = resData.user.cart;
-            // return resData.user;
           });
       }
     }
     fetchUserData();
-  }, []);
+  }, [authCtx.authEmail]);
 
   function updateInputs(inputIdentifier, enteredText) {
     setUserInput((currInputValues) => {
