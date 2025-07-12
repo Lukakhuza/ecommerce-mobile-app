@@ -1,0 +1,199 @@
+import { useContext, useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  Pressable,
+  SafeAreaView,
+} from "react-native";
+import { fetchProfilePicture } from "../../util/auth";
+import { ProductsContext } from "../../store/context/productsContext";
+import { Ionicons } from "@expo/vector-icons";
+import { AuthContext } from "../../store/context/auth-context";
+import { UserInputContext } from "../../store/context/userInputContext";
+import { FavoritesContext } from "../../store/context/favoritesContext";
+
+type Props = {
+  navigation: any;
+};
+
+function Payment({ navigation }: Props) {
+  const [dummyUserData, setDummyUserData] = useState({
+    users: [{ image: "" }],
+  });
+  const authCtx: any = useContext(AuthContext);
+  const userInputCtx: any = useContext(UserInputContext);
+  const productsCtx = useContext(ProductsContext);
+  const favoritesCtx = useContext(FavoritesContext);
+
+  function editPressHandler(basicInfo: any) {
+    navigation.navigate("ManageUserData"),
+      {
+        userData: basicInfo,
+      };
+  }
+
+  function editUserAddress() {
+    navigation.navigate("ManageUserAddress");
+  }
+
+  useEffect(() => {
+    async function getProfilePicture() {
+      const response = await fetchProfilePicture();
+      setDummyUserData(response);
+    }
+    getProfilePicture();
+  }, []);
+
+  return (
+    <SafeAreaView>
+      <View
+      //  style={styles.container}
+      >
+        <View style={styles.containerProfilePic}>
+          <View style={styles.imageContainerProfilePic}>
+            {dummyUserData.users && (
+              <Image
+                source={{ uri: dummyUserData.users[8].image }}
+                style={styles.image}
+              />
+            )}
+          </View>
+        </View>
+        <ScrollView style={styles.categoriesContainer}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.basicInfo,
+              pressed && styles.pressed,
+            ]}
+          >
+            <View>
+              <Text style={styles.label1}>
+                {userInputCtx.input.firstName} {userInputCtx.input.lastName}
+              </Text>
+              <Text style={styles.label2}>{userInputCtx.input.email}</Text>
+              <Text style={styles.label2}>
+                {userInputCtx.input.phoneNumber}
+              </Text>
+            </View>
+            <Pressable
+              onPress={editPressHandler}
+              style={({ pressed }) => pressed && styles.pressed}
+            >
+              <Text style={{ color: "purple", fontSize: 17 }}>Edit</Text>
+            </Pressable>
+          </Pressable>
+        </ScrollView>
+        <Pressable
+          style={styles.signOutContainer}
+          onPress={() => {
+            userInputCtx.resetInputs();
+            authCtx.logout();
+          }}
+        >
+          <Text style={styles.signOut}>Sign Out</Text>
+        </Pressable>
+      </View>
+      <View></View>
+    </SafeAreaView>
+  );
+}
+
+export default Payment;
+
+const styles = StyleSheet.create({
+  pressed: {
+    opacity: 0.75,
+    // backgroundColor: "gray",
+  },
+  containerProfilePic: {
+    marginTop: 38,
+    marginHorizontal: 30,
+    alignItems: "center",
+  },
+  categories: {
+    height: 840,
+  },
+  title: {
+    marginLeft: 30,
+    marginTop: 20,
+    fontSize: 25,
+    fontWeight: 500,
+  },
+  label: {
+    fontSize: 17,
+    marginLeft: 10,
+  },
+  label1: {
+    fontSize: 20,
+    marginLeft: 10,
+    marginVertical: 4,
+    fontWeight: 700,
+  },
+  label2: {
+    color: "gray",
+    fontSize: 17,
+    marginLeft: 10,
+    marginVertical: 4,
+  },
+
+  categoriesContainer: {
+    display: "flex",
+    flexDirection: "column",
+    marginHorizontal: 20,
+    paddingVertical: 50,
+  },
+  category: {
+    marginVertical: 5,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "white",
+    height: 80,
+    borderRadius: 20,
+    paddingHorizontal: 10,
+  },
+  basicInfo: {
+    marginBottom: 35,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "white",
+    height: 110,
+    borderRadius: 20,
+    paddingHorizontal: 10,
+  },
+  image: {
+    flex: 1,
+    overflow: "hidden",
+    resizeMode: "contain",
+  },
+  imageContainer: {
+    height: 40,
+    width: 40,
+    marginLeft: 20,
+    marginRight: 10,
+    marginVertical: 5,
+  },
+  imageContainerProfilePic: {
+    height: 50,
+    width: 50,
+    marginHorizontal: 30,
+    backgroundColor: "brown",
+    borderRadius: 25,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 3,
+    borderColor: "black",
+  },
+  signOut: {
+    color: "red",
+    fontSize: 15,
+  },
+  signOutContainer: {
+    marginVertical: 10,
+    alignItems: "center",
+  },
+});
