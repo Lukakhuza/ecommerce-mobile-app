@@ -19,7 +19,11 @@ import { FavoritesContext } from "../../store/context/favoritesContext";
 import { ProductsContext } from "../../store/context/productsContext";
 import { jsx } from "react/jsx-runtime";
 
-function Welcome({ navigation }) {
+type Props = {
+  navigation: any;
+};
+
+const Welcome = ({ navigation }: Props) => {
   const authCtx = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
   const favoritesCtx = useContext(FavoritesContext);
@@ -28,19 +32,19 @@ function Welcome({ navigation }) {
   const [fetchedProductsData, setFetchedProductsData] = useState([]);
 
   useEffect(() => {
-    async function getUserData() {
+    const getUserData = async () => {
       const userData = await fetchData();
       setFetchedUserData(userData);
-    }
+    };
 
     getUserData();
   }, []);
 
   useEffect(() => {
-    async function getProductsData() {
+    const getProductsData = async () => {
       const productsData = await fetchProductsData();
       setFetchedProductsData(productsData);
-    }
+    };
     getProductsData();
   }, []);
 
@@ -146,7 +150,7 @@ function Welcome({ navigation }) {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

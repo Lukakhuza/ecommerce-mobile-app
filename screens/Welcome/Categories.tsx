@@ -10,12 +10,19 @@ import {
 } from "react-native";
 import { ProductsContext } from "../../store/context/productsContext";
 
-function Categories({ list, navigation }) {
-  const productsCtx = useContext(ProductsContext);
+type Props = {
+  list: any;
+  navigation: any;
+};
+
+const Categories = ({ list, navigation }: Props) => {
+  const productsCtx: any = useContext(ProductsContext);
 
   return (
     <SafeAreaView>
-      <View style={styles.container}>
+      <View
+      //  style={styles.container}
+      >
         <Text style={styles.title}>Shop by Categories</Text>
         <ScrollView style={styles.categoriesContainer}>
           <Pressable
@@ -110,7 +117,7 @@ function Categories({ list, navigation }) {
       <View></View>
     </SafeAreaView>
   );
-}
+};
 
 export default Categories;
 

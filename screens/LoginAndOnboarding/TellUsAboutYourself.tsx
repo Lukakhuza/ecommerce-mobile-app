@@ -26,17 +26,17 @@ const data = [
 type Props = {
   navigation: any;
 };
-function TellUsAboutYourself({ navigation }: Props) {
+const TellUsAboutYourself = ({ navigation }: Props) => {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const authCtx = useContext(AuthContext);
   const userInputCtx: any = useContext(UserInputContext);
   const [selection, setSelection] = useState("");
   const [ageRange, setAgeRange] = useState("");
-  function handleInputUpdate(inputIdentifier: any, enteredText: string) {
+  const handleInputUpdate = (inputIdentifier: any, enteredText: string) => {
     userInputCtx.updateInputs(inputIdentifier, enteredText);
-  }
+  };
 
-  async function createAccountHandler() {
+  const createAccountHandler = async () => {
     const user = {
       email: userInputCtx.input.email,
       password: userInputCtx.input.passwordPlaceholder,
@@ -105,7 +105,7 @@ function TellUsAboutYourself({ navigation }: Props) {
     // setIsAuthenticating(false);
     userInputCtx.resetInputs();
     navigation.navigate("EnterEmail");
-  }
+  };
 
   if (isAuthenticating) {
     return <LoadingOverlay message="Creating User..." />;
@@ -173,7 +173,7 @@ function TellUsAboutYourself({ navigation }: Props) {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 export default TellUsAboutYourself;
 

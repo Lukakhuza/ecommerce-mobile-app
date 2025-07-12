@@ -11,7 +11,7 @@ type Props = {
   navigation: any;
 };
 
-function ManageUserData({ route, navigation }: Props) {
+const ManageUserData = ({ route, navigation }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
   const authCtx: any = useContext(AuthContext);
   const [inputValues, setInputValues] = useState({
@@ -25,14 +25,14 @@ function ManageUserData({ route, navigation }: Props) {
       : "",
   });
 
-  function handleTextChange(inputIdentifier: any, enteredText: string) {
+  const handleTextChange = (inputIdentifier: any, enteredText: string) => {
     setInputValues((currInputValues) => {
       return {
         ...currInputValues,
         [inputIdentifier]: enteredText,
       };
     });
-  }
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -40,10 +40,10 @@ function ManageUserData({ route, navigation }: Props) {
     });
   }, [navigation]);
 
-  function cancelHandler() {
+  const cancelHandler = () => {
     navigation.goBack();
-  }
-  function confirmHandler() {
+  };
+  const confirmHandler = () => {
     // Update the values as they are displayed.
     userInputCtx.updateInputs("firstName", inputValues.firstName);
     userInputCtx.updateInputs("lastName", inputValues.lastName);
@@ -57,7 +57,7 @@ function ManageUserData({ route, navigation }: Props) {
     userInputCtx.input.phoneNumber = inputValues.phoneNumber;
     userInputCtx.input.email = authCtx.authEmail;
     // save the updated context to the database
-    async function updateUserHandler() {
+    const updateUserHandler = async () => {
       const user = {
         email: userInputCtx.input.email,
         password: userInputCtx.input.passwordPlaceholder,
@@ -86,10 +86,10 @@ function ManageUserData({ route, navigation }: Props) {
         .catch((err) => {
           console.log(err);
         });
-    }
+    };
     updateUserHandler();
     navigation.goBack();
-  }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -152,7 +152,7 @@ function ManageUserData({ route, navigation }: Props) {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 export default ManageUserData;
 

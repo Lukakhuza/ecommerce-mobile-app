@@ -1,7 +1,7 @@
 import { Html, Button } from "@react-email/components";
 import { Resend } from "resend";
 
-function Email(props: any) {
+const Email = (props: any) => {
   const { url } = props;
 
   return (
@@ -9,11 +9,11 @@ function Email(props: any) {
       <Button href={url}>Click Me</Button>
     </Html>
   );
-}
+};
 
 export default Email;
 
-export function sendEmail() {
+export const sendEmail = () => {
   const resend = new Resend("re_CCmZQdGU_5QfBZCWhxcX9FwVvxoKqhyZS");
 
   resend.emails.send({
@@ -22,4 +22,4 @@ export function sendEmail() {
     subject: "Hello from the other side",
     react: <Email url="https://example.com" />,
   });
-}
+};

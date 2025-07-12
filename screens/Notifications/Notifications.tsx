@@ -13,7 +13,7 @@ type Props = {
   navigation: any;
 };
 
-function Notifications({ navigation }: Props) {
+const Notifications = ({ navigation }: Props) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <Text style={styles.header}>Notifications</Text>
@@ -41,7 +41,7 @@ function Notifications({ navigation }: Props) {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
 export default Notifications;
 

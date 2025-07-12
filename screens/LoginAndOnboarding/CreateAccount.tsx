@@ -11,7 +11,7 @@ type Props = {
   navigation: any;
 };
 
-function CreateAccount({ navigation }: Props) {
+const CreateAccount = ({ navigation }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
   const handleInputUpdate: any = (
     inputIdentifier: any,
@@ -81,7 +81,7 @@ function CreateAccount({ navigation }: Props) {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 export default CreateAccount;
 

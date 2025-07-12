@@ -8,7 +8,7 @@ type Props = {
   imageId: string;
 };
 
-function CategoryButton({ category, imageId }: Props) {
+const CategoryButton = ({ category, imageId }: Props) => {
   const productsCtx: any = useContext(ProductsContext);
   const navigation: any = useNavigation();
   return (
@@ -32,7 +32,7 @@ function CategoryButton({ category, imageId }: Props) {
       </View>
     </Pressable>
   );
-}
+};
 
 export default CategoryButton;
 

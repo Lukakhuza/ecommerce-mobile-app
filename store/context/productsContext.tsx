@@ -11,7 +11,7 @@ type Props = {
   children: ReactNode;
 };
 
-function ProductsContextProvider({ children }: Props) {
+const ProductsContextProvider = ({ children }: Props) => {
   const [fetchedProductsData, setFetchedProductsData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
 
@@ -23,9 +23,9 @@ function ProductsContextProvider({ children }: Props) {
     getProductsData();
   }, []);
 
-  function updateSelectedCategory(category: any) {
+  const updateSelectedCategory = (category: any) => {
     setSelectedCategory(category);
-  }
+  };
 
   const value = {
     products: fetchedProductsData,
@@ -38,6 +38,6 @@ function ProductsContextProvider({ children }: Props) {
       {children}
     </ProductsContext.Provider>
   );
-}
+};
 
 export default ProductsContextProvider;

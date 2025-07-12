@@ -4,14 +4,14 @@ type Props = {
   message: string;
 };
 
-function LoadingOverlay({ message }: Props) {
+const LoadingOverlay = ({ message }: Props) => {
   return (
     <View style={styles.rootContainer}>
       <Text style={styles.message}>{message}</Text>
       <ActivityIndicator size="large" />
     </View>
   );
-}
+};
 
 export default LoadingOverlay;
 

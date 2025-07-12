@@ -5,14 +5,14 @@ type Props = {
   textInputConfig: any;
 };
 
-function Input({ label, textInputConfig }: Props) {
+const Input = ({ label, textInputConfig }: Props) => {
   return (
     <View style={styles.inputContainer}>
       <Text style={styles.label}>{label}</Text>
       <TextInput style={styles.input} {...textInputConfig}></TextInput>
     </View>
   );
-}
+};
 
 export default Input;
 

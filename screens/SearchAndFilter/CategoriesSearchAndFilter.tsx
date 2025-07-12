@@ -24,7 +24,7 @@ type Props = {
   navigation: any;
 };
 
-function CategoriesSearchAndFilter({ navigation }: Props) {
+const CategoriesSearchAndFilter = ({ navigation }: Props) => {
   const [searchValue, setSearchValue] = useState("");
   const filteredCategories = categories.filter((category) => {
     if (category.label.toLowerCase().includes(searchValue.toLowerCase())) {
@@ -34,9 +34,9 @@ function CategoriesSearchAndFilter({ navigation }: Props) {
     }
   });
 
-  function updateSearchValue(enteredText: string) {
+  const updateSearchValue = (enteredText: string) => {
     setSearchValue(enteredText);
-  }
+  };
 
   return (
     <SafeAreaView>
@@ -79,7 +79,7 @@ function CategoriesSearchAndFilter({ navigation }: Props) {
       <View></View>
     </SafeAreaView>
   );
-}
+};
 
 export default CategoriesSearchAndFilter;
 

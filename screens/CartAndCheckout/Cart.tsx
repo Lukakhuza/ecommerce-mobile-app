@@ -19,14 +19,14 @@ type Props = {
   navigation: any;
 };
 
-function Cart({ navigation }: Props) {
+const Cart = ({ navigation }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
   const productsCtx: any = useContext(ProductsContext);
   const cartCtx: any = useContext(CartContext);
 
   // console.log("Test 52", cartCtx.cartItems.length);
   // useEffect(() => {
-  //     async function fetchUserData() {
+  //     const fetchUserData = async ()=> {
   //       const userData = {
   //         email: authCtx.authEmail,
   //       };
@@ -54,7 +54,7 @@ function Cart({ navigation }: Props) {
   //   }, [authCtx.authEmail]);
 
   // useEffect(() => {
-  //   async function fetchUserData() {
+  //   const fetchUserData = async()=> {
   //     userInputCtx.updateInputs("cart", );
   //   }
   //   fetchUserData();
@@ -366,7 +366,7 @@ function Cart({ navigation }: Props) {
       )}
     </SafeAreaView>
   );
-}
+};
 
 export default Cart;
 

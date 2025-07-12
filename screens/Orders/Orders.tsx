@@ -12,7 +12,7 @@ type Props = {
   navigation: any;
 };
 
-function Orders({ navigation }: Props) {
+const Orders = ({ navigation }: Props) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <Text style={styles.header}>Orders</Text>
@@ -40,7 +40,7 @@ function Orders({ navigation }: Props) {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
 export default Orders;
 

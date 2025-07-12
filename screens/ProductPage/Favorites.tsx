@@ -22,7 +22,7 @@ type Props = {
   navigation: any;
 };
 
-function Favorites({ navigation }: Props) {
+const Favorites = ({ navigation }: Props) => {
   const authCtx: any = useContext(AuthContext);
   const userInputCtx: any = useContext(UserInputContext);
   const favoritesCtx: any = useContext(FavoritesContext);
@@ -31,19 +31,19 @@ function Favorites({ navigation }: Props) {
   const [fetchedProductsData, setFetchedProductsData] = useState([]);
 
   useEffect(() => {
-    async function getUserData() {
+    const getUserData = async () => {
       // const userData = await fetchData();
       // setFetchedUserData(userData);
-    }
+    };
 
     getUserData();
   }, []);
 
   useEffect(() => {
-    async function getProductsData() {
+    const getProductsData = async () => {
       const productsData = await fetchProductsData();
       setFetchedProductsData(productsData);
-    }
+    };
     getProductsData();
   }, []);
 
@@ -136,7 +136,7 @@ function Favorites({ navigation }: Props) {
       </View>
     </View>
   );
-}
+};
 
 const styles: any = StyleSheet.create({
   container: {

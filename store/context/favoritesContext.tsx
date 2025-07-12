@@ -10,21 +10,21 @@ type Props = {
   children: ReactNode;
 };
 
-function FavoritesContextProvider({ children }: Props) {
+const FavoritesContextProvider = ({ children }: Props) => {
   const [favorites, setFavorites] = useState([{}]);
 
-  function addFavorite(id: any) {
+  const addFavorite = (id: any) => {
     setFavorites((currentFavorites: any) => {
       return [...currentFavorites, id];
     });
-  }
-  function removeFavorite(id: any) {
+  };
+  const removeFavorite = (id: any) => {
     setFavorites((currentFavorites) => {
       return currentFavorites.filter((favoriteItem) => {
         return favoriteItem !== id;
       });
     });
-  }
+  };
 
   const value = {
     favorites: favorites,
@@ -37,6 +37,6 @@ function FavoritesContextProvider({ children }: Props) {
       {children}
     </FavoritesContext.Provider>
   );
-}
+};
 
 export default FavoritesContextProvider;

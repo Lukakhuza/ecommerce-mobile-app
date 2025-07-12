@@ -9,7 +9,7 @@ type Props = {
   imageSource: object;
 };
 
-function Button2({ children, onPress, style, imageSource }: Props) {
+const Button2 = ({ children, onPress, style, imageSource }: Props) => {
   return (
     <Pressable
       style={({ pressed }) => [style, styles.button, pressed && styles.pressed]}
@@ -24,7 +24,7 @@ function Button2({ children, onPress, style, imageSource }: Props) {
       <View></View>
     </Pressable>
   );
-}
+};
 
 export default Button2;
 

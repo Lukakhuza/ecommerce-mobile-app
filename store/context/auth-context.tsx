@@ -13,23 +13,23 @@ type Props = {
   children: ReactNode;
 };
 
-function AuthContextProvider({ children }: Props) {
+const AuthContextProvider = ({ children }: Props) => {
   const [authToken, setAuthToken] = useState(null);
   const [authEmail, setAuthEmail] = useState(null);
   useEffect(() => {
-    async function fetchToken() {
+    const fetchToken = async () => {
       const storedToken: any = await AsyncStorage.getItem("token");
       if (storedToken) {
         setAuthToken(storedToken);
       }
-    }
+    };
 
-    async function fetchEmail() {
+    const fetchEmail = async () => {
       const storedEmail: any = await AsyncStorage.getItem("authEmail");
       if (storedEmail) {
         setAuthEmail(storedEmail);
       }
-    }
+    };
 
     fetchToken();
     fetchEmail();
@@ -42,11 +42,11 @@ function AuthContextProvider({ children }: Props) {
     AsyncStorage.setItem("authEmail", email);
   };
 
-  function logout() {
+  const logout = () => {
     // setAuthEmail(null);
     AsyncStorage.removeItem("token");
     AsyncStorage.removeItem("authEmail");
-  }
+  };
 
   const value = {
     token: authToken,
@@ -57,6 +57,6 @@ function AuthContextProvider({ children }: Props) {
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
+};
 
 export default AuthContextProvider;

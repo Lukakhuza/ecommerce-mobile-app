@@ -3,7 +3,7 @@ import { Colors } from "../../constants/colors";
 
 type Props = { children: any; onPress: any; style: any; mode: string };
 
-function PurpleButton({ children, onPress, style, mode }: any) {
+const PurpleButton = ({ children, onPress, style, mode }: any) => {
   return (
     <Pressable
       style={({ pressed }) => [
@@ -19,7 +19,7 @@ function PurpleButton({ children, onPress, style, mode }: any) {
       </Text>
     </Pressable>
   );
-}
+};
 
 export default PurpleButton;
 

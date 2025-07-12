@@ -8,7 +8,7 @@ type Props = {
   style: object;
 };
 
-function CartButton({ children, onPress, style }: Props) {
+const CartButton = ({ children, onPress, style }: Props) => {
   return (
     <Pressable
       style={({ pressed }) => [style, styles.button, pressed && styles.pressed]}
@@ -17,7 +17,7 @@ function CartButton({ children, onPress, style }: Props) {
       <Ionicons name="cart-outline" size={30} />
     </Pressable>
   );
-}
+};
 
 export default CartButton;
 

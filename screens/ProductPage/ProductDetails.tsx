@@ -24,14 +24,14 @@ type Props = {
   navigation: any;
 };
 
-function ProductDetails({ route, navigation }: Props) {
+const ProductDetails = ({ route, navigation }: Props) => {
   const productsCtx = useContext(ProductsContext);
   const userInputCtx: any = useContext(UserInputContext);
   const authCtx = useContext(AuthContext);
   const [quantity, setQuantity] = useState(1);
   const product = route.params.product;
 
-  async function addProductToCart() {
+  const addProductToCart = async () => {
     // work here and send both product data, as well as user data.
     const productData = {
       id: route.params.product.id,
@@ -72,10 +72,10 @@ function ProductDetails({ route, navigation }: Props) {
       .then((resData) => {
         userInputCtx.updateInputs("cart", resData.user.cart.items);
       });
-  }
+  };
   // addProductToCart();
 
-  // async function testStripe() {
+  // const testStripe = async () => {
   //   const productData = {
   //     id: route.params.product.id,
   //     title: route.params.product.title,
@@ -225,7 +225,7 @@ function ProductDetails({ route, navigation }: Props) {
       </PurpleButton>
     </SafeAreaView>
   );
-}
+};
 
 const styles: any = StyleSheet.create({
   container: {

@@ -9,7 +9,7 @@ type Props = {
   style: any;
 };
 
-function IconButton({ icon, size, color, onPress, style }: Props) {
+const IconButton = ({ icon, size, color, onPress, style }: Props) => {
   return (
     <Pressable
       onPress={onPress}
@@ -18,7 +18,7 @@ function IconButton({ icon, size, color, onPress, style }: Props) {
       <Ionicons name={icon} size={size} color={color} />
     </Pressable>
   );
-}
+};
 
 export default IconButton;
 

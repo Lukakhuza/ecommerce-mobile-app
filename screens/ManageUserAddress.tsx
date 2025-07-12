@@ -11,7 +11,7 @@ type Props = {
   navigation: any;
 };
 
-function ManageUserAddress({ route, navigation }: Props) {
+const ManageUserAddress = ({ route, navigation }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
   const authCtx: any = useContext(AuthContext);
   useEffect(() => {
@@ -30,14 +30,14 @@ function ManageUserAddress({ route, navigation }: Props) {
       : "",
   });
 
-  function handleTextChange(inputIdentifier: any, enteredText: string) {
+  const handleTextChange = (inputIdentifier: any, enteredText: string) => {
     setInputValues((currInputValues) => {
       return {
         ...currInputValues,
         [inputIdentifier]: enteredText,
       };
     });
-  }
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -45,17 +45,17 @@ function ManageUserAddress({ route, navigation }: Props) {
     });
   }, [navigation]);
 
-  function cancelHandler() {
+  const cancelHandler = () => {
     navigation.goBack();
-  }
-  function confirmHandler() {
+  };
+  const confirmHandler = () => {
     // Update the values as they are displayed:
     userInputCtx.updateInputs("address", inputValues);
     // Update the user input context with new address:
     userInputCtx.input.address = inputValues;
 
     // Save updated context to the database:
-    async function updateUserAddressHandler() {
+    const updateUserAddressHandler = async () => {
       const user = {
         email: userInputCtx.input.email,
         password: userInputCtx.input.passwordPlaceholder,
@@ -84,10 +84,10 @@ function ManageUserAddress({ route, navigation }: Props) {
         .catch((err) => {
           console.log(err);
         });
-    }
+    };
     updateUserAddressHandler();
     navigation.goBack();
-  }
+  };
   return (
     <SafeAreaView>
       <View>
@@ -191,7 +191,7 @@ function ManageUserAddress({ route, navigation }: Props) {
     //       </View>
     //   </SafeAreaView>
   );
-}
+};
 
 export default ManageUserAddress;
 

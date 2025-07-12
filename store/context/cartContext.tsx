@@ -17,7 +17,7 @@ type Props = {
   children: ReactNode;
 };
 
-function CartContextProvider({ children }: Props) {
+const CartContextProvider = ({ children }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
   const [cartItems, setCartItems] = useState(
     userInputCtx.input.cart.items ?? []
@@ -29,7 +29,7 @@ function CartContextProvider({ children }: Props) {
     }
   }, [userInputCtx.input.cart.items]);
 
-  function addItem(item: any) {
+  const addItem = (item: any) => {
     setCartItems((currentCartItems: any) => {
       const index = currentCartItems.findIndex((selectedItem: any) => {
         if (item._id === selectedItem._id) {
@@ -53,9 +53,9 @@ function CartContextProvider({ children }: Props) {
       return updatedCartItems;
     });
     return cartItems;
-  }
+  };
 
-  function removeItem(id: any) {
+  const removeItem = (id: any) => {
     setCartItems((currentCartItems: any) => {
       const index = currentCartItems.findIndex((selectedItem: any) => {
         if (id === selectedItem._id) {
@@ -82,7 +82,7 @@ function CartContextProvider({ children }: Props) {
       });
       return updatedCartItems;
     });
-  }
+  };
 
   const value = {
     cartItems: cartItems,
@@ -91,6 +91,6 @@ function CartContextProvider({ children }: Props) {
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
-}
+};
 
 export default CartContextProvider;

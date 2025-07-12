@@ -3,7 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 type Props = { style: any; onChangeText: any; value: any };
 
-function SearchComponent({ style, onChangeText, value }: Props) {
+const SearchComponent = ({ style, onChangeText, value }: Props) => {
   return (
     <View style={[styles.searchBarContainer, style]}>
       <Ionicons name="search-outline" size={25} style={styles.searchIcon} />
@@ -18,7 +18,7 @@ function SearchComponent({ style, onChangeText, value }: Props) {
       ></TextInput>
     </View>
   );
-}
+};
 
 export default SearchComponent;
 

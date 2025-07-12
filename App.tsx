@@ -46,7 +46,7 @@ const Stack = createNativeStackNavigator();
 
 const BottomTabs = createBottomTabNavigator();
 
-function TabsOverview() {
+const TabsOverview = () => {
   return (
     <BottomTabs.Navigator screenOptions={{ headerShown: false }}>
       <BottomTabs.Screen
@@ -87,9 +87,9 @@ function TabsOverview() {
       />
     </BottomTabs.Navigator>
   );
-}
+};
 
-function AuthStack() {
+const AuthStack = () => {
   return (
     <Stack.Navigator initialRouteName="EnterEmail">
       <Stack.Screen
@@ -110,6 +110,7 @@ function AuthStack() {
           headerTransparent: true,
           headerLeft: ({ tintColor }) => (
             <IconButton
+              style={{}}
               icon="chevron-back-circle-outline"
               size={32}
               color={tintColor}
@@ -126,6 +127,7 @@ function AuthStack() {
           headerTransparent: true,
           headerLeft: ({ tintColor }) => (
             <IconButton
+              style={{}}
               icon="chevron-back-circle-outline"
               size={32}
               color={tintColor}
@@ -148,15 +150,15 @@ function AuthStack() {
       />
     </Stack.Navigator>
   );
-}
+};
 
-function AuthenticatedStack() {
-  const userInputCtx = useContext(UserInputContext);
-  const authCtx = useContext(AuthContext);
-  const favoritesCtx = useContext(FavoritesContext);
+const AuthenticatedStack = () => {
+  const userInputCtx: any = useContext(UserInputContext);
+  const authCtx: any = useContext(AuthContext);
+  const favoritesCtx: any = useContext(FavoritesContext);
 
   useEffect(() => {
-    async function fetchUserData() {
+    const fetchUserData = async () => {
       const userData = {
         email: authCtx.authEmail,
       };
@@ -186,7 +188,7 @@ function AuthenticatedStack() {
             return resData.user;
           });
       }
-    }
+    };
     fetchUserData();
   }, []);
 
@@ -210,6 +212,7 @@ function AuthenticatedStack() {
           headerTransparent: true,
           headerLeft: ({ tintColor }) => (
             <IconButton
+              style={{}}
               icon="chevron-back-circle-outline"
               size={32}
               color={tintColor}
@@ -218,6 +221,7 @@ function AuthenticatedStack() {
           ),
           headerRight: ({ tintColor }) => (
             <IconButton
+              style={{}}
               icon={
                 favoritesCtx.favorites.includes(route.params.product.id)
                   ? "heart"
@@ -244,6 +248,7 @@ function AuthenticatedStack() {
           headerTransparent: true,
           headerLeft: ({ tintColor }) => (
             <IconButton
+              style={{}}
               icon="chevron-back-circle-outline"
               size={32}
               color={tintColor}
@@ -254,12 +259,13 @@ function AuthenticatedStack() {
       />
       <Stack.Screen
         name="CategoriesList"
-        component={Categories}
+        component={CategoriesSearchAndFilter}
         options={({ navigation }) => ({
           title: "",
           headerTransparent: true,
           headerLeft: ({ tintColor }) => (
             <IconButton
+              style={{}}
               icon="chevron-back-circle-outline"
               size={32}
               color={tintColor}
@@ -283,6 +289,7 @@ function AuthenticatedStack() {
           headerTransparent: true,
           headerLeft: ({ tintColor }) => (
             <IconButton
+              style={{}}
               icon="chevron-back-circle-outline"
               size={32}
               color={tintColor}
@@ -369,32 +376,34 @@ function AuthenticatedStack() {
       <Stack.Screen name="Checkout" component={Checkout} />
     </Stack.Navigator>
   );
-}
+};
 
-function Navigation() {
+const Navigation = () => {
   const authCtx = useContext(AuthContext);
   return (
-    <NavigationContainer style={styles.container}>
+    <NavigationContainer
+    // style={styles.container}
+    >
       <SafeAreaView style={{ flex: 1, paddingTop: 30 }}>
         {authCtx.isAuthenticated ? <AuthenticatedStack /> : <AuthStack />}
       </SafeAreaView>
     </NavigationContainer>
   );
-}
+};
 
-function Root() {
+const Root = () => {
   const [isTryingToLogin, setIsTryingToLogin] = useState(true);
   const authCtx = useContext(AuthContext);
   const userInputCtx = useContext(UserInputContext);
   useEffect(() => {
-    async function fetchToken() {
+    const fetchToken = async () => {
       const storedToken = await AsyncStorage.getItem("token");
       const storedEmail = await AsyncStorage.getItem("authEmail");
       if (storedToken && storedEmail) {
         authCtx.authenticate(storedToken, storedEmail);
       }
       setIsTryingToLogin(false);
-    }
+    };
 
     SplashScreen.hide();
     fetchToken();
@@ -405,9 +414,9 @@ function Root() {
   }
 
   return <Navigation />;
-}
+};
 
-export default function App() {
+const App = () => {
   const [publishableKey, setPublishableKey] = useState("");
 
   const fetchPublishableKey = async () => {
@@ -449,7 +458,9 @@ export default function App() {
       </StripeProvider>
     </>
   );
-}
+};
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {

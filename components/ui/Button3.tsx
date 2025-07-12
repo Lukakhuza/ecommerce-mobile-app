@@ -6,7 +6,7 @@ type Props = {
   style: object;
 };
 
-function Button3({ children, onPress, style }: Props) {
+const Button3 = ({ children, onPress, style }: Props) => {
   return (
     <Pressable
       onPress={onPress}
@@ -15,7 +15,7 @@ function Button3({ children, onPress, style }: Props) {
       <Text style={styles.text}>{children}</Text>
     </Pressable>
   );
-}
+};
 
 export default Button3;
 

@@ -52,7 +52,7 @@ export const loginUser = async (email: string, password: string) => {
   return token;
 };
 
-// export async function loginOAuth() {
+// export const loginOAuth = async ()=>  {
 //   const response = await axios.post(
 //     "https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=" +
 //       API_KEY,
@@ -66,7 +66,7 @@ export const loginUser = async (email: string, password: string) => {
 //   );
 // }
 
-export async function addData(data: any) {
+export const addData = async (data: any) => {
   const userData = {
     firstName: data.firstName,
     lastName: data.lastName,
@@ -77,9 +77,9 @@ export async function addData(data: any) {
   };
 
   const response = axios.post(BACKEND_API + "/data.json", userData);
-}
+};
 
-// export async function fetchUserData() {
+// export const fetchUserData = async ()=>  {
 //   const userData = {
 //     email: "Lukakhuz778@test.com",
 //   };
@@ -101,14 +101,14 @@ export async function addData(data: any) {
 //     });
 // }
 
-export async function fetchProductsData() {
+export const fetchProductsData = async () => {
   const response = await axios.get("https://fakestoreapi.com/products");
   return response.data;
-}
+};
 
-export async function fetchProfilePicture() {
+export const fetchProfilePicture = async () => {
   const response = await axios.get(
     "https://static.vecteezy.com/system/resources/thumbnails/030/504/836/small_2x/avatar-account-flat-isolated-on-transparent-background-for-graphic-and-web-design-default-social-media-profile-photo-symbol-profile-and-people-silhouette-user-icon-vector.jpg"
   );
   return response.data;
-}
+};

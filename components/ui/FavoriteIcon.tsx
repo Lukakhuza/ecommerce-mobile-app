@@ -9,13 +9,13 @@ type Props = {
   style: any;
 };
 
-function FavoriteIcon({ name, color, onPress, size, style }: Props) {
+const FavoriteIcon = ({ name, color, onPress, size, style }: Props) => {
   return (
     <Pressable onPress={onPress}>
       <Ionicons name={name} color={color} size={size} style={style} />
     </Pressable>
   );
-}
+};
 
 export default FavoriteIcon;
 

@@ -30,8 +30,12 @@ const data = [
   { label: "Women", value: "Women" },
 ];
 
-function HomePage({ navigation }) {
-  const productsCtx = useContext(ProductsContext);
+type Props = {
+  navigation: any;
+};
+
+const HomePage = ({ navigation }: Props) => {
+  const productsCtx: any = useContext(ProductsContext);
   const userInputCtx = useContext(UserInputContext);
   const favoritesCtx = useContext(FavoritesContext);
   const [dummyUserData, setDummyUserData] = useState("");
@@ -39,10 +43,10 @@ function HomePage({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function getProfilePicture() {
+    const getProfilePicture = async () => {
       const response = await fetchProfilePicture();
       setDummyUserData(response);
-    }
+    };
     getProfilePicture();
     setIsLoading(false);
   }, []);
@@ -337,7 +341,7 @@ function HomePage({ navigation }) {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
 export default HomePage;
 

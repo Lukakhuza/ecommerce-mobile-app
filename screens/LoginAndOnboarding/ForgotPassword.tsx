@@ -7,7 +7,7 @@ type Props = {
   navigation: any;
 };
 
-function ForgotPassword({ navigation }: Props) {
+const ForgotPassword = ({ navigation }: Props) => {
   return (
     <SafeAreaView style={styles.container}>
       <View></View>
@@ -33,7 +33,7 @@ function ForgotPassword({ navigation }: Props) {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 export default ForgotPassword;
 

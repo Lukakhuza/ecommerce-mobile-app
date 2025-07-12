@@ -15,7 +15,7 @@ type Props = {
   navigation: any;
 };
 
-function Checkout({ navigation }: Props) {
+const Checkout = ({ navigation }: Props) => {
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [loading, setLoading] = useState(false);
 
@@ -81,6 +81,6 @@ function Checkout({ navigation }: Props) {
       />
     </SafeAreaView>
   );
-}
+};
 
 export default Checkout;

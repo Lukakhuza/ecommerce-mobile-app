@@ -12,7 +12,7 @@ const data = [
   { label: " > 60 ", value: " > 60 " },
 ];
 
-function DropdownComponent({ value, onChange, style }: any) {
+const DropdownComponent = ({ value, onChange, style }: any) => {
   //   const [value, setValue] = useState(null);
 
   return (
@@ -36,7 +36,7 @@ function DropdownComponent({ value, onChange, style }: any) {
       //   )}
     />
   );
-}
+};
 
 export default DropdownComponent;
 

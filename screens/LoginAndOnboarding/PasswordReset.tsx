@@ -5,7 +5,7 @@ type Props = {
   navigation: any;
 };
 
-function PasswordReset({ navigation }: Props) {
+const PasswordReset = ({ navigation }: Props) => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -30,7 +30,7 @@ function PasswordReset({ navigation }: Props) {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 export default PasswordReset;
 

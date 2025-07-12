@@ -21,7 +21,7 @@ type Props = {
   navigation: any;
 };
 
-function EnterEmail({ navigation }: Props) {
+const EnterEmail = ({ navigation }: Props) => {
   const userInputCtx: any = useContext(UserInputContext);
   const userData = {
     email: userInputCtx.email,
@@ -124,7 +124,7 @@ function EnterEmail({ navigation }: Props) {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
 export default EnterEmail;
 

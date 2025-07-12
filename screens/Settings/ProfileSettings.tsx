@@ -19,7 +19,7 @@ type Props = {
   navigation: any;
 };
 
-function ProfileSettings({ navigation }: Props) {
+const ProfileSettings = ({ navigation }: Props) => {
   const [dummyUserData, setDummyUserData] = useState({
     users: [{ image: "" }],
   });
@@ -28,22 +28,22 @@ function ProfileSettings({ navigation }: Props) {
   const productsCtx: any = useContext(ProductsContext);
   const favoritesCtx = useContext(FavoritesContext);
 
-  function editPressHandler(basicInfo: any) {
+  const editPressHandler = (basicInfo: any) => {
     navigation.navigate("ManageUserData"),
       {
         userData: basicInfo,
       };
-  }
+  };
 
-  function editUserAddress() {
+  const editUserAddress = () => {
     navigation.navigate("ManageUserAddress");
-  }
+  };
 
   useEffect(() => {
-    async function getProfilePicture() {
+    const getProfilePicture = async () => {
       const response = await fetchProfilePicture();
       setDummyUserData(response);
-    }
+    };
 
     getProfilePicture();
   }, []);
@@ -172,7 +172,7 @@ function ProfileSettings({ navigation }: Props) {
       <View></View>
     </SafeAreaView>
   );
-}
+};
 
 export default ProfileSettings;
 

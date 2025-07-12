@@ -32,7 +32,7 @@ type Props = {
   children: ReactNode;
 };
 
-function UserInputContextProvider({ children }: Props) {
+const UserInputContextProvider = ({ children }: Props) => {
   const authCtx: any = useContext(AuthContext);
   const [userInput, setUserInput] = useState({
     email: authCtx.authEmail ?? "",
@@ -52,7 +52,7 @@ function UserInputContextProvider({ children }: Props) {
   });
 
   useEffect(() => {
-    async function fetchUserData() {
+    const fetchUserData = async () => {
       const userData = {
         email: authCtx.authEmail,
       };
@@ -74,11 +74,11 @@ function UserInputContextProvider({ children }: Props) {
             console.log("Test 11", resData);
           });
       }
-    }
+    };
     fetchUserData();
   }, [authCtx.authEmail]);
 
-  function updateInputs(inputIdentifier: any, enteredText: string) {
+  const updateInputs = (inputIdentifier: any, enteredText: string) => {
     console.log("Test 50");
     setUserInput((currInputValues) => {
       return {
@@ -86,9 +86,9 @@ function UserInputContextProvider({ children }: Props) {
         [inputIdentifier]: enteredText,
       };
     });
-  }
+  };
 
-  function resetInputs() {
+  const resetInputs = () => {
     setUserInput({
       email: "",
       passwordPlaceholder: "",
@@ -105,7 +105,7 @@ function UserInputContextProvider({ children }: Props) {
       },
       cart: { items: [] },
     });
-  }
+  };
 
   const value = {
     input: userInput,
@@ -118,6 +118,6 @@ function UserInputContextProvider({ children }: Props) {
       {children}
     </UserInputContext.Provider>
   );
-}
+};
 
 export default UserInputContextProvider;

@@ -12,7 +12,7 @@ type Props = {
   navigation: any;
 };
 
-function EnterPassword({ navigation }: Props) {
+const EnterPassword = ({ navigation }: Props) => {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const userInputCtx: any = useContext(UserInputContext);
   const authCtx: any = useContext(AuthContext);
@@ -77,7 +77,7 @@ function EnterPassword({ navigation }: Props) {
       </View>
     </SafeAreaView>
   );
-}
+};
 
 export default EnterPassword;
 
